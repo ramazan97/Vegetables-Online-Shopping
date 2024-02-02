@@ -4,7 +4,13 @@ const mongoose = require("mongoose");
 
 const shopCartOlustur = async (req, res) => {
   const { resim, ucret, baslik, kilogram, aciklama } = req.body;
-
+  let bosAlanlar = [];
+  if (!baslik) {
+    bosAlanlar.push("baslik");
+  }
+  if (bosAlanlar.length > 0) {
+    return res.status(400).json({ hata: "Alanlar bos geçilemez", bosAlanlar });
+  }
   try {
     const shopCart = await ShopCartModel.create({
       resim,

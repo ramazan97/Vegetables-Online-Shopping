@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Footer from "./pages/Footer";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contactus" element={<Contactus />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/register" element={<Register />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/user" element={<User />} />

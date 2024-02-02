@@ -7,9 +7,11 @@ const shopCartSema = new Sema(
   {
     resim: {
       type: String,
+      required: [true, "resim zorunlu olarak girilmelidir"],
     },
     ucret: {
       type: String,
+      required: [true, "ucret zorunlu olarak girilmelidir"],
     },
     baslik: {
       type: String,
@@ -17,9 +19,11 @@ const shopCartSema = new Sema(
     },
     kilogram: {
       type: String,
+      required: [true, "kilogram zorunlu olarak girilmelidir"],
     },
     aciklama: {
       type: String,
+      required: [true, "aciklama zorunlu olarak girilmelidir"],
     },
     //  kullanici_id:{
     //    type:String,
@@ -33,23 +37,3 @@ const shopCartSema = new Sema(
 );
 // ('Not',notSema) isim ve shema vermemiz lazım
 module.exports = mongoose.model("ShopCart", shopCartSema);
-
-// const mongoose = require("mongoose");
-// const Sema = mongoose.Schema;
-
-// const shopSema = Sema(
-//   {
-//     baslik: {
-//       type: String,
-//       require: true,
-//     },
-//     aciklama: {
-//       type: String,
-//     },
-//   },
-//   {
-//     timestamps: true,
-//   }
-// );
-
-// module.exports = mongoose.model("SHOP", shopSema);

@@ -1,5 +1,4 @@
 const express = require("express");
-const ShopCartModel = require("../models/shopCartModel");
 const {
   shopCartOlustur,
   shopCartsGetir,

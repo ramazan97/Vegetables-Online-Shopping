@@ -49,6 +49,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="hover:text-orange-400 transition-all duration-500">
+              <Link className="" to="/signup">
+                SIGNUP
+              </Link>
+            </li>
+            <li className="hover:text-orange-400 transition-all duration-500">
               <Link className="" to="/register">
                 REGISTER
               </Link>
