@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.css";
 import Navbar from "./component/Navbar";
@@ -13,8 +13,10 @@ import Footer from "./pages/Footer";
 import Admin from "./pages/Admin";
 import User from "./pages/User";
 import Signup from "./pages/Signup";
+import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
+  const { kullanici } = useAuthContext();
   return (
     <div>
       <BrowserRouter>
@@ -22,13 +24,25 @@ function App() {
           <Navbar />
           <div className="flex-grow">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={kullanici ? <Home /> : <Navigate to="/login" />}
+              />
               <Route path="/shop" element={<Shop />} />
               <Route path="/vegetables" element={<Vegetables />} />
               <Route path="/about" element={<About />} />
               <Route path="/contactus" element={<Contactus />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+
+              {/* buradaki Navigate komutu ile sonradan istediğimiz alana yönlendirme işlemi yapacağız. burasını sonradan istediğimiz gibi ayarlayacaz */}
+
+              <Route
+                path="/login"
+                element={!kullanici ? <Login /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/signup"
+                element={!kullanici ? <Signup /> : <Navigate to="/" />}
+              />
               <Route path="/register" element={<Register />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/user" element={<User />} />
