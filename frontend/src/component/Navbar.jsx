@@ -23,7 +23,7 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:flex items-center justify-center gap-5">
-        {kullanici && (
+        {!kullanici && (
           <div>
             <ul className="flex items-center justify-center gap-5 font-medium p-6">
               <li className="hover:text-orange-400 transition-all duration-500">
@@ -80,7 +80,7 @@ const Navbar = () => {
             </ul>
           </div>
         )}
-        {!kullanici && (
+        {kullanici && (
           <div className="flex items-center justify-center">
             <div>
               <ul className="flex items-center justify-center gap-5 font-medium p-6">
@@ -128,7 +128,8 @@ const Navbar = () => {
               </ul>
             </div>
 
-            <div className="hover:text-orange-400 transition-all duration-500 font-bold  mr-2 ">
+            <div className="hover:text-orange-400 transition-all duration-500 font-bold flex items-center justify-center gap-2  mr-2 ">
+              <span>{kullanici.email}</span>
               <button
                 className="hover:text-orange-400 transition-all duration-500 "
                 onClick={handleClick}
