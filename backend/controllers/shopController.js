@@ -12,12 +12,15 @@ const shopCartOlustur = async (req, res) => {
     return res.status(400).json({ hata: "Alanlar bos geçilemez", bosAlanlar });
   }
   try {
+    // burada kullanici_id yazarak kullanıcıya göre id işlemi yaptık
+    const kullanici_id = req.kullanici._id;
     const shopCart = await ShopCartModel.create({
       resim,
       ucret,
       baslik,
       kilogram,
       aciklama,
+      kullanici_id,
     });
     res.status(200).json(shopCart);
   } catch (error) {
@@ -26,6 +29,10 @@ const shopCartOlustur = async (req, res) => {
 };
 
 const shopCartsGetir = async (req, res) => {
+  // burada kullanici_id yazarak kullanıcıya göre sepete ürün getirimini yapacaz
+  // const kullanici_id = req.kullanici._id;
+  // const shopCarts = await ShopCartModel.find({kullanici_id}).sort({ createdAt: -1 });
+  // res.status(200).json(shopCarts);
   const shopCarts = await ShopCartModel.find().sort({ createdAt: -1 });
   res.status(200).json(shopCarts);
 };

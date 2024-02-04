@@ -25,10 +25,11 @@ const shopCartSema = new Sema(
       type: String,
       required: [true, "aciklama zorunlu olarak girilmelidir"],
     },
-    //  kullanici_id:{
-    //    type:String,
-    //    required:true
-    //  }
+    // burada kullanıcıya göre sepete ürüün eklemek için bu işlemi kullanacaz
+    kullanici_id: {
+      type: String,
+      required: true,
+    },
   },
   {
     // zaman damgasını aktif etmek maksatlı kullandık

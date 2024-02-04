@@ -1,19 +1,16 @@
-
-
-import { useAuthContext } from './useAuthContext'
-// import {useNotContext} from './useNotContext'
+import { useAuthContext } from "./useAuthContext";
+import { useNotContext } from "./useNotContext";
 
 export const useLogout = () => {
-  const { dispatch } = useAuthContext()
-//   const { dispatch : notDispatch } = useNotContext()
+  const { dispatch } = useAuthContext();
+  const { dispatch: notDispatch } = useNotContext();
 
   const logout = () => {
-    localStorage.removeItem('kullanici')
+    localStorage.removeItem("kullanici");
 
-    dispatch({ type: 'LOGOUT' })
-    // notDispatch({type:'NOT_DOLDUR',payload:null})
-  }
+    dispatch({ type: "LOGOUT" });
+    notDispatch({ type: "NOT_DOLDUR", payload: null });
+  };
 
-  return { logout }
-}
-
+  return { logout };
+};
