@@ -2,7 +2,13 @@ import React from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
+import { useLogout } from "../hooks/useLogout";
+
 const Navbar = () => {
+  const { logout } = useLogout();
+  const handleClick = () => {
+    logout();
+  };
   return (
     <div className="flex items-center justify-between px-10 h-[81px] ">
       <div>
@@ -47,6 +53,7 @@ const Navbar = () => {
                 LOGIN
               </Link>
             </li>
+
             <li className="hover:text-orange-400 transition-all duration-500">
               <Link className="" to="/signup">
                 SIGNUP
@@ -68,6 +75,16 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+        </div>
+        <div>
+          <div className="hover:text-orange-400 transition-all duration-500">
+            <button
+              className="hover:text-orange-400 transition-all duration-500 "
+              onClick={handleClick}
+            >
+              ÇIKIS
+            </button>
+          </div>
         </div>
         <div>
           <div className="flex items-center justify-end w-[200px]  h-[81px] ">
