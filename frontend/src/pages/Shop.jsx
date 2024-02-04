@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Cart from "../component/Cart";
 import { useUrunContext } from "../hooks/useUrunContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Shop = () => {
   // const [shopCart, setShopCart] = useState(null);
   const { urunler, dispatch } = useUrunContext(null);
+  const { kullanici } = useAuthContext();
+
   useEffect(() => {
-    const fetchNotlar = async () => {
-      const response = await fetch("/api/shopcart");
+    const fetchUrunler = async () => {
+      // const response = await fetch("/api/shopcart");
+
+      // biz buradaki işlemleri kullanıcı sepetine ürün eklemesi için yapacağız. her kullanıcı kendi sepetindeki ürünü görmesini sağlayacağız
+
+      const response = await fetch("/api/shopcart", {
+        headers: {
+          Authorization: `Bearer ${kullanici.token}`,
+        },
+      });
 
       const json = await response.json();
       if (response.ok) {
@@ -15,9 +26,12 @@ const Shop = () => {
         dispatch({ type: "URUN_DOLDUR", payload: json });
       }
     };
-    fetchNotlar();
-  }, [dispatch]);
 
+    // fetchUrunler();
+    if (kullanici) {
+      fetchUrunler();
+    }
+  }, [dispatch, kullanici]);
 
   return (
     <div className="flex flex-col items-center mt-16 gap-y-5">

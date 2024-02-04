@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { useUrunContext } from "../hooks/useUrunContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const UrunEkle = () => {
   const [resim, setResim] = useState("");
@@ -11,8 +12,17 @@ const UrunEkle = () => {
   const [hata, setHata] = useState(null);
   const { dispatch } = useUrunContext();
   const [bosAlanlar, setBosalanlar] = useState([]);
+  // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
+  // const { kullanici } = useAuthContext();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
+    // if (!kullanici) {
+    //   setHata("Giriş yapmalısınız");
+    //   return;
+    // }
+
     const urunVerisi = { resim, ucret, baslik, kilogram, aciklama };
 
     const response = await fetch("/api/shopcart", {
@@ -20,6 +30,8 @@ const UrunEkle = () => {
       body: JSON.stringify(urunVerisi),
       headers: {
         "Content-Type": "application/json",
+        // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
+        // Authorization: `Bearer ${kullanici.token}`,
       },
     });
 
