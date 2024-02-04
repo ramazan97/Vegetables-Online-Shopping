@@ -10,7 +10,6 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, parola, "email-parola");
     await signup(email, parola);
   };
 
@@ -55,8 +54,9 @@ const Signup = () => {
         <div className=" flex items-center justify-center">
           <Button disabled={yukleniyor} name="Google" />
         </div>
+        {hata && <div className="text-red-500 font-bold"> {hata} </div>}
       </div>
-      {hata && <div className="text-red-500 font-bold"> {hata} </div>}
+   
     </form>
   );
 };

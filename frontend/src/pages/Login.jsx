@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Button from "../component/Button";
 import { Link } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [parola, setParola] = useState("");
+  const { login, yukleniyor, hata } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, parola);
+      await login(email, parola);
   };
   return (
     <form    onSubmit={handleSubmit} className="flex items-center justify-center py-14">
@@ -44,9 +46,11 @@ const Login = () => {
         </div>
         <div className="text-center my-2 font-bold text-lg">OR</div>
         <div className=" flex items-center justify-center">
-          <Button name="Google" />
+          <Button  disabled={yukleniyor} name="Google" />
         </div>
+        {hata && <div className="text-red-500 font-bold"> {hata} </div>}
       </div>
+ 
     </form>
   );
 };
