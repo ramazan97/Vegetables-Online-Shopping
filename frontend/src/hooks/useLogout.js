@@ -1,9 +1,10 @@
 import { useAuthContext } from "./useAuthContext";
-import { useNotContext } from "./useNotContext";
+import { useUrunContext } from "./useUrunContext";
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext();
-  const { dispatch: notDispatch } = useNotContext();
+  //   --
+  const { dispatch: notDispatch } = useUrunContext();
 
   const logout = () => {
     localStorage.removeItem("kullanici");
