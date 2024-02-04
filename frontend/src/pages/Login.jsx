@@ -11,7 +11,7 @@ const Login = () => {
     console.log(email, parola);
   };
   return (
-    <form className="flex items-center justify-center py-14">
+    <form    onSubmit={handleSubmit} className="flex items-center justify-center py-14">
       <div className="w-full md:w-[500px] p-3 shadow-2xl rounded-md">
         <p className={`text-slate-500 my-3 md:my-5 px-3 md:px-10 md:text-2xl text-center `}>
           Login

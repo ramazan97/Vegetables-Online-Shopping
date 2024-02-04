@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Sidebar from "./Sidebar";
 const Navbar = () => {
   return (
