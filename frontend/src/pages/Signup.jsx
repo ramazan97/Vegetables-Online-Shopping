@@ -45,8 +45,8 @@ const Signup = () => {
         </div>
 
         <div className="text-center my-2 text-sm text-red-500">
-          Daha Önce Üye Olduysanız
-          <Link className="underline " href="/login">
+          Daha Önce Üye Olduysanız <br/>
+          <Link className="underline " to="/login">
             buraya tıkla
           </Link>
         </div>

@@ -9,9 +9,9 @@ import { FaLinkedinIn } from "react-icons/fa";
 const Footer = () => {
   return (
     <div>
-      <div className="h-[310px] bg-gray-900 text-white py-5 flex items-stretch justify-center gap-28 ">
+      <div className="h-[250px] bg-neutral-900 text-white pb-3 flex items-stretch justify-center gap-28 border-b ">
         {/* adress */}
-        <div className="py-10 flex flex-col gap-y-10  ">
+        <div className="pb-5 pt-5 flex flex-col gap-y-5  ">
           <p className="text-2xl">Address</p>
           <div className="flex flex-col gap-y-5">
             <div className="flex items-center gap-3">
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
         </div>
         {/* Social link */}
-        <div className="py-10 flex flex-col gap-y-10 ">
+        <div className="pb-5 pt-5 flex flex-col gap-y-5 ">
           {" "}
           <p className="text-2xl">Social link</p>
           <div className="flex flex-col gap-y-5">
@@ -50,7 +50,7 @@ const Footer = () => {
         </div>
       </div>
       {/* copyright */}
-      <div className="h-[50px] flex items-center justify-center">
+      <div className="h-[50px] bg-neutral-900 text-white  flex items-center justify-center">
         <p className=" text-center ">
           Copyright 2023 All Right Reserved Free html Templates
         </p>

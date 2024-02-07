@@ -77,21 +77,13 @@ const Sidebar = () => {
                 LOGIN
               </Link>
             </li>
-            <li className="hover:text-orange-400 transition-all duration-500">
-              <Link className="" to="/register">
-                REGISTER
-              </Link>
-            </li>
+      
             <li className="hover:text-orange-400 transition-all duration-500">
               <Link className="" to="/admin">
                 admin
               </Link>
             </li>
-            <li className="hover:text-orange-400 transition-all duration-500">
-              <Link className="" to="/user">
-                user
-              </Link>
-            </li>
+
           </ul>
         </nav>
       </div>

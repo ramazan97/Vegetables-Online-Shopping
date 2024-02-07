@@ -39,8 +39,8 @@ const Login = () => {
         </div>
 
         <div className="text-center my-2 text-sm text-red-500">
-          Daha Önce Kayıt Olmadıysa{" "}
-          <Link className="underline " href="/signup">
+          Daha Önce Kayıt Olmadıysanız <br/> 
+          <Link className="underline " to="/signup">
             buraya tıkla
           </Link>
         </div>
