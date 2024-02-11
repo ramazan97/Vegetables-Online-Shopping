@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import UrunDetay from "./pages/UrunDetay";
 import Vegetables from "./pages/Vegetables";
 import About from "./pages/About";
 import Contactus from "./pages/Contactus";
@@ -30,6 +31,7 @@ function App() {
                   element={kullanici ? <Home /> : <Navigate to="/login" />}
                 /> */}
                 <Route path="/" element={<Home />} />
+                <Route path="/cart/:id" element={<UrunDetay />} />
                 <Route path="/shop" element={<Shop />} />
                 <Route path="/vegetables" element={<Vegetables />} />
                 <Route path="/about" element={<About />} />
@@ -48,8 +50,7 @@ function App() {
                 <Route
                   path="/admin"
                   element={
-                    kullanici &&
-                    kullanici.email === "ramaz@gmail.com" ? (
+                    kullanici && kullanici.email === "ramaz@gmail.com" ? (
                       <Admin />
                     ) : (
                       <Home />
@@ -65,7 +66,7 @@ function App() {
                   <Route
                     path="products"
                     element={
-                      kullanici? <Products /> : <Navigate to="/admin" />
+                      kullanici ? <Products /> : <Navigate to="/admin" />
                     }
                   />
                 </Route>

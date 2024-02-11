@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { IoCartOutline, IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
@@ -12,15 +12,29 @@ import { FaCaretDown } from "react-icons/fa";
 import { SidebarContext } from "../contexts/SidebarContext";
 
 import Cart from "./Cart";
+import { CartContext } from "../contexts/CartContext";
 const Navbar = () => {
   const { logout } = useLogout();
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { kullanici } = useAuthContext();
+  const { itemAmount } = useContext(CartContext);
   const handleClick = () => {
     logout();
   };
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
+    });
+  });
+
   return (
-    <div className="flex items-center justify-between px-10 h-[81px] ">
+    <header
+      className={`${
+        isActive ? "bg-white py-4 shadow-md " : "bg-none  py-6  "
+      } flex items-center justify-between px-10 h-[81px] fixed w-full z-10 transition-all `}
+    >
       <div>
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="./logo.png" alt="logo" />
@@ -106,8 +120,8 @@ const Navbar = () => {
                   <Link className="" onClick={() => setIsOpen(!isOpen)} to="">
                     <div className="flex items-center justify-center">
                       <IoCartOutline size={25} />
-                      <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full p-[6px] text-[10px]">
-                        4
+                      <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full p-[6px] text-[12px] w-[18px] flex justify-center items-center  h-[18px]">
+                        {itemAmount}
                       </span>
                     </div>
                     <Cart />
@@ -175,7 +189,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

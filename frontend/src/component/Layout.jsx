@@ -4,7 +4,10 @@ import Footer from "../pages/Footer";
 const Layout = ({ children }) => {
   return (
     <div>
-      <Navbar />
+      <div className="pb-[81px]">
+        <Navbar />
+      </div>
+
       {children}
       <Footer />
     </div>

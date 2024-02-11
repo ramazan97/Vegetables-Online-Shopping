@@ -2,15 +2,24 @@ import { BrowserRouter as Router, Outlet } from "react-router-dom";
 
 import Sidebar from "../component/Admin Panel Component/shared/Sidebar";
 import Header from "../component/Admin Panel Component/shared/Header";
+import UrunEkle from "../component/UrunEkle";
+import UrunSil from "../component/UrunSil";
 
 const Admin = () => {
   return (
-    <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
-      <Sidebar />
-      <div className="flex flex-col flex-1">
-        <Header />
-        <div className="flex-1 p-4 min-h-0 overflow-auto">
-          <Outlet />
+    <div className="flex items-center justify-center flex-col">
+      <div className="flex items-center justify-center flex-col">
+        <UrunEkle />
+        <UrunSil />
+      </div>
+      <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
+        <Sidebar />
+
+        <div className="flex flex-col flex-1">
+          <Header />
+          <div className="flex-1 p-4 min-h-0 overflow-auto">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

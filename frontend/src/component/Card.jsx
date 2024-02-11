@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Button from "./Button";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { CartContext } from "../contexts/CartContextProvider";
+import { CartContext } from "../contexts/CartContext";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { BsEyeFill } from "react-icons/bs";
 const Card = ({ product }) => {
@@ -10,43 +10,45 @@ const Card = ({ product }) => {
   const navigate = useNavigate();
   // console.log(data,"data");
   // const { sayac, arttir, azalt } = countReducer();
-
-  // const { urunler, artir, azalt } = useContext(CartContext);
+  const { resim, ucret, baslik, aciklama, _id } = product;
+  const { addToCard } = useContext(CartContext);
 
   // const urunMiktar = urunler[data._id] ?? 0; // Başlangıçta 0 atanıyor
 
-  const handleClick = () => {
+  const handleClick = (product, id) => {
     if (!kullanici) {
       navigate("/login");
     } else {
       navigate("/");
     }
+    addToCard(product, id);
   };
   return (
     <div class="w-[250px] rounded overflow-hidden shadow-lg shadow-black">
       <div class="px-6 py-4 flex items-center flex-col">
-        <img
+        {/* <img
           class="w-[6rem] "
           className="py-3"
           src="./img-4.png"
           alt="tometo"
-        />
+        /> */}
+        <img class="w-[6rem] " className="py-3" src={resim} alt="tometo" />
         <div class="font-bold text-3xl mb-2 ">
-          $<span className="text-yellow-500 ">{product.ucret}</span>
+          $<span className="text-yellow-500 ">{ucret}</span>
         </div>
-        <div class="font-bold text-3xl mb-2">{product.baslik}</div>
+        <div class="font-bold text-3xl mb-2">{baslik}</div>
         <div class="font-bold text-3xl mb-2">
           {product.kilogram}
           <span className="text-yellow-500">Kg</span>
         </div>
-        <p class="text-gray-700 text-center ">{product.aciklama}</p>
+        <p class="text-gray-700 text-center ">{aciklama}</p>
       </div>
 
       {/* button */}
       <div className="flex flex-col gap-y-3.5 items-center justify-center py-7">
-        <Button onClick={handleClick} name={`Buy Now`} />
+        <Button onClick={() => handleClick(product, _id)} name={`Buy Now`} />
 
-        <Link to={`/cart/${product._id}`}>
+        <Link to={`/cart/${_id}`}>
           <Button name={<BsEyeFill className="text-3xl" />} />
         </Link>
 

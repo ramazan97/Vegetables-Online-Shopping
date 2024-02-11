@@ -22,7 +22,7 @@ export const useLogin = () => {
     //console.log(response);
 
     const json = await response.json();
-    console.log(json, "json");
+
     if (!response.ok) {
       setYukleniyor(false);
       setHata(json.hata);

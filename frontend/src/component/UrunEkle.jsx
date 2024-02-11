@@ -6,6 +6,9 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const UrunEkle = () => {
   const [resim, setResim] = useState("");
   const [ucret, setUcret] = useState("");
+  // const [rating, setRating] = useState("");
+  // const [rate, setRate] = useState("");
+  // const [count, setCount] = useState("");
   const [baslik, setBaslik] = useState("");
   const [kilogram, setKilogram] = useState("");
   const [aciklama, setAciklama] = useState("");
@@ -23,9 +26,18 @@ const UrunEkle = () => {
     //   return;
     // }
 
-    const urunVerisi = { resim, ucret, baslik, kilogram, aciklama };
+    const urunVerisi = {
+      resim,
+      ucret,
+      baslik,
+      kilogram,
+      aciklama,
+      // rating,
+      // rate,
+      // count,
+    };
 
-    const response = await fetch("/api/shopcart", {
+    const response = await fetch("http://localhost:3000/api/shopcart", {
       method: "POST",
       body: JSON.stringify(urunVerisi),
       headers: {
@@ -42,7 +54,13 @@ const UrunEkle = () => {
     }
     if (response.ok) {
       setHata(null);
+      setResim("");
+      setUcret("");
+      // setRating("");
+      // setRate("");
+      // setCount("");
       setBaslik("");
+      setKilogram("");
       setAciklama("");
       setBosalanlar([]);
       dispatch({ type: "URUN_OLUSTUR", payload: json });
@@ -54,6 +72,7 @@ const UrunEkle = () => {
     <form className="" onSubmit={handleSubmit}>
       <h3>Yeni Bir Ürün Ekle</h3>
       <div>
+        {/* resim */}
         <div>
           <label>Resim</label>
           <input
@@ -67,6 +86,7 @@ const UrunEkle = () => {
             value={resim}
           />
         </div>
+        {/* ücret */}
         <div>
           <label>Üçret</label>
           <input
@@ -80,6 +100,7 @@ const UrunEkle = () => {
             value={ucret}
           />
         </div>
+        {/* baslik */}
         <div>
           <label>Baslik</label>
           <input
@@ -93,6 +114,7 @@ const UrunEkle = () => {
             value={baslik}
           />
         </div>
+        {/* kilogram */}
         <div>
           <label>Kilogram</label>
           <input
@@ -106,6 +128,49 @@ const UrunEkle = () => {
             value={kilogram}
           />
         </div>
+        {/* raitng */}
+        {/* <div>
+          <label>rating</label>
+          <input
+            className={
+              bosAlanlar
+                ? "border  rounded-l-md h-[41px]  "
+                : "border  rounded-l-md h-[41px] border-red-500"
+            }
+            type="text"
+            onChange={(e) => setRating(e.target.value)}
+            value={rating}
+          />
+        </div> */}
+        {/* rate */}
+        {/* <div>
+          <label>Rate</label>
+          <input
+            className={
+              bosAlanlar
+                ? "border  rounded-l-md h-[41px]  "
+                : "border  rounded-l-md h-[41px] border-red-500"
+            }
+            type="text"
+            onChange={(e) => setRate(e.target.value)}
+            value={rate}
+          />
+        </div> */}
+        {/* count */}
+        {/* <div>
+          <label>Count</label>
+          <input
+            className={
+              bosAlanlar
+                ? "border  rounded-l-md h-[41px]  "
+                : "border  rounded-l-md h-[41px] border-red-500"
+            }
+            type="text"
+            onChange={(e) => setCount(e.target.value)}
+            value={count}
+          />
+        </div> */}
+        {/* aciklama */}
         <div>
           <label>Aciklama</label>
           <input

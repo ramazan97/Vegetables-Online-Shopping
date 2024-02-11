@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
@@ -22,7 +21,7 @@ export const useSignup = () => {
     //console.log(response);
 
     const json = await response.json();
-    console.log(json, "json");
+
     if (!response.ok) {
       setYukleniyor(false);
       setHata(json.hata);

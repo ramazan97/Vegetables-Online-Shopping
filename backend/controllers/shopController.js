@@ -15,11 +15,11 @@ const shopCartOlustur = async (req, res) => {
     // burada kullanici_id yazarak kullanıcıya göre id işlemi yaptık
     const kullanici_id = req.kullanici._id;
     const shopCart = await ShopCartModel.create({
-      resim,
-      ucret,
       baslik,
-      kilogram,
+      ucret,
       aciklama,
+      resim,
+      kilogram,
       kullanici_id,
     });
     res.status(200).json(shopCart);
