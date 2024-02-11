@@ -1,12 +1,13 @@
 import React from "react";
 
-const Button = ({ name, disabled }) => {
+const Button = ({ name, disabled, onClick }) => {
   return (
     <div>
       <button
+        onClick={onClick}
         disabled={disabled}
         type="submit"
-        className="text-white bg-black hover:bg-yellow-500 text-xl font-bold transition-all duration-500 w-48 h-14"
+        className="text-white bg-black hover:bg-yellow-500 text-xl font-bold transition-all duration-500 w-48 h-14 flex items-center justify-center "
       >
         {name}
       </button>

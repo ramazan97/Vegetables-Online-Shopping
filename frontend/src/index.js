@@ -3,16 +3,29 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UrunContextProvider } from "./contexts/UrunContext";
+import CartContext from "./contexts/CartContext";
+import ProductContext from "./contexts/ProductContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
+import SidebarProvider from "./contexts/SidebarContext";
+import SayacProvider, {
+  CartContextProvider,
+  CountContextProvider,
+} from "./contexts/CartContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <UrunContextProvider>
-        <App />
-      </UrunContextProvider>
-    </AuthContextProvider>
+    <SidebarProvider>
+      <AuthContextProvider>
+        <CartContext>
+          <ProductContext>
+            <UrunContextProvider>
+              <App />
+            </UrunContextProvider>
+          </ProductContext>
+        </CartContext>
+      </AuthContextProvider>
+    </SidebarProvider>
   </React.StrictMode>
 );
 

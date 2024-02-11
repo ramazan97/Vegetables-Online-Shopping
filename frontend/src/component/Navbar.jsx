@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { IoSearchSharp } from "react-icons/io5";
+import React, { Fragment, useContext } from "react";
+import { IoCartOutline, IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useLogout } from "../hooks/useLogout";
@@ -9,8 +9,12 @@ import { CiLogout } from "react-icons/ci";
 import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { FaCaretDown } from "react-icons/fa";
+import { SidebarContext } from "../contexts/SidebarContext";
+
+import Cart from "./Cart";
 const Navbar = () => {
   const { logout } = useLogout();
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { kullanici } = useAuthContext();
   const handleClick = () => {
     logout();
@@ -50,7 +54,7 @@ const Navbar = () => {
                   ABOUT
                 </Link>
               </li>
-              <li className="hover:text-orange-400 transition-all duration-500">
+              <li className="hover:text-orange-400 text-nowrap transition-all duration-500">
                 <Link className="" to="/contactus">
                   CONTACT US
                 </Link>
@@ -93,9 +97,20 @@ const Navbar = () => {
                     ABOUT
                   </Link>
                 </li>
-                <li className="hover:text-orange-400 transition-all duration-500 whitespace-nowrap ">
+                <li className="hover:text-orange-400 transition-all duration-500 text-nowrap ">
                   <Link className="" to="/contactus">
                     CONTACT US
+                  </Link>
+                </li>
+                <li className="hover:text-orange-400 transition-all duration-500  ">
+                  <Link className="" onClick={() => setIsOpen(!isOpen)} to="">
+                    <div className="flex items-center justify-center">
+                      <IoCartOutline size={25} />
+                      <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full p-[6px] text-[10px]">
+                        4
+                      </span>
+                    </div>
+                    <Cart />
                   </Link>
                 </li>
               </ul>

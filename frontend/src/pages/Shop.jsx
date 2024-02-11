@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Cart from "../component/Cart";
 import { useUrunContext } from "../hooks/useUrunContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Card from "../component/Card";
 
-const Shop = () => {
+const Shop = ({ products }) => {
   // const [shopCart, setShopCart] = useState(null);
   const { urunler, dispatch } = useUrunContext(null);
   const { kullanici } = useAuthContext();
@@ -51,10 +51,10 @@ const Shop = () => {
       {/* cart */}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-5 ">
-        {urunler &&
-          urunler.map((data) => (
+        {products &&
+          products.map((product) => (
             <div>
-              <Cart key={data._id} data={data} />
+              <Card key={product._id} product={product} />
             </div>
           ))}
       </div>

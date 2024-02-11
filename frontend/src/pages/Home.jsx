@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import Hero from "./Hero";
 import About from "./About";
 import Shop from "./Shop";
 import Vegetables from "./Vegetables";
 import Contactus from "./Contactus";
+import { ProductContext } from "../contexts/ProductContext";
 
 const Home = () => {
+  const { products } = useContext(ProductContext);
+
   return (
     <div>
       <Hero />
       <About />
-      <Shop />
+      <Shop products={products} />
       <Vegetables />
       <Contactus />
     </div>
