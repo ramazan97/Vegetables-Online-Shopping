@@ -10,7 +10,7 @@ const Card = ({ product }) => {
   const navigate = useNavigate();
   // console.log(data,"data");
   // const { sayac, arttir, azalt } = countReducer();
-  const { resim, ucret, baslik, aciklama, _id } = product;
+  const { resim, ucret, baslik, aciklama, _id, kilogram } = product;
   const { addToCard } = useContext(CartContext);
 
   // const urunMiktar = urunler[data._id] ?? 0; // Başlangıçta 0 atanıyor
@@ -46,7 +46,18 @@ const Card = ({ product }) => {
 
       {/* button */}
       <div className="flex flex-col gap-y-3.5 items-center justify-center py-7">
-        <Button onClick={() => handleClick(product, _id)} name={`Buy Now`} />
+        {kilogram < 3 ? (
+          <div className="bg-red-500 ">
+            <Button name={`Ürün Stokda Kalmadı`} />
+          </div>
+        ) : (
+          <div className="bg-green-500">
+            <Button
+              onClick={() => handleClick(product, _id)}
+              name={`Buy Now`}
+            />
+          </div>
+        )}
 
         <Link to={`/cart/${_id}`}>
           <Button name={<BsEyeFill className="text-3xl" />} />

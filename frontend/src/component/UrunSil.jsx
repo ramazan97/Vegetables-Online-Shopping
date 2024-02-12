@@ -1,29 +1,14 @@
-import React, { useState } from "react";
-import Button from "./Button";
+import React from "react";
 import { useUrunContext } from "../hooks/useUrunContext";
-import Cart from "./Cart";
-import moment from "moment";
 import "moment/locale/tr";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { ImBin } from "react-icons/im";
+
 const UrunSil = () => {
   const { urunler, dispatch } = useUrunContext();
 
-  // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
-
-  // const { kullanici } = useAuthContext();
   const handleClick = async ({ data }) => {
-    // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
-    // if (!kullanici) {
-    //   return;
-    // }
-
     const response = await fetch("/api/shopcart/" + data._id, {
       method: "DELETE",
-      // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
-
-      // headers: {
-      //   Authorization: `Bearer ${kullanici.token}`,
-      // },
     });
 
     const json = await response.json();
@@ -34,32 +19,43 @@ const UrunSil = () => {
   };
 
   return (
-    <form className="">
-      <h3>Ürün Sil</h3>
-      <div>
-        <div className="flex flex-row justify-center items-center gap-5">
+    <form className="flex flex-col min-h-screen p-20 gap-x-20 items-center justify-center  ">
+      <strong className="text-2xl mb-9 text-gray-800 ">Ürün Sil</strong>
+      <div className="flex-grow">
+        <div className="flex flex-row justify-center items-start gap-5 grid grid-cols-1 md:grid-cols-3 xl:md:grid-cols-4 gap-4 py-5">
           {urunler &&
             urunler.length > 0 &&
             urunler.map((data) => (
-              <div>
-                <div>
-                  {" "}
+              <div class="w-[250px]  rounded overflow-hidden shadow-lg shadow-black ">
+                <div class="px-6 py-4 flex items-center flex-col">
+                  <img
+                    className="py-3  size-48 "
+                    src={data.resim}
+                    alt="tometo"
+                  />
+                  <div class="font-bold text-3xl mb-2 ">
+                    $<span className="text-yellow-500 ">{data.ucret}</span>
+                  </div>
+                  <div class="font-bold text-3xl mb-2">{data.baslik}</div>
+                  <div class="font-bold text-3xl mb-2">
+                    {data.kilogram}
+                    <span className="text-yellow-500">Kg</span>
+                  </div>
+                  <p class="text-gray-700 text-center ">{data.aciklama}</p>
+                </div>
+                {/* sil butonu */}
+                <div className="w-full  flex items-center justify-center mt-10">
                   <span
-                    className="bg-red-500 p-2 cursor-pointer"
+                    className="text-gray-800 hover:text-red-500 transition-all duration-500 p-2 cursor-pointer"
                     onClick={() => handleClick({ data })}
                   >
-                    X
+                    <ImBin size={50} />
                   </span>
                 </div>
-                <div>
-                  <Cart key={data._id} data={data} />
-                </div>
-                <div> {moment(new Date(data.createdAt)).fromNow()}</div>
               </div>
             ))}
         </div>
       </div>
-      {/* <Button name={`Ekle`} /> */}
     </form>
   );
 };

@@ -8,10 +8,6 @@ import UrunSil from "../component/UrunSil";
 const Admin = () => {
   return (
     <div className="flex items-center justify-center flex-col">
-      <div className="flex items-center justify-center flex-col">
-        <UrunEkle />
-        <UrunSil />
-      </div>
       <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
         <Sidebar />
 

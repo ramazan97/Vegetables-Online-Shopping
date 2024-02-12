@@ -6,15 +6,16 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const UrunEkle = () => {
   const [resim, setResim] = useState("");
   const [ucret, setUcret] = useState("");
-  // const [rating, setRating] = useState("");
-  // const [rate, setRate] = useState("");
-  // const [count, setCount] = useState("");
   const [baslik, setBaslik] = useState("");
   const [kilogram, setKilogram] = useState("");
   const [aciklama, setAciklama] = useState("");
   const [hata, setHata] = useState(null);
   const { dispatch } = useUrunContext();
   const [bosAlanlar, setBosalanlar] = useState([]);
+  // const [rating, setRating] = useState("");
+  // const [rate, setRate] = useState("");
+  // const [count, setCount] = useState("");
+
   // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
   // const { kullanici } = useAuthContext();
 
@@ -37,7 +38,7 @@ const UrunEkle = () => {
       // count,
     };
 
-    const response = await fetch("http://localhost:3000/api/shopcart", {
+    const response = await fetch("/api/shopcart", {
       method: "POST",
       body: JSON.stringify(urunVerisi),
       headers: {
@@ -69,17 +70,20 @@ const UrunEkle = () => {
   };
 
   return (
-    <form className="" onSubmit={handleSubmit}>
-      <h3>Yeni Bir Ürün Ekle</h3>
-      <div>
+    <form
+      className=" flex flex-col gap-y-5 items-center justify-center my-20"
+      onSubmit={handleSubmit}
+    >
+      <strong className="text-gray-800 text-2xl">Yeni Bir Ürün Ekle</strong>
+      <div className="flex flex-col gap-y-5">
         {/* resim */}
-        <div>
+        <div className=" w-80 flex items-center justify-between ">
           <label>Resim</label>
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
-                : "border  rounded-l-md h-[41px] border-red-500"
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
+                : "border border-gray-900  rounded-l-md h-[41px] border border-gray-900-red-500"
             }
             type="text"
             onChange={(e) => setResim(e.target.value)}
@@ -87,12 +91,12 @@ const UrunEkle = () => {
           />
         </div>
         {/* ücret */}
-        <div>
+        <div className=" w-80 flex items-center justify-between ">
           <label>Üçret</label>
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
                 : "border  rounded-l-md h-[41px] border-red-500"
             }
             type="text"
@@ -101,12 +105,12 @@ const UrunEkle = () => {
           />
         </div>
         {/* baslik */}
-        <div>
+        <div className=" w-80 flex items-center justify-between ">
           <label>Baslik</label>
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
                 : "border  rounded-l-md h-[41px] border-red-500"
             }
             type="text"
@@ -115,12 +119,12 @@ const UrunEkle = () => {
           />
         </div>
         {/* kilogram */}
-        <div>
+        <div className=" w-80 flex items-center justify-between ">
           <label>Kilogram</label>
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
                 : "border  rounded-l-md h-[41px] border-red-500"
             }
             type="text"
@@ -128,13 +132,31 @@ const UrunEkle = () => {
             value={kilogram}
           />
         </div>
+        {/* aciklama */}
+        <div className=" w-80 flex items-center justify-between ">
+          <div>
+            <label>Aciklama</label>
+          </div>
+          <div>
+            <input
+              className={
+                bosAlanlar
+                  ? "border border-gray-900  rounded-l-md h-[41px]  "
+                  : "border  rounded-l-md h-[41px] border-red-500"
+              }
+              type="text"
+              onChange={(e) => setAciklama(e.target.value)}
+              value={aciklama}
+            />
+          </div>
+        </div>
         {/* raitng */}
         {/* <div>
           <label>rating</label>
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
                 : "border  rounded-l-md h-[41px] border-red-500"
             }
             type="text"
@@ -148,8 +170,8 @@ const UrunEkle = () => {
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
-                : "border  rounded-l-md h-[41px] border-red-500"
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
+                : "border rounded-l-md h-[41px] border-red-500"
             }
             type="text"
             onChange={(e) => setRate(e.target.value)}
@@ -162,28 +184,14 @@ const UrunEkle = () => {
           <input
             className={
               bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
-                : "border  rounded-l-md h-[41px] border-red-500"
+                ? "border border-gray-900  rounded-l-md h-[41px]  "
+                : "border   rounded-l-md h-[41px] border-red-500"
             }
             type="text"
             onChange={(e) => setCount(e.target.value)}
             value={count}
           />
         </div> */}
-        {/* aciklama */}
-        <div>
-          <label>Aciklama</label>
-          <input
-            className={
-              bosAlanlar
-                ? "border  rounded-l-md h-[41px]  "
-                : "border  rounded-l-md h-[41px] border-red-500"
-            }
-            type="text"
-            onChange={(e) => setAciklama(e.target.value)}
-            value={aciklama}
-          />
-        </div>
       </div>
       <Button name={`Ekle`} />
       {hata && <div className="text-red-500 text-2xl">{hata} </div>}

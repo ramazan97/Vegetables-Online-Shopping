@@ -16,6 +16,10 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Dashboard from "./component/Admin Panel Component/pages/Dashboard";
 import Products from "./component/Admin Panel Component/pages/Products";
 import Layout from "./component/Layout";
+import UrunEkleSil from "./component/UrunEkleSil";
+import UrunSil from "./component/UrunSil";
+import UrunEkle from "./component/UrunEkle";
+import UrunGuncelle from "./component/UrunGuncelle";
 
 function App() {
   const { kullanici } = useAuthContext();
@@ -33,6 +37,10 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/cart/:id" element={<UrunDetay />} />
                 <Route path="/shop" element={<Shop />} />
+                <Route path="/adminproducts" element={<UrunEkleSil />} />
+                <Route path="/adminurunsil" element={<UrunSil />} />
+                <Route path="/adminurunekle" element={<UrunEkle />} />
+                <Route path="/adminurunguncelle" element={<UrunGuncelle />} />
                 <Route path="/vegetables" element={<Vegetables />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contactus" element={<Contactus />} />

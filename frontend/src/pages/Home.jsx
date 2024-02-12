@@ -15,7 +15,6 @@ const Home = () => {
       <Hero />
       <About />
       <Shop products={products} />
-      <UrunDetay/>
       <Vegetables />
       <Contactus />
     </div>

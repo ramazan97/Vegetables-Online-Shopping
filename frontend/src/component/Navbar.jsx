@@ -153,7 +153,7 @@ const Navbar = () => {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute  mr-3 flex flex-col gap-y-3 items-center justify-end right-0 z-10 mt-2.5 transform w-36">
+                    <Popover.Panel className="absolute  mr-3 flex flex-col gap-y-3 items-center justify-end right-0 z-10 mt-2.5 transform w-36 bg-white">
                       <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-center gap-3">
                         {kullanici && kullanici.email === "ramaz@gmail.com" ? (
                           <Link className="" to="/admin">
