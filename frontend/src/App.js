@@ -20,11 +20,14 @@ import UrunEkleSil from "./component/UrunEkleSil";
 import UrunSil from "./component/UrunSil";
 import UrunEkle from "./component/UrunEkle";
 import UrunGuncelle from "./component/UrunGuncelle";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const { kullanici } = useAuthContext();
   return (
     <div>
+      <ToastContainer />
+
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
           <div className="flex-grow">

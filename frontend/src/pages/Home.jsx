@@ -11,7 +11,7 @@ const Home = () => {
   const { products } = useContext(ProductContext);
 
   return (
-    <div>
+    <div className="">
       <Hero />
       <About />
       <Shop products={products} />

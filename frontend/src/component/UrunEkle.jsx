@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { useUrunContext } from "../hooks/useUrunContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { toast } from "react-toastify";
 const UrunEkle = () => {
   const [resim, setResim] = useState("");
   const [ucret, setUcret] = useState("");
@@ -52,6 +52,7 @@ const UrunEkle = () => {
     if (!response.ok) {
       setHata(json.hata);
       setBosalanlar(json.bosAlanlar);
+      toast.error(` ${json.hata} sı var `  );
     }
     if (response.ok) {
       setHata(null);
@@ -66,6 +67,7 @@ const UrunEkle = () => {
       setBosalanlar([]);
       dispatch({ type: "URUN_OLUSTUR", payload: json });
       // console.log(`yeni bir not eklendi`, json);
+      toast.success("yeni bir not eklendi!");
     }
   };
 

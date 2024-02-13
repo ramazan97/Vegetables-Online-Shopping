@@ -13,7 +13,8 @@ import { SidebarContext } from "../contexts/SidebarContext";
 
 import Cart from "./Cart";
 import { CartContext } from "../contexts/CartContext";
-const Navbar = () => {
+import { LuMoon, LuSun } from "react-icons/lu";
+const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
   const { logout } = useLogout();
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { kullanici } = useAuthContext();
@@ -21,6 +22,7 @@ const Navbar = () => {
   const handleClick = () => {
     logout();
   };
+
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const Navbar = () => {
     <header
       className={`${
         isActive ? "bg-white py-4 shadow-md " : "bg-none  py-6  "
-      } flex items-center justify-between px-10 h-[81px] fixed w-full z-10 transition-all `}
+      } flex items-center justify-between px-10 h-[81px] fixed w-full z-10 transition-all dark:bg-neutral-900`}
     >
       <div>
         <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -43,7 +45,9 @@ const Navbar = () => {
       <div className="md:hidden flex items-center justify-end">
         <Sidebar />
       </div>
-
+      <button className={`${darkMode ? "text-gray-100" : "text-gray-900"}`} onClick={toggleDarkMode}>
+        {darkMode ? <LuSun size={50} /> : <LuMoon size={50} />}
+      </button>
       <div className="hidden md:flex items-center justify-center gap-5">
         {!kullanici && (
           <div>

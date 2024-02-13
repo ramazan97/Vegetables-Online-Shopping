@@ -8,8 +8,6 @@ const Hero = () => {
   const { kullanici } = useAuthContext();
   const navigate = useNavigate();
 
-
-
   const handleClick = () => {
     if (!kullanici) {
       navigate("/login");
@@ -19,7 +17,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-5 px-20">
+    <div className=" dark:bg-neutral-900 flex items-center justify-center gap-5 px-20">
       <div className="hidden md:flex md:w-[600px]">
         <img src="./img-1.png" alt="hero" />
       </div>
@@ -41,7 +39,6 @@ const Hero = () => {
           <div className="flex flex-row gap-5">
             <Button onClick={handleClick} name="Buy Now" />
             <Button name="Read More" />
-     
           </div>
         </div>
       </div>
