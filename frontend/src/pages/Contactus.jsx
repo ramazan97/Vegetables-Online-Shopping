@@ -1,7 +1,19 @@
 import React from "react";
-import Button from "../component/Button";
-
+import Button from "../component/Buttons/Button";
+import { toast } from "react-toastify";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Link, useNavigate } from "react-router-dom";
 const Contactus = () => {
+  const { kullanici } = useAuthContext();
+  const navigate = useNavigate();
+  const handleClick = (product, id) => {
+    if (!kullanici) {
+      navigate("/login");
+    } else {
+      // müşteriden gelen mesajları burada kaydedip veri tabanına gönderen sonrada admin panelde mesajlar kısmında gösteren kodu yaz
+      navigate("/contactus");
+    }
+  };
   return (
     <div className="flex flex-col items-center mt-16 gap-y-5">
       {/* logo */}
@@ -39,9 +51,12 @@ const Contactus = () => {
             className="w-full h-[153px] text-xl text-balance border border-spacing-6 border-gray-200"
             placeholder="Message"
           />
-          <div className=" flex items-center justify-center my-5">
-            <Button name={`Send`} />
-          </div>
+          <Link
+            to={"/login"}
+            className=" flex items-center justify-center my-5"
+          >
+            <Button onClick={() => handleClick()} name={`Send`} />
+          </Link>
         </div>
         {/* map */}
         <div className="  ">

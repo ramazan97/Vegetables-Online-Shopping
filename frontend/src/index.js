@@ -11,20 +11,26 @@ import SayacProvider, {
   CartContextProvider,
   CountContextProvider,
 } from "./contexts/CartContextProvider";
+import KullaniciContext from "./contexts/KullaniciContext";
+import NavbarContext from "./contexts/NavbarContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <SidebarProvider>
-      <AuthContextProvider>
-        <CartContext>
-          <ProductContext>
-            <UrunContextProvider>
-              <App />
-            </UrunContextProvider>
-          </ProductContext>
-        </CartContext>
-      </AuthContextProvider>
+      <NavbarContext>
+        <AuthContextProvider>
+          <CartContext>
+            <ProductContext>
+              <KullaniciContext>
+                <UrunContextProvider>
+                  <App />
+                </UrunContextProvider>
+              </KullaniciContext>
+            </ProductContext>
+          </CartContext>
+        </AuthContextProvider>
+      </NavbarContext>
     </SidebarProvider>
   </React.StrictMode>
 );

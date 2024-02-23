@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import Button from "../component/Button";
+import Button from "../component/Buttons/Button";
 import { Link } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
 
 const Signup = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [parola, setParola] = useState("");
+  const [password, setPassword] = useState("");
   const { signup, yukleniyor, hata } = useSignup();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(email, parola);
+    await signup(username, email, password);
   };
+
 
   return (
     <form
@@ -25,6 +27,14 @@ const Signup = () => {
           Sign up
         </p>
         <input
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="isim"
+          type="text"
+          id="isim"
+          className="w-full h-12 p-3 rounded-md outline-none my-2"
+          required
+        />
+        <input
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           type="text"
@@ -33,7 +43,7 @@ const Signup = () => {
           required
         />
         <input
-          onChange={(e) => setParola(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Parola"
           type="password"
           id="password"
@@ -45,7 +55,7 @@ const Signup = () => {
         </div>
 
         <div className="text-center my-2 text-sm text-red-500">
-          Daha Önce Üye Olduysanız <br/>
+          Daha Önce Üye Olduysanız <br />
           <Link className="underline " to="/login">
             buraya tıkla
           </Link>
@@ -56,7 +66,6 @@ const Signup = () => {
         </div>
         {hata && <div className="text-red-500 font-bold"> {hata} </div>}
       </div>
-   
     </form>
   );
 };

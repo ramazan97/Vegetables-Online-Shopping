@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Outlet } from "react-router-dom";
 
 import Sidebar from "../component/Admin Panel Component/shared/Sidebar";
 import Header from "../component/Admin Panel Component/shared/Header";
-import UrunEkle from "../component/UrunEkle";
-import UrunSil from "../component/UrunSil";
 
 const Admin = () => {
   return (
@@ -19,15 +17,6 @@ const Admin = () => {
         </div>
       </div>
     </div>
-
-    // <div className="flex flex-col items-center justify-center gap-5">
-    //   <div className="border border-spacing-8 border-red-500 p-8 ">
-    //     <UrunEkle />
-    //   </div>
-    //   <div className="border border-spacing-8 border-red-500 p-8 ">
-    //     <UrunSil />
-    //   </div>
-    // </div>
   );
 };
 

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import Button from "../component/Button";
+import Button from "../component/Buttons/Button";
 import { Link } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
 
 const Login = () => {
+
   const [email, setEmail] = useState("");
-  const [parola, setParola] = useState("");
+  const [password, setPassword] = useState("");
   const { login, yukleniyor, hata } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      await login(email, parola);
+      await login( email,password);
   };
   return (
     <form    onSubmit={handleSubmit} className="flex items-center justify-center py-14">
@@ -27,7 +28,7 @@ const Login = () => {
           required
         />
         <input
-               onChange={(e) => setParola(e.target.value)}
+               onChange={(e) => setPassword(e.target.value)}
           placeholder="Parola"
           type="password"
           id="password"

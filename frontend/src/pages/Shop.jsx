@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUrunContext } from "../hooks/useUrunContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import Card from "../component/Card";
+import Card from "../component/Cards/Card";
 
 const Shop = ({ products }) => {
   // const [shopCart, setShopCart] = useState(null);
@@ -9,27 +9,34 @@ const Shop = ({ products }) => {
   const { kullanici } = useAuthContext();
 
   useEffect(() => {
-    const fetchUrunler = async () => {
-      // const response = await fetch("/api/shopcart");
+    try {
+      const fetchUrunler = async () => {
+        // const response = await fetch("/api/shopcart");
 
-      // biz buradaki işlemleri kullanıcı sepetine ürün eklemesi için yapacağız. her kullanıcı kendi sepetindeki ürünü görmesini sağlayacağız
+        // biz buradaki işlemleri kullanıcı sepetine ürün eklemesi için yapacağız. her kullanıcı kendi sepetindeki ürünü görmesini sağlayacağız
 
-      const response = await fetch("/api/shopcart", {
-        headers: {
-          Authorization: `Bearer ${kullanici.token}`,
-        },
-      });
+        const response = await fetch("/api/shopcart", {
+          headers: {
+            Authorization: `Bearer ${kullanici.token}`,
+          },
+        });
 
-      const json = await response.json();
-      if (response.ok) {
-        // setShopCart(json);
-        dispatch({ type: "URUN_DOLDUR", payload: json });
+        const json = await response.json();
+        if (response.ok) {
+          // setShopCart(json);
+          dispatch({ type: "URUN_DOLDUR", payload: json });
+        }
+      };
+
+      // fetchUrunler();
+      if (kullanici) {
+        fetchUrunler();
       }
-    };
-
-    // fetchUrunler();
-    if (kullanici) {
-      fetchUrunler();
+    } catch (error) {
+      console.log(
+        "shop.jsx içerisinde ürünlere get işlemi atarken hata oluştır.",
+        error
+      );
     }
   }, [dispatch, kullanici]);
 

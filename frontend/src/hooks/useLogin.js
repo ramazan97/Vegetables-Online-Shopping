@@ -9,23 +9,23 @@ export const useLogin = () => {
 
   const { dispatch } = useAuthContext();
 
-  const login = async (email, parola) => {
+  const login = async (email,password) => {
     setYukleniyor(true);
     setHata(null);
 
     const response = await fetch("/api/kullanici/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, parola }),
+      body: JSON.stringify({ email,password }),
     });
 
-    //console.log(response);
 
     const json = await response.json();
 
     if (!response.ok) {
       setYukleniyor(false);
       setHata(json.hata);
+   
     }
 
     if (response.ok) {
@@ -34,6 +34,8 @@ export const useLogin = () => {
       dispatch({ type: "LOGIN", payload: json });
 
       setYukleniyor(false);
+      
+
     }
   };
 

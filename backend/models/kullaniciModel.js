@@ -1,37 +1,32 @@
-// 28. videoda buradan başladım
-
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 
 const Sema = mongoose.Schema;
 
-const kullaniciSema = new Sema({
-  email: {
-    type: String,
-    // zorunlu olduğun için bunu kullandık
-    required: true,
-    // eklenen email hesabını tekrar eklenmemesisni kontrol emtmek maksatlı kullak
-    unique: true,
+const kullaniciSema = new Sema(
+  {
+    username: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    role: { type: String, default: "user", enum: ["user", "admin"] },
+    avatar: { type: String },
   },
-  parola: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
-kullaniciSema.statics.signup = async function (email, parola) {
+kullaniciSema.statics.signup = async function (username, email, password) {
   // validatin işlemlerinin burada yapacaz
 
-  if (!email || !parola) {
+  if (!email || !password || !username) {
     throw Error("Alanlar boş geçilemez");
   }
   // isEmail ile mail mi değil mi kontrol ediyoruz
   if (!validator.isEmail(email)) {
     throw Error("Email kurallara uygun değil");
   }
-  // isStrongPassword ile parola mi değil mi kontrol ediyoruz
-  if (!validator.isStrongPassword(parola)) {
+  // isStrongPassword ile password mi değil mi kontrol ediyoruz
+  if (!validator.isStrongPassword(password)) {
     throw Error("Parola yeterince güçlü değil");
   }
 
@@ -43,17 +38,21 @@ kullaniciSema.statics.signup = async function (email, parola) {
 
   //   parolayı güçlendirmek için anlamsız random karakterlere salt dedik
   const salt = await bcrypt.genSalt(10);
-  //   hash olayı parola+ salt = şifrelenöişş hash
-  const sifrelenmisParola = await bcrypt.hash(parola, salt);
+  //   hash olayı password+ salt = şifrelenöişş hash
+  const sifrelenmisParola = await bcrypt.hash(password, salt);
 
-  //   şifrelenmiş parola ile emailli veritabanına kayot ettik
-  const kullanici = await this.create({ email, parola: sifrelenmisParola });
+  //   şifrelenmiş password ile emailli veritabanına kayot ettik
+  const kullanici = await this.create({
+    email,
+    username,
+    password: sifrelenmisParola,
+  });
 
   return kullanici;
 };
 
-kullaniciSema.statics.login = async function (email, parola) {
-  if (!email || !parola) {
+kullaniciSema.statics.login = async function (email, password) {
+  if (!email || !password) {
     throw Error("Alanlar boş geçilemez");
   }
 
@@ -63,10 +62,10 @@ kullaniciSema.statics.login = async function (email, parola) {
     throw Error("Email bulunamadı");
   }
 
-  const parolaKontrol = await bcrypt.compare(parola, kullanici.parola);
+  const parolaKontrol = await bcrypt.compare(password, kullanici.password);
 
   if (!parolaKontrol) {
-    throw Error("Hatalı parola girdiniz");
+    throw Error("Hatalı password girdiniz");
   }
 
   return kullanici;

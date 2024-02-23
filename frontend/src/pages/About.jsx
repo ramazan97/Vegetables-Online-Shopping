@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../component/Button";
+import Button from "../component/Buttons/Button";
 
 const About = () => {
   return (

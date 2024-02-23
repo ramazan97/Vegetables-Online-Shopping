@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../component/Button";
+import Button from "../component/Buttons/Button";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useSayac } from "../contexts/CartContextProvider";
