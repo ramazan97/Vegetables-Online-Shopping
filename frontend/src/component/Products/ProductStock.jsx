@@ -90,7 +90,7 @@ const ProductStock = () => {
                     {/* reddet butonuna basıldığında silsin bu şekilde reddetsin*/}
                     <div className={"text-white"}>
                       <Link
-                        to={"/adminupdateproduct"}
+                        to={`/admin/adminupdateproduct/${urun._id}`}
                         className="bg-yellow-500 p-3 rounded-lg
                         hover:bg-yellow-400 transition duration-500"
                       >

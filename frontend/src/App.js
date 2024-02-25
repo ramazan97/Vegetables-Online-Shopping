@@ -46,10 +46,18 @@ function App() {
                 <Route path="/adminproducts" element={<AddDeleteProduct />} />
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/cartt" element={<Cartt />} />
+
                 <Route path="/admindeleteproduct" element={<DeleteProduct />} />
                 <Route path="/messages" element={<Messages />} />
                 <Route path="/adminaddproduct" element={<AddProduct />} />
-                <Route path="/adminupdateproduct" element={<UpdateProduct />} />
+
+                <Route path="/admin/*">
+                  <Route
+                    path="adminupdateproduct/:id"
+                    element={<UpdateProduct />}
+                  />
+                </Route>
+
                 <Route path="/vegetables" element={<Vegetables />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contactus" element={<Contactus />} />
