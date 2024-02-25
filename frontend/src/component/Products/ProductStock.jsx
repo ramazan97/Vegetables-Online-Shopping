@@ -39,6 +39,9 @@ const ProductStock = () => {
                 Ürün id
               </th>
               <th scope="col" class="px-6 py-3">
+                Ürün Resmi
+              </th>
+              <th scope="col" class="px-6 py-3">
                 Ürün ismi
               </th>
               <th scope="col" class="px-6 py-3">
@@ -63,6 +66,9 @@ const ProductStock = () => {
                   >
                     {urun._id}
                   </th>
+                  <td class="px-6 py-4 h-10 w-10 ">
+                    <img src={urun.resim} className="h-10 w-10" alt="urun resmi" />
+                  </td>
                   <td class="px-6 py-4">{urun.name}</td>
                   <td class="px-6 py-4">{urun.kilogram}</td>
                   <td class="px-6 py-4">${urun.current}</td>
