@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import Navbar from "./component/Layout/Navbar";
+
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Vegetables from "./pages/Vegetables";
@@ -18,13 +18,16 @@ import AddDeleteProduct from "./component/Products/AddDeleteProduct";
 import DeleteProduct from "./component/Products/DeleteProduct";
 import AddProduct from "./component/Products/AddProduct";
 import UpdateProduct from "./component/Products/UpdateProduct";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Customers from "./component/Customers/Customers";
 import Messages from "./component/Messages/Messages";
-import Cart from "./component/Cart/Cart";
+
 import Cartt from "./component/Cart/Cartt";
 import ProductDetail from "./pages/ProductDetail";
+import Coupons from "./pages/Coupons";
+import AddCoupon from "./pages/AddCoupon";
+import UpdateCoupon from "./pages/UpdateCoupon";
 function App() {
   const { kullanici } = useAuthContext();
   return (
@@ -50,11 +53,17 @@ function App() {
                 <Route path="/admindeleteproduct" element={<DeleteProduct />} />
                 <Route path="/messages" element={<Messages />} />
                 <Route path="/adminaddproduct" element={<AddProduct />} />
+                <Route path="/adminaddcoupon" element={<AddCoupon />} />
+                <Route path="/admincoupon" element={<Coupons />} />
 
                 <Route path="/admin/*">
                   <Route
                     path="adminupdateproduct/:id"
                     element={<UpdateProduct />}
+                  />
+                  <Route
+                    path="adminupdatecoupon/:id"
+                    element={<UpdateCoupon />}
                   />
                 </Route>
 

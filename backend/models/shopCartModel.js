@@ -11,7 +11,7 @@ const ReviewSchema = new Sema(
     rating: { type: Number, 
       // required: true
      },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", 
+     kullanici: { type: mongoose.Schema.Types.ObjectId, ref: "Kullanici", 
     // required: true 
   },
   },

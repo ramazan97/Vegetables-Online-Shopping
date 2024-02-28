@@ -38,7 +38,7 @@ const DeleteProduct = () => {
     <form className="flex flex-col min-h-screen p-20 gap-x-20 items-center justify-center  ">
       <strong className="text-2xl mb-9 text-gray-800 ">Ürün Sil</strong>
       <div className="flex-grow">
-        <div className="flex flex-row justify-center items-start gap-5 grid grid-cols-1 md:grid-cols-3 xl:md:grid-cols-4 gap-4 py-5">
+        <div className=" flex-row justify-center items-start gap-5 grid grid-cols-1 md:grid-cols-3 xl:md:grid-cols-4  py-5">
           {urunler &&
             urunler.length > 0 &&
             urunler.map((data) => (

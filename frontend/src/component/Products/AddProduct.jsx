@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Buttons/Button";
 import { useUrunContext } from "../../hooks/useUrunContext";
-import { useAuthContext } from "../../hooks/useAuthContext";
 import { toast } from "react-toastify";
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -101,7 +100,7 @@ console.log(name,"name");
             className={
               bosAlanlar
                 ? "border border-gray-900  rounded-l-md h-[41px]  "
-                : "border border-gray-900  rounded-l-md h-[41px] border border-gray-900-red-500"
+                : "border border-gray-900  rounded-l-md h-[41px]  border-gray-900-red-500"
             }
             type="text"
             placeholder="Ürün resmi"

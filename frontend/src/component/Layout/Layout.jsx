@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
  
 
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

@@ -5,12 +5,9 @@ import reportWebVitals from "./reportWebVitals";
 import { UrunContextProvider } from "./contexts/UrunContext";
 import CartContext from "./contexts/CartContext";
 import ProductContext from "./contexts/ProductContext";
+import CouponContext from "./contexts/CouponContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import SidebarProvider from "./contexts/SidebarContext";
-import SayacProvider, {
-  CartContextProvider,
-  CountContextProvider,
-} from "./contexts/CartContextProvider";
 import KullaniciContext from "./contexts/KullaniciContext";
 import NavbarContext from "./contexts/NavbarContext";
 
@@ -22,11 +19,13 @@ root.render(
         <AuthContextProvider>
           <CartContext>
             <ProductContext>
-              <KullaniciContext>
-                <UrunContextProvider>
-                  <App />
-                </UrunContextProvider>
-              </KullaniciContext>
+              <CouponContext>
+                <KullaniciContext>
+                  <UrunContextProvider>
+                    <App />
+                  </UrunContextProvider>
+                </KullaniciContext>
+              </CouponContext>
             </ProductContext>
           </CartContext>
         </AuthContextProvider>

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useUrunContext } from "../hooks/useUrunContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Card from "../component/Cards/Card";
 
 const Shop = ({ products }) => {
   // const [shopCart, setShopCart] = useState(null);
-  const { urunler, dispatch } = useUrunContext(null);
+  const { dispatch } = useUrunContext(null);
   const { kullanici } = useAuthContext();
-
   useEffect(() => {
+    if (!kullanici) {
+      return; // Kullanıcı yoksa işlemi durdur
+    }
     try {
       const fetchUrunler = async () => {
         // const response = await fetch("/api/shopcart");
@@ -28,7 +30,7 @@ const Shop = ({ products }) => {
         }
       };
 
-      // fetchUrunler();
+      fetchUrunler();
       if (kullanici) {
         fetchUrunler();
       }
@@ -59,9 +61,9 @@ const Shop = ({ products }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 xl:md:grid-cols-4 gap-4 py-5 ">
         {products &&
-          products.map((product) => (
-            <div>
-              <Card key={product._id} product={product} />
+          products.map((product, index) => (
+            <div key={index}>
+              <Card product={product} />
             </div>
           ))}
       </div>

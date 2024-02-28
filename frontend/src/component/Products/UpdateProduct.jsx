@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
-  const [loading, setLoading] = useState(false);
-  const [productData, setProductData] = useState();
+  const [ setLoading] = useState(false);
+  const [ setProductData] = useState();
   const params = useParams();
   const productId = params.id;
   const [productData2, setProductData2] = useState();
@@ -42,7 +42,7 @@ const UpdateProduct = () => {
     setLoading(true);
     try {
       const response = await fetch(`/api/shopcart/${productId}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,

@@ -24,6 +24,7 @@ export const AuthContextProvider = ({ children }) => {
     if (kullanici) {
       dispatch({ type: "LOGIN", payload: kullanici });
     }
+    
   }, []);
 
   return (

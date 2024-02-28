@@ -74,7 +74,7 @@ router.delete("/:id", async (req, res) => {
   res.status(200).json(cart);
 });
 //id ye göre ürün güncellme işlemi
-router.patch("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
