@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CiStar } from "react-icons/ci";
 import { FaRegCircleUser } from "react-icons/fa6";
-const ReviewItem = ({ review, user, text, createdAt, rating }) => {
+import { useParams } from "react-router-dom";
+import { ProductContext } from "../contexts/ProductContext";
+import { LiaStarSolid } from "react-icons/lia";
+
+const ReviewItem = ({ text, createdAt, rating }) => {
   // const { review, user } = reviewItem;
   // const { text, createdAt, rating } = review;
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -10,32 +15,39 @@ const ReviewItem = ({ review, user, text, createdAt, rating }) => {
   );
   // console.log(reviewItem, `reviewItem`);
 
+  const user = localStorage.getItem("kullanici")
+    ? JSON.parse(localStorage.getItem("kullanici"))
+    : null;
+
   return (
     <li>
-      <div>
-        {user !== null ? (
-          <img src={user?.avatar} alt="" width={60} />
-        ) : (
-          <FaRegCircleUser />
-        )}
-      </div>
-      <div>
-        <ul>
-          {Array.from({ length: rating }, (_, index) => {
-            return (
-              <li key={index}>
-                <i className="bi bi-star-fill"></i>
-              </li>
-            );
-          })}
-        </ul>
+      <div className="pb-3 flex items-stretch gap-x-3 ">
         <div>
-          <strong> {user?.username}</strong>
-          <span> - </span>
-          <time>{formattedDate}</time>
+          {user == null ? (
+            // <img src={user?.avatar} alt="" width={60} />
+            <FaRegCircleUser size={60} />
+          ) : (
+            <FaRegCircleUser size={60} />
+          )}
         </div>
-        <div>
-          <p>{text}</p>{" "}
+        <div className="">
+          <ul className="flex items-center flex-row text-yellow-500">
+            {Array.from({ length: rating }, (_, index) => {
+              return (
+                <li key={index}>
+                  <LiaStarSolid size={25} />
+                </li>
+              );
+            })}
+          </ul>
+          <div>
+            <strong> {user.email}</strong>
+            <span> - </span>
+            <time>{formattedDate}</time>
+          </div>
+          <div className="text-gray-800 pt-5">
+            <p>{text}</p>
+          </div>
         </div>
       </div>
     </li>

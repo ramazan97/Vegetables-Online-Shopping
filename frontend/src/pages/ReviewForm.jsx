@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { CiStar } from "react-icons/ci";
+import { LiaStarSolid } from "react-icons/lia";
 import Button from "../component/Buttons/Button";
 import { useParams } from "react-router-dom";
+
 const ReviewForm = ({ setSingleProduct, singleProduct }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
-  const user = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user"))
+  const user = localStorage.getItem("kullanici")
+    ? JSON.parse(localStorage.getItem("kullanici"))
     : null;
 
   const params = useParams();
@@ -32,7 +33,7 @@ const ReviewForm = ({ setSingleProduct, singleProduct }) => {
       return toast.warning("Puan seçiniz!");
     }
 
-    let reviews = singleProduct.reviews;
+    let reviews = selectedProduct.reviews;
     let userId = null;
     if (user !== null) {
       userId = user.id || user._id;
@@ -79,83 +80,83 @@ const ReviewForm = ({ setSingleProduct, singleProduct }) => {
       toast.error("Bir şeyler yanlış gitti22222.");
     }
   };
-  // console.log(singleProduct._id, "singleProduct._id");
+
   return (
     <form
       className="flex flex-col gap-3 mb-[550px] md:mb-[450px] "
       onSubmit={handleSubmit}
     >
       <p className="text-[14px]">
-        Your email address will not be published. Required fields are marked
+        E-posta hesabınız yayımlanmayacak. Gerekli alanlar işaretlendi
         <span className="text-red-500">*</span>
       </p>
       <div className="text-yellow-500">
         <label>
-          Your rating
+          Oyunuz
           <span className="text-red-500">*</span>
         </label>
         {/* yıldız kısmı */}
         <div className=" gap-x-3 flex flex-row">
           <Link
             href="#"
-            className={`text-gray-500  flex flex-row ${
+            className={`text-gray-300 focus:text-yellow-500  flex flex-row ${
               rating === 1 && "hover:text-yellow-500"
             }`}
             onClick={(e) => handleRatingChange(e, 1)}
           >
-            <CiStar size={15} />
+            <LiaStarSolid className="" size={25} />
           </Link>
           <Link
             href="#"
-            className={`text-gray-500 flex flex-row ${
+            className={`text-gray-300 focus:text-yellow-500 flex flex-row ${
               rating === 2 && "hover:text-yellow-500"
             }`}
             onClick={(e) => handleRatingChange(e, 2)}
           >
-            <CiStar size={15} />
-            <CiStar size={15} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
           </Link>
           <Link
             href="#"
-            className={`text-gray-500 flex flex-row ${
+            className={`text-gray-300 focus:text-yellow-500  flex flex-row ${
               rating === 3 && "hover:text-yellow-500"
             }`}
             onClick={(e) => handleRatingChange(e, 3)}
           >
-            <CiStar size={15} />
-            <CiStar size={15} />
-            <CiStar size={15} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
           </Link>
           <Link
             href="#"
-            className={`text-gray-500 flex flex-row ${
+            className={`text-gray-300 focus:text-yellow-500 flex flex-row ${
               rating === 4 && "hover:text-yellow-500"
             }`}
             onClick={(e) => handleRatingChange(e, 4)}
           >
-            <CiStar size={15} />
-            <CiStar size={15} />
-            <CiStar size={15} />
-            <CiStar size={15} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
           </Link>
           <Link
             href="#"
-            className={`text-gray-500 flex flex-row ${
+            className={`text-gray-300 focus:text-yellow-500 flex flex-row ${
               rating === 5 && "hover:text-yellow-500"
             }`}
             onClick={(e) => handleRatingChange(e, 5)}
           >
-            <CiStar size={15} />
-            <CiStar size={15} />
-            <CiStar size={15} />
-            <CiStar size={15} />
-            <CiStar size={15} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
+            <LiaStarSolid className="" size={25} />
           </Link>
         </div>
       </div>
       <div className=" flex flex-col text-sm gap-x-1">
-        <label htmlFor="" className="text-yellow-500">
-          Your review
+        <label htmlFor="" className="text-yellow-500 py-2">
+          Yorumunuz
           <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -171,14 +172,13 @@ const ReviewForm = ({ setSingleProduct, singleProduct }) => {
       <div className="gap-x-2 flex items-center justify-center">
         <input id="cookes" type="checkbox" />
         <label htmlFor="cookies">
-          Save my name, email, and website in this browser for the next time I
-          comment.
+          Bir dahaki sefere kullandığımda kullanılmak üzere adımı, e-posta
+          adresimi ve web site adresimi bu tarayıcıya kaydet.
           <span className="">*</span>
         </label>
       </div>
       <div className="">
         <Button name="Gönder" />
-        {/* <input type="submit" className="btn submit" /> */}
       </div>
     </form>
   );

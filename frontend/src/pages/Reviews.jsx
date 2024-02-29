@@ -3,9 +3,11 @@ import { toast } from "react-toastify";
 import ReviewForm from "./ReviewForm";
 import ReviewItem from "./ReviewItem";
 import { ProductContext } from "../contexts/ProductContext";
-const Reviews = ({ products, active }) => {
+import { useParams } from "react-router-dom";
+const Reviews = ({ active }) => {
   const [users, setUsers] = useState([]);
-
+  const params = useParams();
+  const productId = params.id;
   const thisReview = [];
 
   const { singleProduct, setSingleProduct } = useContext(ProductContext);
@@ -28,8 +30,12 @@ const Reviews = ({ products, active }) => {
     fetchUsers();
   }, []);
 
-  if (singleProduct.reviews) {
-    singleProduct.reviews.forEach((review) => {
+  const selectedProduct = Array.isArray(singleProduct)
+    ? singleProduct.find((product) => product._id === productId)
+    : singleProduct;
+
+  if (selectedProduct.reviews) {
+    selectedProduct.reviews.forEach((review) => {
       const matchingUsers = users?.filter((user) => user._id === review.user);
       matchingUsers.forEach((matchingUser) => {
         thisReview.push({
@@ -40,14 +46,15 @@ const Reviews = ({ products, active }) => {
     });
   }
 
+
+
   return (
     <div>
       <>
         {singleProduct.reviews?.length > 0 ? (
           <>
-            <h3>2 reviews for Basic Colored Sweatpants With Elastic Hems</h3>
-            <div className="comments">
-              <ol className="comment-list">
+            <div className="pt-5">
+              <ol className="">
                 {singleProduct.reviews.map((item, index) => (
                   <ReviewItem
                     key={index}
@@ -66,7 +73,7 @@ const Reviews = ({ products, active }) => {
         )}
 
         <div className="pt-10 pb-5">
-          <h2>Add a review</h2>
+          <h2>Yorum ekle</h2>
           <ReviewForm
             singleProduct={singleProduct}
             setSingleProduct={setSingleProduct}

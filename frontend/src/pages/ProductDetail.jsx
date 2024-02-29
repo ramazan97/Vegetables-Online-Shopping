@@ -7,17 +7,16 @@ import Button from "../component/Buttons/Button";
 import { FaRegCircleUser } from "react-icons/fa6";
 import Tabs from "./Tabs";
 import Reviews from "./Reviews";
+import Product from "./Product";
 
 const ProductDetail = () => {
   const { products } = useContext(ProductContext);
 
   const { addToCard } = useContext(CartContext);
-
+  const { name, description, price, img } = products;
   const product = products.find((item) => {
     return item._id;
   });
-
-  const { name, description, price, img } = products;
 
   if (!product) {
     return (
@@ -26,40 +25,15 @@ const ProductDetail = () => {
       </section>
     );
   }
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
 
   return (
-    <section className="pt-32 pb-12 lg:py-32 h-screen flex items-center ">
-      <div className="container mx-auto flex flex-col items-center justify-between gap-y-10">
-        <div className="flex gap-x-36 mx-40 max-w-[500px] flex-col lg:flex-row items-center pt-[600px] bg-red-500">
-          {/* resim */}
-          <div className="flex justify-center items-center mb-8 lg:mb-0 ">
-            <img className="max-w-[200px] lg:max-w-sm " src={img} alt="" />
-          </div>
-          {/* Ürün bilgisi */}
-          <div className="flex-1  max-w-[450px] text-center lg:text-left ">
-            <h1 className="text-[26px] font-medium mb-2 max-w-[450px] mx-auto lg:mx-0 ">
-              {name}
-            </h1>
-            <div className="text-xl text-red-500 font-medium mb-6">
-              $ {price}
-            </div>
+    <section className="pt-32 pb-12 lg:py-32 flex items-center justify-center ">
+      <div className=" flex flex-col items-center justify-center ">
+        <div className="pb-20">
+          <Product />
+        </div>
 
-            <p className="mb-8  text-wrap w-[500px]">{description} </p>
-            <div className=" flex items-center md:justify-center lg:justify-start">
-              <Button
-                onClick={() => addToCard(product, product.id)}
-                name={"Buy Now"}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="bg-yellow-500">
-          <Reviews />
-        </div>
-        <div className="bg-green-500">
+        <div className="flex items-center justify-start w-full ">
           <Tabs products={products} />
         </div>
       </div>
