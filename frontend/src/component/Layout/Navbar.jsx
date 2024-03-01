@@ -11,13 +11,13 @@ import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { FaCaretDown } from "react-icons/fa";
 import { SidebarContext } from "../../contexts/SidebarContext";
-
+import { CiUser } from "react-icons/ci";
 import Cart from "../Cart/Cart";
 import { CartContext } from "../../contexts/CartContext";
 import { LuMoon, LuSun } from "react-icons/lu";
 import { NavbarContext } from "../../contexts/NavbarContext";
 import { IoCartOutline } from "react-icons/io5";
-const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
+const Navbar = ({ toggleDarkMode, darkMode, setDarkMode, setIsSearchShow }) => {
   const { logout } = useLogout();
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { navisOpen, setNavIsOpen } = useContext(NavbarContext);
@@ -42,11 +42,8 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
       } flex items-center justify-between px-10 h-[81px] fixed w-full z-10 transition-all dark:bg-neutral-900`}
     >
       {/* logo */}
-      <div>
-        <Link
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-          to={"/"}
-        >
+      <div className=" px-8 py-5">
+        <Link className="flex items-center  scale-150" to={"/"}>
           <img src="./logo.png" alt="logo" />
         </Link>
       </div>
@@ -55,7 +52,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
 
         <Link className="" onClick={() => setNavIsOpen(!navisOpen)} to="">
           <div className="flex items-center justify-center">
-            <GiHamburgerMenu size={25} />
+            <GiHamburgerMenu size={40} />
             <Sidebar
               toggleDarkMode={toggleDarkMode}
               darkMode={darkMode}
@@ -65,23 +62,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
         </Link>
       </div>
 
-      {/* search işlemi */}
-      <div className="hidden lg:flex flex-auto mx-5  bg-red-500">
-        <div className="relative flex w-full">
-          <HiOutlineSearch
-            fontSize={20}
-            className="text-gray-400 absolute top-1/2 left-3 -translate-y-1/2"
-          />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="text-sm focus:outline-none active:outline-none border w-full  border-gray-300  h-10 pl-11 pr-4 rounded-sm"
-          />
-        </div>
-      </div>
-      {/* linkler */}
-      <div>
-        {" "}
+      <div className=" w-full text-2xl">
         {!kullanici && (
           <div>
             <ul className="flex items-center justify-center gap-5 font-medium p-6">
@@ -90,6 +71,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
                   HOME
                 </Link>
               </li>
+
               <li className="hover:text-orange-400 transition-all duration-500">
                 <Link className="" to="/shop">
                   SHOP
@@ -133,6 +115,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
                     HOME
                   </Link>
                 </li>
+
                 <li className="hover:text-orange-400 transition-all duration-500">
                   <Link className="" to="/shop">
                     SHOP
@@ -153,20 +136,37 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
                     CONTACT US
                   </Link>
                 </li>
-                <li className="hover:text-orange-400 transition-all duration-500  ">
-                  <Link className="" onClick={() => setIsOpen(!isOpen)} to="">
-                    <div className="flex items-center justify-center">
-                      <IoCartOutline size={25} />
-                      <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full p-[6px] text-[12px] w-[18px] flex justify-center items-center  h-[18px]">
-                        {itemAmount}
-                      </span>
-                    </div>
-                    <Cart />
-                  </Link>
-                </li>
               </ul>
             </div>
+          </div>
+        )}
+      </div>
 
+      <div className=" flex items-center justify-center gap-x-3">
+        <button
+          className={`${darkMode ? "text-gray-100" : "text-gray-900"}`}
+          onClick={toggleDarkMode}
+        >
+          {darkMode ? <LuSun size={40} /> : <LuMoon size={40} />}
+        </button>
+        <HiOutlineSearch
+          fontSize={50}
+          className="text-gray-900 p-2  "
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+        />
+
+        {kullanici && (
+          <>
+            {" "}
+            <Link className="" onClick={() => setIsOpen(!isOpen)} to="">
+              <div className="flex items-center justify-center">
+                <IoCartOutline size={40} />
+                <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full  text-[18px] font-bold w-[28px] flex justify-center items-center  h-[28px]">
+                  {itemAmount}
+                </span>
+              </div>
+              <Cart />
+            </Link>
             <Popover className="relative">
               {({ open }) => (
                 <>
@@ -177,7 +177,8 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
                     )}
                   >
                     <div className="hover:text-orange-400 transition-all duration-500 flex items-center justify-center ">
-                      <span>{kullanici.email}</span>
+                      <CiUser className="text-gray-900" size={40} />
+
                       <FaCaretDown />
                     </div>
                   </Popover.Button>
@@ -190,36 +191,29 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode }) => {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute  mr-3 flex flex-col gap-y-3 items-center justify-end right-0 z-10 mt-2.5 transform w-36 bg-white">
-                      <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-center gap-3">
+                    <Popover.Panel className="absolute text-lg bg-gray-100 mr-3 flex flex-col gap-y-3 text-end items-center justify-end right-0 z-10 mt-2.5 transform w-48 ">
+                      <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-end w-full   ">
                         {kullanici && kullanici.email === "admin1@gmail.com" ? (
                           <Link className="" to="/admin">
+                            <span>{kullanici.email}</span>
+                            <br />
                             <strong>Admin</strong>
                           </Link>
                         ) : (
                           <></>
                         )}
                       </div>
-                      <div className="hover:text-orange-400 transition-all duration-500 font-bold flex items-center justify-center gap-3">
-                        <button onClick={handleClick}>ÇIKIS</button>
+                      <div className="hover:text-orange-400 transition-all w-full duration-500 font-bold flex items-center justify-end gap-3">
                         <CiLogout />
+                        <button onClick={handleClick}>ÇIKIS</button>
                       </div>
                     </Popover.Panel>
                   </Transition>
                 </>
               )}
             </Popover>
-          </div>
+          </>
         )}
-      </div>
-      {/* dark mode button */}
-      <div>
-        <button
-          className={`${darkMode ? "text-gray-100" : "text-gray-900"}`}
-          onClick={toggleDarkMode}
-        >
-          {darkMode ? <LuSun size={25} /> : <LuMoon size={25} />}
-        </button>
       </div>
 
       <div className="hidden md:flex items-center justify-center gap-5"></div>

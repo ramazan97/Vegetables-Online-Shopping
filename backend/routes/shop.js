@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   const shopCarts = await ShopCartModel.find().sort({ createdAt: -1 });
   res.status(200).json(shopCarts);
 });
-//id ye göre ürün güncellme işlemi
+//id ye göre ürün getirme işlemi
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -91,81 +91,21 @@ router.put("/:id", async (req, res) => {
   }
   res.status(200).json(cart);
 });
+//id ye göre ürün getirme işlemi
+router.get("/search/:productName", async (req, res) => {
+  try {
+    const productName = req.params.productName;
+    const products = await ShopCartModel.find({
+      name: { $regex: productName, $options: "i" },
+    });
 
+  
+    res.status(200).json(products);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ error: "Server error. ürün arama işlemi sırasında hata oluştu" });
+  }
+});
 module.exports = router;
-
-// ----------------------------------------------------------------
-// body: {
-//   name: 'Ürün Adı',
-//   img: [
-//     'https://e-commerce-udemy.netlify.app/img/products/product1/1.png',
-//     'https://e-commerce-udemy.netlify.app/img/products/product1/2.png',
-//     'https://e-commerce-udemy.netlify.app/img/products/product1/3.png',
-//     'https://e-commerce-udemy.netlify.app/img/products/product1/2.png'
-//   ],
-//   reviews: [ [Object], [Object] ],
-//   description: 'Ürün açıklaması',
-//   colors: [ 'Mavi', 'Kırmızı', 'Yeşil' ],
-//   kilogram: [ 'S', 'M', 'L' ],
-//   price: { current: 50, discount: 40 },
-//   category: '650cb032054382a2c88bf42e'
-// },
-// _body: true,
-// length: undefined,
-// _eventsCount: 0,
-// route: Route { path: '/', stack: [ [Layer] ], methods: { post: true } },
-// [Symbol(shapeMode)]: true,
-// [Symbol(kCapture)]: false,
-// [Symbol(kHeaders)]: {
-//   'content-type': 'application/json',
-//   'user-agent': 'PostmanRuntime/7.36.3',
-//   accept: '*/*',
-//   'postman-token': '7f7055d5-e5e3-4696-b684-3695c27d65d9',
-//   host: 'localhost:4000',
-//   'accept-encoding': 'gzip, deflate, br',
-//   connection: 'keep-alive',
-//   'content-length': '1059'
-// },
-// [Symbol(kHeadersCount)]: 16,
-// [Symbol(kTrailers)]: null,
-// [Symbol(kTrailersCount)]: 0
-// } req
-// ----------------------------------------------------------------
-// {
-
-//       "name": "Ürün Adı",
-//       "img": [
-//           "https://e-commerce-udemy.netlify.app/img/products/product1/1.png",
-//           "https://e-commerce-udemy.netlify.app/img/products/product1/2.png",
-//           "https://e-commerce-udemy.netlify.app/img/products/product1/3.png",
-//           "https://e-commerce-udemy.netlify.app/img/products/product1/2.png"
-//       ],
-//       "reviews": [
-//           {
-//               "text": "Bu ürün harika!",
-//               "rating": 5,
-//               "user": "5fbc7c318f4e3d4e9c53b27e"
-//           },
-//           {
-//               "text": "Fiyatı çok yüksek.",
-//               "rating": 2,
-//               "user": "5fbc7c318f4e3d4e9c53b27e"
-//           }
-//       ],
-//       "description": "Ürün açıklaması",
-//       "colors": [
-//           "Mavi",
-//           "Kırmızı",
-//           "Yeşil"
-//       ],
-//       "kilogram": [
-//           "S",
-//           "M",
-//           "L"
-//       ],
-//       "price": {
-//           "current": 50,
-//           "discount": 40
-//       },
-//       "category": "650cb032054382a2c88bf42e"
-//   }

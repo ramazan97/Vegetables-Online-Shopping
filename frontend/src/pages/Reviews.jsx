@@ -4,7 +4,7 @@ import ReviewForm from "./ReviewForm";
 import ReviewItem from "./ReviewItem";
 import { ProductContext } from "../contexts/ProductContext";
 import { useParams } from "react-router-dom";
-const Reviews = ({ active }) => {
+const Reviews = ({ selectedProduct }) => {
   const [users, setUsers] = useState([]);
   const params = useParams();
   const productId = params.id;
@@ -30,9 +30,9 @@ const Reviews = ({ active }) => {
     fetchUsers();
   }, []);
 
-  const selectedProduct = Array.isArray(singleProduct)
-    ? singleProduct.find((product) => product._id === productId)
-    : singleProduct;
+  // const selectedProduct = Array.isArray(singleProduct)
+  //   ? singleProduct.find((product) => product._id === productId)
+  //   : singleProduct;
 
   if (selectedProduct.reviews) {
     selectedProduct.reviews.forEach((review) => {
@@ -46,16 +46,14 @@ const Reviews = ({ active }) => {
     });
   }
 
-
-
   return (
     <div>
       <>
-        {singleProduct.reviews?.length > 0 ? (
+        {selectedProduct.reviews?.length > 0 ? (
           <>
             <div className="pt-5">
               <ol className="">
-                {singleProduct.reviews.map((item, index) => (
+                {selectedProduct.reviews.map((item, index) => (
                   <ReviewItem
                     key={index}
                     review={item.review}

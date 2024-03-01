@@ -12,17 +12,17 @@ const Tabs = ({ products }) => {
     setActiveTab(tab);
   };
   const { name, description, price, img } = products;
-  console.log(products.description,"products");
+  console.log(products.description, "products");
 
   const selectedProduct = Array.isArray(products)
     ? products.find((product) => product._id === productId)
     : products;
 
-
+  console.log(selectedProduct, "selectedProduct");
 
   return (
     <div>
-      <ul className="flex items-center justify-start w-full  flex-row gap-3 border border-gray-800 rounded-md">
+      <ul className="flex items-center justify-start   flex-row gap-3 border p-3  border-gray-800 rounded-md">
         <li>
           <Link
             href="#"
@@ -56,14 +56,12 @@ const Tabs = ({ products }) => {
         <div className={` ${activeTab === "desc" ? "block" : "hidden"}`}>
           <div className="">{selectedProduct.description}</div>
         </div>
-    
-       
+
         {/* reviews */}
         <div className={` ${activeTab === "reviews" ? "block" : "hidden"}`}>
           <Reviews
             active={activeTab === "reviews" ? "block" : "hidden"}
-           
-            // setSingleProduct={setSingleProduct}
+            selectedProduct={selectedProduct}
           />
         </div>
       </div>
