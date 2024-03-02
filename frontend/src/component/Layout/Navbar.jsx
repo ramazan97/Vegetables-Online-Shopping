@@ -157,15 +157,17 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode, setIsSearchShow }) => {
 
         {kullanici && (
           <>
-            {" "}
-            <Link className="" onClick={() => setIsOpen(!isOpen)} to="">
+            <Link
+              className=""
+              //  onClick={() => setIsOpen(!isOpen)}
+              to="/cartt"
+            >
               <div className="flex items-center justify-center">
                 <IoCartOutline size={40} />
                 <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full  text-[18px] font-bold w-[28px] flex justify-center items-center  h-[28px]">
                   {itemAmount}
                 </span>
               </div>
-              <Cart />
             </Link>
             <Popover className="relative">
               {({ open }) => (
@@ -191,12 +193,15 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode, setIsSearchShow }) => {
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
                   >
-                    <Popover.Panel className="absolute text-lg bg-gray-100 mr-3 flex flex-col gap-y-3 text-end items-center justify-end right-0 z-10 mt-2.5 transform w-48 ">
+                    <Popover.Panel className="absolute text-lg bg-gray-100 pr-3 flex flex-col gap-y-2  py-3 text-end items-center justify-end right-0 z-10 mt-2.5 transform w-48 ">
+                      <div className="hover:text-orange-400 transition-all w-full duration-500 font-bold flex items-center justify-end gap-3">
+                        <Link className="" to="">
+                          <span>{kullanici.email}</span>
+                        </Link>
+                      </div>
                       <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-end w-full   ">
                         {kullanici && kullanici.email === "admin1@gmail.com" ? (
                           <Link className="" to="/admin">
-                            <span>{kullanici.email}</span>
-                            <br />
                             <strong>Admin</strong>
                           </Link>
                         ) : (

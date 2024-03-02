@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -8,10 +8,46 @@ import { SidebarContext } from "../../contexts/SidebarContext";
 import { CartContext } from "../../contexts/CartContext";
 import CartItem from "./CartItem";
 import CarttItem from "./CarttItem";
-
+import Button from "../Buttons/Button";
+import { toast } from "react-toastify";
 const Cartt = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
-  const { cart, clearCart, total, itemAmount } = useContext(CartContext);
+  const [couponCode, setCouponCode] = useState("");
+  const {
+    cart,
+    clearCart,
+    total,
+    itemAmount,
+    fastCargoChecked,
+    setFastCargoChecked,
+    setCart
+  } = useContext(CartContext);
+  console.log(cart,"cart");
+  const applyCoupon = async () => {
+    if (couponCode.trim().length === 0) {
+      return toast.warning("Boş değer girilimez.");
+    }
+
+    try {
+      const res = await fetch(`/api/coupon/code/${couponCode}`);
+
+      if (!res.ok) {
+        return toast.warning("Girdiğiniz kupon kodu yanlış!");
+      }
+      const data = await res.json();
+      const discountPercent = data.discountPercent;
+
+     const updatedCartItems = cart.map((item) => {
+       const updatePrice = item.price * (1 - discountPercent / 100);
+       return { ...item, price: updatePrice };
+     });
+     setCart(updatedCartItems);
+      toast.success(`${couponCode} kupon kodu başarıyla uygulandı.`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       className="px-20 my-20 "
@@ -36,6 +72,33 @@ const Cartt = () => {
         })}
       </div>
       {/* Sidebar bottom */}
+      <div className="flex items-center justify-center gap-x-3 border-b border-t">
+        <div className="flex items-center justify-center gap-x-5  py-3 w-1/2 h-16">
+          <input
+            type="text"
+            className="h-14 border w-2/3"
+            placeholder="Kupon girin..."
+            onChange={(e) => setCouponCode(e.target.value)}
+            value={couponCode}
+          />
+          <div className="w-1/3">
+            <Button onClick={applyCoupon} name={"Uygula"} />
+          </div>
+        </div>
+        <div className=" border-l  py-3 h-16 w-1/2 ">
+          <label className="flex pl-3 items-center ">
+            <input
+              className="mr-4 w-5 h-5"
+              type="checkbox"
+              id="fast-cargo"
+              checked={fastCargoChecked}
+              onChange={() => setFastCargoChecked(!fastCargoChecked)}
+            />
+            <p className="text-xl"> Fast Cargo:{"  "} $15.00</p>
+          </label>
+        </div>
+      </div>
+
       <div className="flex flex-col gap-y-3 py-4 mt-4">
         <div className="flex w-full justify-between items-center">
           <div className="uppercase  font-semibold">

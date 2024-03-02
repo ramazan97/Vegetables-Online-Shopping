@@ -8,10 +8,29 @@ const CartProvider = ({ children }) => {
   const [itemAmount, setItemAmount] = useState(0);
   const [total, setTotal] = useState(0);
 
+  // -----------------
+
+  const [fastCargoChecked, setFastCargoChecked] = useState(false);
+  const cargoFee = 15;
+  // const cartTotals = fastCargoChecked
+  //   ? (subTotals + cargoFee).toFixed(2)
+  //   : subTotals.toFixed(2);
+
+  // ---------------------
+
+  const subTotals = cart.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.ucret * currentItem.amount;
+  }, 0);
+
   useEffect(() => {
-    const total = cart.reduce((accumulator, currentItem) => {
-      return accumulator + currentItem.ucret * currentItem.amount;
-    }, 0);
+    // const total = cart.reduce((accumulator, currentItem) => {
+    //   return accumulator + currentItem.ucret * currentItem.amount;
+    // }, 0);
+
+    const total = fastCargoChecked
+      ? (subTotals + cargoFee).toFixed(2)
+      : subTotals.toFixed(2);
+
     setTotal(total);
   });
 
@@ -91,6 +110,9 @@ const CartProvider = ({ children }) => {
         itemAmount,
         increaseAmount,
         total,
+        fastCargoChecked,
+        setFastCargoChecked,
+        setCart
       }}
     >
       {children}{" "}

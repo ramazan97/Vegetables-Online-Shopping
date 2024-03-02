@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,15 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
-  const { cart, clearCart, total, itemAmount } = useContext(CartContext);
+  const {
+    cart,
+    clearCart,
+    total,
+    itemAmount,
+    fastCargoChecked,
+    setFastCargoChecked,
+  } = useContext(CartContext);
+
   return (
     <div
       className={`${
@@ -35,6 +43,26 @@ const Cart = () => {
         })}
       </div>
       {/* Sidebar bottom */}
+      <div className=" border-b border-t py-3 h-16">
+        <input
+          type="text"
+          className="h-full w-2/3 border"
+          placeholder="Kupon girin..."
+        />
+      </div>
+      <div className=" border-b py-3 h-16  ">
+        <label className="flex items-center ">
+          <input
+            className="mr-4 w-5 h-5"
+            type="checkbox"
+            id="fast-cargo"
+            checked={fastCargoChecked}
+            onChange={() => setFastCargoChecked(!fastCargoChecked)}
+          />
+          <p className="text-xl"> Fast Cargo:{"  "} $15.00</p>
+        </label>
+      </div>
+
       <div className="flex flex-col gap-y-3 py-4 mt-4">
         <div className="flex w-full justify-between items-center">
           <div className="uppercase  font-semibold">
@@ -47,6 +75,7 @@ const Cart = () => {
             <FiTrash2 />
           </div>
         </div>
+
         <Link
           to={"/"}
           className="bg-gray-200 flex p-4 justify-center items-center text-primary w-full font-medium "
