@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
-
+import { loadStripe } from "@stripe/stripe-js";
 import { IoMdArrowForward } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
 import { SidebarContext } from "../../contexts/SidebarContext";
@@ -12,7 +12,9 @@ import Button from "../Buttons/Button";
 import { toast } from "react-toastify";
 const Cartt = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
+  const [loading, setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState("");
+
   const {
     cart,
     clearCart,
@@ -20,9 +22,13 @@ const Cartt = () => {
     itemAmount,
     fastCargoChecked,
     setFastCargoChecked,
-    setCart
+    setCart,
+    cargoFee,
   } = useContext(CartContext);
-  console.log(cart,"cart");
+  const user = localStorage.getItem("kullanici")
+    ? JSON.parse(localStorage.getItem("kullanici"))
+    : null;
+
   const applyCoupon = async () => {
     if (couponCode.trim().length === 0) {
       return toast.warning("Boş değer girilimez.");
@@ -37,14 +43,55 @@ const Cartt = () => {
       const data = await res.json();
       const discountPercent = data.discountPercent;
 
-     const updatedCartItems = cart.map((item) => {
-       const updatePrice = item.price * (1 - discountPercent / 100);
-       return { ...item, price: updatePrice };
-     });
-     setCart(updatedCartItems);
+      const updatedCartItems = cart.map((item) => {
+        const updatePrice = item.price * (1 - discountPercent / 100);
+        return { ...item, price: updatePrice };
+      });
+      setCart(updatedCartItems);
       toast.success(`${couponCode} kupon kodu başarıyla uygulandı.`);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handlePayment = async () => {
+    setLoading(true);
+    if (!user) {
+      return toast.info("Ödeme yapabilmek için giriş yapmalısınız!");
+    }
+
+    const body = {
+      products: cart,
+      user: user,
+      cargoFee: fastCargoChecked ? cargoFee : 0,
+    };
+
+    try {
+      const stripe = await loadStripe(
+        `pk_test_51OpzpsE7ftghkhcgwrZS6evXApAvMXkWq0ujkafogl3sxnYgNuQWKBBmAUIv40jjH6RIXFkVrqquBiNwlgroPRyM00B1Ly1SOM`
+      );
+
+      const res = await fetch(`/api/payment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      
+      if (!res.ok) {
+        return toast.error("Ödeme işlemi başarısız oldu.");
+      }
+      const session = await res.json();
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+      console.log(session, "result");
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,20 +158,17 @@ const Cartt = () => {
             <FiTrash2 />
           </div>
         </div>
-        <Link
-          to={"/"}
-          className="bg-gray-200 flex p-4 justify-center items-center text-primary w-full font-medium "
-        >
+        <Link className="bg-gray-200 flex p-4 justify-center items-center text-primary w-full font-medium ">
           View Cart
         </Link>
         <Link
-          to={"/"}
-          className="bg-primary flex p-4 justify-center items-center text-gray-200 w-full font-medium "
+          className="bg-primary flex p-4 justify-center items-center bg-red-500 text-gray-200 w-full font-medium "
+          onClick={handlePayment}
         >
           Chechout
         </Link>
       </div>
-      <div> toggle bar</div>
+      {/* <div> toggle bar</div> */}
     </div>
   );
 };

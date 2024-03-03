@@ -5,15 +5,19 @@ const Sema = mongoose.Schema;
 
 const ReviewSchema = new Sema(
   {
-    text: { type: String,
-      // required: true 
-    },
-    rating: { type: Number, 
+    text: {
+      type: String,
       // required: true
-     },
-     kullanici: { type: mongoose.Schema.Types.ObjectId, ref: "Kullanici", 
-    // required: true 
-  },
+    },
+    rating: {
+      type: Number,
+      // required: true
+    },
+    kullanici: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Kullanici",
+      // required: true
+    },
   },
   { timestamps: true }
 );
@@ -22,16 +26,15 @@ const shopCartSema = new Sema(
     name: { type: String, required: true },
     img: [{ type: String, required: true }],
     reviews: [ReviewSchema],
-    colors: [{ type: String, 
-      required: true
-     }],
+    colors: [{ type: String, required: true }],
     kilogram: [{ type: String, required: true }],
-    price: {
-      current: { type: Number, 
-        // required: true 
-      },
-      discount: { type: Number },
-    },
+    price: [{ type: Number, required: true }],
+    // price: {
+    //   current: { type: Number,
+    //     // required: true
+    //   },
+    //   discount: { type: Number },
+    // },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

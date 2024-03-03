@@ -15,7 +15,6 @@ const AddProduct = () => {
   const { dispatch } = useUrunContext();
   const [bosAlanlar, setBosalanlar] = useState([]);
 
-
   // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
   // const { kullanici } = useAuthContext();
 
@@ -37,37 +36,58 @@ const AddProduct = () => {
       category,
       description,
     };
-console.log(name,"name");
-    const response = await fetch("/api/shopcart", {
-      method: "POST",
-      body: JSON.stringify(urunVerisi),
-      headers: {
-        "Content-Type": "application/json",
-        // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
-        // Authorization: `Bearer ${kullanici.token}`,
-      },
-    });
 
-    const json = await response.json();
-    if (!response.ok) {
-      setHata(json.hata);
-      setBosalanlar(json.bosAlanlar);
-      toast.error(` ${json.hata} sı var `);
-    }
-    if (response.ok) {
-      setHata(null);
-      setName("");
-      setImg("");
-      setReviews("");
-      setColors("");
-      setKilogram();
-      setPrice();
-      setCategory("");
-      setDescription("");
-      setBosalanlar([]);
-      dispatch({ type: "URUN_OLUSTUR", payload: json });
-      // console.log(`yeni bir not eklendi`, json);
-      toast.success("yeni bir not eklendi!");
+    const imgLinks = img.split("\n").map((link) => link.trim());
+
+    console.log(price, "price");
+
+    try {
+      const response = await fetch("/api/shopcart", {
+        method: "POST",
+        body: JSON.stringify(urunVerisi),
+        headers: {
+          "Content-Type": "application/json",
+          // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
+          // Authorization: `Bearer ${kullanici.token}`,
+        },
+        body: JSON.stringify({
+          //   ...values,
+          // price: {
+          //   current: values.current,
+          // },
+          //   colors,
+          //   sizes,
+          name: name,
+          img: imgLinks,
+          kilogram: kilogram,
+          price: price,
+          description: description,
+        }),
+      });
+
+      const json = await response.json();
+      if (!response.ok) {
+        setHata(json.hata);
+        setBosalanlar(json.bosAlanlar);
+        toast.error(` ${json.hata} sı var `);
+      }
+      if (response.ok) {
+        setHata(null);
+        setName("");
+        setImg("");
+        setReviews("");
+        setColors("");
+        setKilogram();
+        setPrice();
+        setCategory("");
+        setDescription("");
+        setBosalanlar([]);
+        dispatch({ type: "URUN_OLUSTUR", payload: json });
+        // console.log(`yeni bir not eklendi`, json);
+        toast.success("yeni bir not eklendi!");
+      }
+    } catch (error) {
+      console.log(error, "Add product işlemi sırasında bir hata oluştu ");
     }
   };
 
@@ -96,11 +116,11 @@ console.log(name,"name");
         {/* resim */}
         <div className=" w-80 flex items-center justify-between ">
           <label>Resim</label>
-          <input
+          <textarea
             className={
               bosAlanlar
-                ? "border border-gray-900  rounded-l-md h-[41px]  "
-                : "border border-gray-900  rounded-l-md h-[41px]  border-gray-900-red-500"
+                ? "border border-gray-900  rounded-l-md  h-32 "
+                : "border border-gray-900  rounded-l-md   border-gray-900-red-500  h-32 "
             }
             type="text"
             placeholder="Ürün resmi"
@@ -108,21 +128,7 @@ console.log(name,"name");
             value={img}
           />
         </div>
-        {/* colors */}
-        {/* <div className=" w-80 flex items-center justify-between ">
-          <label>Resim</label>
-          <input
-            className={
-              bosAlanlar
-                ? "border border-gray-900  rounded-l-md h-[41px]  "
-                : "border border-gray-900  rounded-l-md h-[41px] border border-gray-900-red-500"
-            }
-            type="text"
-            placeholder="Ürün resmi"
-            onChange={(e) => setColors(e.target.value)}
-            value={img}
-          />
-        </div> */}
+
         {/* kilogram */}
         <div className=" w-80 flex items-center justify-between ">
           <label>Kilogram</label>

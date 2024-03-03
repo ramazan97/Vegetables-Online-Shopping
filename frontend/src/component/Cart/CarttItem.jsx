@@ -6,14 +6,14 @@ import { CartContext } from "../../contexts/CartContext";
 const CarttItem = ({ item }) => {
   const { removeFromCart, decriseAmount, increaseAmount } =
     useContext(CartContext);
-  const { ucret, baslik, aciklama, _id, amount, resim } = item;
+  const { price,ucret, baslik, aciklama, _id, amount, img } = item;
   const id = _id;
   return (
     <div className="flex gap-x-4 py-2 lg:px-6 border-b border-gray-200 w-full font-light text-gray-500  ">
       <div className="w-full min-h-[150px] flex items-center justify-between ">
         {/* image */}
         <Link to={`/product/${id} `}>
-          <img className="max-w-[80px]" src={resim} alt="" />
+          <img className="max-w-[80px]" src={img} alt="" />
         </Link>
         <div className="flex justify-between mb-2">
           {/* baslik  */}
@@ -43,10 +43,10 @@ const CarttItem = ({ item }) => {
           </div>
         </div>
         {/* ücret kısmı */}
-        <div className=" flex items-center justify-around">$ {ucret}</div>
+        <div className=" flex items-center justify-around">$ {price}</div>
         {/* toplam üçret */}
         <div className=" flex justify-end items-center text-primary font-medium ">
-          {`$ ${parseFloat(ucret * amount).toFixed(2)}`}
+          {`$ ${parseFloat(price * amount).toFixed(2)}`}
         </div>
         {/* silme butonu */}
         <div

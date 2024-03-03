@@ -28,6 +28,7 @@ import ProductDetail from "./pages/ProductDetail";
 import Coupons from "./pages/Coupons";
 import AddCoupon from "./pages/AddCoupon";
 import UpdateCoupon from "./pages/UpdateCoupon";
+import Success from "./pages/Success";
 function App() {
   const { kullanici } = useAuthContext();
   return (
@@ -49,7 +50,7 @@ function App() {
                 <Route path="/adminproducts" element={<AddDeleteProduct />} />
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/cartt" element={<Cartt />} />
-
+                <Route path="/success" element={<Success />} />
                 <Route path="/admindeleteproduct" element={<DeleteProduct />} />
                 <Route path="/messages" element={<Messages />} />
                 <Route path="/adminaddproduct" element={<AddProduct />} />

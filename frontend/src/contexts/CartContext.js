@@ -19,7 +19,7 @@ const CartProvider = ({ children }) => {
   // ---------------------
 
   const subTotals = cart.reduce((accumulator, currentItem) => {
-    return accumulator + currentItem.ucret * currentItem.amount;
+    return accumulator + currentItem.price * currentItem.amount;
   }, 0);
 
   useEffect(() => {
@@ -112,7 +112,7 @@ const CartProvider = ({ children }) => {
         total,
         fastCargoChecked,
         setFastCargoChecked,
-        setCart
+        setCart,cargoFee
       }}
     >
       {children}{" "}

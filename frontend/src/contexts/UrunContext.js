@@ -17,7 +17,7 @@ export const urunReducer = (state, action) => {
 };
 
 export const UrunContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(urunReducer, { urunler: null });
+  const [state, dispatch] = useReducer(urunReducer, {  urunler: [] });
   return (
     <UrunContext.Provider value={{ ...state, dispatch }}>
       {children}

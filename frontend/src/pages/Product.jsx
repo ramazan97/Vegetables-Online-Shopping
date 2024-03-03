@@ -11,24 +11,21 @@ const Product = () => {
   const product = products.find((item) => {
     return item._id;
   });
-
+  console.log(product,"product");
   return (
     <div className="flex gap-x-36 mx-40 max-w-[500px] flex-col lg:flex-row items-center  ">
       {/* resim */}
       <div className="flex justify-center items-center mb-8 lg:mb-0 ">
-        <img className="max-w-[200px] lg:max-w-sm " src={img} alt="" />
-        img
+        <img className="max-w-[200px] lg:max-w-sm " src={product.img} alt="" />
       </div>
       {/* Ürün bilgisi */}
       <div className="flex-1  max-w-[450px] text-center lg:text-left ">
         <h1 className="text-[26px] font-medium mb-2 max-w-[450px] mx-auto lg:mx-0 ">
-          {name}name
+          {product.name}
         </h1>
-        <div className="text-xl text-red-500 font-medium mb-6">
-          $price {price}
-        </div>
+        <div className="text-xl text-red-500 font-medium mb-6">{product.price}</div>
 
-        <p className="mb-8  text-wrap w-[500px]">{description}description </p>
+        <p className="mb-8  text-wrap w-[500px]">{product.description} </p>
         <div className=" flex items-center md:justify-center lg:justify-start">
           <Button
             onClick={() => addToCard(product, product.id)}

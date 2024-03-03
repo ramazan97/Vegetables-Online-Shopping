@@ -8,9 +8,9 @@ import { BsEyeFill } from "react-icons/bs";
 const Card = ({ product }) => {
   const { kullanici } = useAuthContext();
   const navigate = useNavigate();
-  // console.log(data,"data");
+  console.log(product, "product");
   // const { sayac, arttir, azalt } = countReducer();
-  const { resim, ucret, baslik, aciklama, _id, kilogram } = product;
+  const { img, ucret, price, baslik, aciklama, _id, kilogram } = product;
   const { addToCard } = useContext(CartContext);
 
   // const urunMiktar = urunler[data._id] ?? 0; // Başlangıçta 0 atanıyor
@@ -18,9 +18,7 @@ const Card = ({ product }) => {
   const handleClick = (product, id) => {
     if (!kullanici) {
       navigate("/login");
-    } else {
-      navigate("/");
-    }
+    } 
     addToCard(product, id);
   };
   return (
@@ -32,9 +30,9 @@ const Card = ({ product }) => {
           src="./img-4.png"
           alt="tometo"
         /> */}
-        <img class="w-[6rem] " className="py-3" src={resim} alt="tometo" />
+        <img class="w-[6rem] " className="py-3" src={img} alt="tometo" />
         <div class="font-bold text-3xl mb-2 ">
-          $<span className="text-yellow-500 ">{ucret}</span>
+          $<span className="text-yellow-500 ">{price}</span>
         </div>
         <div class="font-bold text-3xl mb-2">{baslik}</div>
         <div class="font-bold text-3xl mb-2">

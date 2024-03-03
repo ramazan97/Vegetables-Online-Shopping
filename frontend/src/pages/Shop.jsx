@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useUrunContext } from "../hooks/useUrunContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Card from "../component/Cards/Card";
+import { ProductContext } from "../contexts/ProductContext";
 
-const Shop = ({ products }) => {
+const Shop = () => {
   // const [shopCart, setShopCart] = useState(null);
+  const { products } = useContext(ProductContext);
   const { dispatch } = useUrunContext(null);
   const { kullanici } = useAuthContext();
   useEffect(() => {
@@ -41,6 +43,7 @@ const Shop = ({ products }) => {
       );
     }
   }, [dispatch, kullanici]);
+
 
   return (
     <div id="shop" className="flex flex-col items-center mt-16 gap-y-5">

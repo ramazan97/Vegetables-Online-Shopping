@@ -50,7 +50,8 @@ const DeleteProduct = () => {
                     alt="tometo"
                   />
                   <div class="font-bold text-3xl mb-2 ">
-                    $<span className="text-yellow-500 ">{data.ucret}</span>
+                    $<span className="text-yellow-500 ">{data.price}</span>
+                    {/* $<span className="text-yellow-500 ">{data.ucret}</span> */}
                   </div>
                   <div class="font-bold text-3xl mb-2">{data.baslik}</div>
                   <div class="font-bold text-3xl mb-2">
