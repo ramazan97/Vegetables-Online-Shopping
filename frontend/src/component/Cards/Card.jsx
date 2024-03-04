@@ -10,7 +10,7 @@ const Card = ({ product }) => {
   const navigate = useNavigate();
   console.log(product, "product");
   // const { sayac, arttir, azalt } = countReducer();
-  const { img, ucret, price, baslik, aciklama, _id, kilogram } = product;
+  const { img, price, name, aciklama, _id, kilogram } = product;
   const { addToCard } = useContext(CartContext);
 
   // const urunMiktar = urunler[data._id] ?? 0; // Başlangıçta 0 atanıyor
@@ -18,7 +18,7 @@ const Card = ({ product }) => {
   const handleClick = (product, id) => {
     if (!kullanici) {
       navigate("/login");
-    } 
+    }
     addToCard(product, id);
   };
   return (
@@ -34,7 +34,7 @@ const Card = ({ product }) => {
         <div class="font-bold text-3xl mb-2 ">
           $<span className="text-yellow-500 ">{price}</span>
         </div>
-        <div class="font-bold text-3xl mb-2">{baslik}</div>
+        <div class="font-bold text-3xl mb-2">{name}</div>
         <div class="font-bold text-3xl mb-2">
           {product.kilogram}
           <span className="text-yellow-500">Kg</span>
