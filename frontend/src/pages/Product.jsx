@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Button from "../component/Buttons/Button";
 import { CartContext } from "../contexts/CartContext";
 import { ProductContext } from "../contexts/ProductContext";
+import Gallery from "./Gallery";
 
 const Product = () => {
   const { products } = useContext(ProductContext);
@@ -11,19 +12,31 @@ const Product = () => {
   const product = products.find((item) => {
     return item._id;
   });
-  console.log(product,"product");
+  console.log(product, "product");
   return (
     <div className="flex gap-x-36 mx-40 max-w-[500px] flex-col lg:flex-row items-center  ">
       {/* resim */}
-      <div className="flex justify-center items-center mb-8 lg:mb-0 ">
-        <img className="max-w-[200px] lg:max-w-sm " src={product.img} alt="" />
+      <div className="flex items-start justify-center flex-col ">
+        <div className="flex justify-center items-center mb-8 lg:mb-0 ">
+          <img
+            className="max-w-[200px] lg:max-w-sm "
+            src={product.img}
+            alt=""
+          />
+        </div>
+        <div className="">
+          <Gallery />
+        </div>
       </div>
+
       {/* Ürün bilgisi */}
       <div className="flex-1  max-w-[450px] text-center lg:text-left ">
         <h1 className="text-[26px] font-medium mb-2 max-w-[450px] mx-auto lg:mx-0 ">
           {product.name}
         </h1>
-        <div className="text-xl text-red-500 font-medium mb-6">{product.price}</div>
+        <div className="text-xl text-red-500 font-medium mb-6">
+          {product.price}
+        </div>
 
         <p className="mb-8  text-wrap w-[500px]">{product.description} </p>
         <div className=" flex items-center md:justify-center lg:justify-start">

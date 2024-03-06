@@ -4,8 +4,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
-  const [ setLoading] = useState(false);
-  const [ setProductData] = useState();
+  const [setProductData] = useState();
   const params = useParams();
   const productId = params.id;
   const [productData2, setProductData2] = useState();
@@ -14,13 +13,11 @@ const UpdateProduct = () => {
 
   const [kilogram, setKilogram] = useState();
   const [price, setPrice] = useState();
-
+  const [bosAlanlar, setBosalanlar] = useState([]);
   const [description, setDescription] = useState("");
 
   useEffect(() => {
     const fetchSingleCategory = async () => {
-      setLoading(true);
-
       try {
         const response = await fetch(`/api/shopcart/${productId}`);
         const data = await response.json();
@@ -31,7 +28,6 @@ const UpdateProduct = () => {
       } catch (error) {
         console.log("Veri hatası:", error);
       } finally {
-        setLoading(false);
       }
     };
     fetchSingleCategory();
@@ -39,17 +35,18 @@ const UpdateProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    const imgLinks = img.split("\n").map((link) => link.trim());
+    console.log(imgLinks, "imgLinks");
     try {
       const response = await fetch(`/api/shopcart/${productId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
-          img,
-          kilogram,
-          price,
-          description,
+          name: name,
+          img: imgLinks,
+          kilogram: kilogram,
+          price: price,
+          description: description,
         }),
       });
 
@@ -69,8 +66,6 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.error("Ürün güncelleme hatası:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -97,10 +92,15 @@ const UpdateProduct = () => {
             {/* resim */}
             <div className=" w-80 flex items-center justify-between ">
               <label>Resim</label>
-              <input
-                className={"border border-gray-900  rounded-l-md h-[41px]  "}
+              <textarea
+                className={
+                  bosAlanlar
+                    ? "border border-gray-900  rounded-l-md  h-32 "
+                    : "border border-gray-900  rounded-l-md   border-gray-900-red-500  h-32 "
+                }
                 onChange={(e) => setImg(e.target.value)}
                 value={img || productData2?.img}
+                type="text"
                 placeholder="Ürün resmi"
               />
             </div>

@@ -39,7 +39,7 @@ const AddProduct = () => {
 
     const imgLinks = img.split("\n").map((link) => link.trim());
 
-    console.log(price, "price");
+
 
     try {
       const response = await fetch("/api/shopcart", {
