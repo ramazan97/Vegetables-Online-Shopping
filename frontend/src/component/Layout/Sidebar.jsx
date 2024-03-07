@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -12,11 +12,20 @@ import { IoCartOutline } from "react-icons/io5";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { HiOutlineSearch } from "react-icons/hi";
 import { LuMoon, LuSun } from "react-icons/lu";
+import { CiLogout, CiUser } from "react-icons/ci";
+import { Popover, Transition } from "@headlessui/react";
+import classNames from "classnames";
+import { FaCaretDown } from "react-icons/fa6";
+import { useLogout } from "../../hooks/useLogout";
 
 const Cart = ({ toggleDarkMode, darkMode, setDarkMode }) => {
   const { navisOpen, setNavIsOpen, navhandleClose } = useContext(NavbarContext);
+  const { logout } = useLogout();
   const { cart, clearCart, total, itemAmount } = useContext(CartContext);
   const { kullanici } = useAuthContext();
+  const handleClick = () => {
+    logout();
+  };
   return (
     <div
       className={`${
@@ -52,89 +61,137 @@ const Cart = ({ toggleDarkMode, darkMode, setDarkMode }) => {
         </div>
 
         {/* linkler */}
-        <div className="  w-full">
+        <div className=" w-full text-2xl ">
           {!kullanici && (
-            <ul className="flex flex-col items-start text-black justify-center gap-5 md:text-xl text-md ">
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/">
-                  HOME
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/shop">
-                  SHOP
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/vegetables">
-                  VEGETABLES
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/about">
-                  ABOUT
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/contactus">
-                  CONTACT US
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/login">
-                  LOGIN
-                </Link>
-              </li>
-            </ul>
+            <div>
+              <ul className="flex flex-col items-start justify-center gap-5 font-medium p-6">
+                <li className="hover:text-orange-400 transition-all duration-500">
+                  <Link className="" to="/">
+                    HOME
+                  </Link>
+                </li>
+
+                <li className="hover:text-orange-400 transition-all duration-500">
+                  <Link className="" to="/shop">
+                    SHOP
+                  </Link>
+                </li>
+                <li className="hover:text-orange-400 transition-all duration-500">
+                  <Link className="" to="/vegetables">
+                    VEGETABLES
+                  </Link>
+                </li>
+                <li className="hover:text-orange-400 transition-all duration-500">
+                  <Link className="" to="/about">
+                    ABOUT
+                  </Link>
+                </li>
+                <li className="hover:text-orange-400 text-nowrap transition-all duration-500">
+                  <Link className="" to="/contactus">
+                    CONTACT US
+                  </Link>
+                </li>
+                <li className="hover:text-orange-400 transition-all duration-500">
+                  <Link className="" to="/login">
+                    LOGIN
+                  </Link>
+                </li>
+
+                <li className="hover:text-orange-400 transition-all duration-500">
+                  <Link className="" to="/signup">
+                    SIGNUP
+                  </Link>
+                </li>
+              </ul>
+            </div>
           )}
           {kullanici && (
-            <ul className="flex flex-col items-start text-black justify-center gap-5 md:text-xl text-md ">
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/">
-                  HOME
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/shop">
-                  SHOP
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/vegetables">
-                  VEGETABLES
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500">
-                <Link className="" to="/about">
-                  ABOUT
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500 text-nowrap ">
-                <Link className="" to="/contactus">
-                  CONTACT US
-                </Link>
-              </li>
-              <li className="hover:text-orange-400 cursor-pointer transition-all duration-500  ">
-                <Link className="" to="/cartt">
-                  <div className="flex items-center justify-center">
-                    <IoCartOutline size={25} />
-                    <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full p-[6px] text-[12px] w-[18px] flex justify-center items-center  h-[18px]">
-                      {itemAmount}
-                    </span>
-                  </div>
-                  {/* <Cart /> */}
-                </Link>
-              </li>
-            </ul>
+            <div className="flex flex-col items-start justify-center">
+              <div>
+                <ul className="flex flex-col items-start justify-center gap-5 font-medium p-6">
+                  <li className="hover:text-orange-400 transition-all duration-500">
+                    <Link className="" to="/">
+                      HOME
+                    </Link>
+                  </li>
+
+                  <li className="hover:text-orange-400 transition-all duration-500">
+                    <Link className="" to="/shop">
+                      SHOP
+                    </Link>
+                  </li>
+                  <li className="hover:text-orange-400 transition-all duration-500">
+                    <Link className="" to="/vegetables">
+                      VEGETABLES
+                    </Link>
+                  </li>
+                  <li className="hover:text-orange-400 transition-all duration-500">
+                    <Link className="" to="/about">
+                      ABOUT
+                    </Link>
+                  </li>
+                  <li className="hover:text-orange-400 transition-all duration-500 text-nowrap ">
+                    <Link className="" to="/contactus">
+                      CONTACT US
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
           )}
-          {/* dark mode button */}
-          <div className=" pt-5">
+          <div className=" flex flex-col gap-y-5 items-start justify-center  pl-5">
             <button
               className={`${darkMode ? "text-gray-100" : "text-gray-900"}`}
               onClick={toggleDarkMode}
             >
-              {darkMode ? <LuSun size={25} /> : <LuMoon size={25} />}
+              {darkMode ? <LuSun size={40} /> : <LuMoon size={40} />}
             </button>
+            <HiOutlineSearch
+              fontSize={50}
+              className="text-gray-900 p-2  "
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+            />
+
+            {kullanici && (
+              <>
+                <Link className="" to="/cartt">
+                  <div className="flex flex-col items-start justify-center">
+                    <IoCartOutline size={40} />
+                    <span className="absolute ml-6 mb-6 bg-red-500 text-white rounded-full  text-[18px] font-bold w-[28px] flex justify-center items-center  h-[28px]">
+                      {itemAmount}
+                    </span>
+                  </div>
+                </Link>
+                <Popover className="relative">
+                  {({ open }) => (
+                    <>
+                      <div className=" flex flex-col items-start justify-center py-5 gap-y-5">
+                        {" "}
+                        <div className="hover:text-orange-400 transition-all w-full duration-500 font-bold flex items-center justify-start gap-3">
+                          <Link className="" to="">
+                            <span>{kullanici.email}</span>
+                          </Link>
+                        </div>
+                        <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-start w-full   ">
+                          {kullanici &&
+                          kullanici.email === "admin1@gmail.com" ? (
+                            <Link className="" to="/admin">
+                              <strong>Admin</strong>
+                            </Link>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        <div className="hover:text-orange-400 transition-all w-full duration-500 font-bold flex items-center justify-start gap-3">
+                          <CiLogout />
+                          <button onClick={handleClick}>ÇIKIS</button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </Popover>
+              </>
+            )}
           </div>
         </div>
       </div>

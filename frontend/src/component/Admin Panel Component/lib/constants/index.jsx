@@ -13,37 +13,37 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: "dashboard",
     label: "Dashboard",
-    path: "/",
+    path: "/admin",
     icon: <HiOutlineViewGrid />,
   },
   {
     key: "products",
     label: "Products",
-    path: "/adminproducts",
+    path: "/admin/adminproducts",
     icon: <HiOutlineCube />,
   },
   {
     key: "orders",
     label: "Orders",
-    path: "/adminorders",
+    path: "/admin/adminorders",
     icon: <HiOutlineShoppingCart />,
   },
   {
     key: "customers",
     label: "Customers",
-    path: "/customers",
+    path: "/admin/customers",
     icon: <HiOutlineUsers />,
   },
   {
     key: "coupon",
     label: "Coupon",
-    path: "/admincoupon",
+    path: "/admin/admincoupon",
     icon: <HiOutlineDocumentText />,
   },
   {
     key: "messages",
     label: "Messages",
-    path: "/messages",
+    path: "/admin/messages",
     icon: <HiOutlineAnnotation />,
   },
 ];
@@ -52,13 +52,8 @@ export const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
   {
     key: "settings",
     label: "Settings",
-    path: "/adminsettings",
+    path: "/admin/adminsettings",
     icon: <HiOutlineCog />,
   },
-  {
-    key: "support",
-    label: "Help & Support",
-    path: "/adminsupport",
-    icon: <HiOutlineQuestionMarkCircle />,
-  },
+
 ];

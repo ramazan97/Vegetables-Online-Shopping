@@ -30,7 +30,7 @@ const Reviews = ({ selectedProduct }) => {
     fetchUsers();
   }, []);
 
-  // const selectedProduct = Array.isArray(singleProduct)
+  // const edProduct = Array.isArray(singleProduct)
   //   ? singleProduct.find((product) => product._id === productId)
   //   : singleProduct;
 
@@ -45,6 +45,9 @@ const Reviews = ({ selectedProduct }) => {
       });
     });
   }
+  const user = localStorage.getItem("kullanici")
+    ? JSON.parse(localStorage.getItem("kullanici"))
+    : null;
 
   return (
     <div>
@@ -70,13 +73,17 @@ const Reviews = ({ selectedProduct }) => {
           <h3>Hiç yorum yok...</h3>
         )}
 
-        <div className="pt-10 pb-5">
-          <h2>Yorum ekle</h2>
-          <ReviewForm
-            singleProduct={singleProduct}
-            setSingleProduct={setSingleProduct}
-          />
-        </div>
+        {user === null ? (
+          ""
+        ) : (
+          <div className="pt-10 pb-5">
+            <h2>Yorum ekle</h2>
+            <ReviewForm
+              singleProduct={singleProduct}
+              setSingleProduct={setSingleProduct}
+            />
+          </div>
+        )}
       </>
     </div>
   );

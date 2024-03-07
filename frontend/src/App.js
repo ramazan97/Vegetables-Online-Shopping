@@ -29,6 +29,8 @@ import Coupons from "./pages/Coupons";
 import AddCoupon from "./pages/AddCoupon";
 import UpdateCoupon from "./pages/UpdateCoupon";
 import Success from "./pages/Success";
+import Orders from "./pages/Orders";
+import Settings from "./pages/Settings";
 function App() {
   const { kullanici } = useAuthContext();
   return (
@@ -47,15 +49,16 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/cart/:id" element={<ProductDetail />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/adminproducts" element={<AddDeleteProduct />} />
-                <Route path="/customers" element={<Customers />} />
+
                 <Route path="/cartt" element={<Cartt />} />
                 <Route path="/success" element={<Success />} />
-                <Route path="/admindeleteproduct" element={<DeleteProduct />} />
-                <Route path="/messages" element={<Messages />} />
-                <Route path="/adminaddproduct" element={<AddProduct />} />
+                {/* <Route path="/admindeleteproduct" element={<DeleteProduct />} />
+                <Route path="/messages" element={<Messages />} /> */}
+                {/* <Route path="/adminaddproduct" element={<AddProduct />} />
                 <Route path="/adminaddcoupon" element={<AddCoupon />} />
-                <Route path="/admincoupon" element={<Coupons />} />
+                <Route path="/admincoupon" element={<Coupons />} /> */}
+                {/* <Route path="/customers" element={<Customers />} /> */}
+                {/* <Route path="/adminproducts" element={<AddDeleteProduct />} /> */}
 
                 <Route path="/admin/*">
                   <Route
@@ -66,6 +69,18 @@ function App() {
                     path="adminupdatecoupon/:id"
                     element={<UpdateCoupon />}
                   />
+                  <Route path="adminaddproduct" element={<AddProduct />} />
+                  <Route path="adminaddcoupon" element={<AddCoupon />} />
+                  <Route path="admincoupon" element={<Coupons />} />
+                  <Route path="adminorders" element={<Orders />} />
+                  <Route
+                    path="admindeleteproduct"
+                    element={<DeleteProduct />}
+                  />
+                  <Route path="messages" element={<Messages />} />
+                  <Route path="customers" element={<Customers />} />
+                  <Route path="adminsettings" element={<Settings />} />
+                  <Route path="adminproducts" element={<AddDeleteProduct />} />
                 </Route>
 
                 <Route path="/vegetables" element={<Vegetables />} />

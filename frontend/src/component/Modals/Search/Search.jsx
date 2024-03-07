@@ -37,7 +37,7 @@ const Search = () => {
 
   return (
     <div>
-      <dialog id="my_modal_3" className="modal w-1/2 h-2/3">
+      <dialog id="my_modal_2" className="modal w-1/2 h-2/3">
         <div className="modal-box">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
@@ -48,6 +48,7 @@ const Search = () => {
               <RxCross1 size={25} />
             </button>
           </form>
+
           <div>
             <h3 className="font-bold text-4xl p-4 m-4 ">Ürün Ara</h3>
             <p className="px-6 text-xl text-gray-600 ">
@@ -55,7 +56,7 @@ const Search = () => {
             </p>
           </div>
 
-          <div className="hidden lg:flex flex-auto m-5 py-5 border-b border-t border-gray-300">
+          <div className="flex flex-auto m-5 py-5 border-b border-t gap-y-10 border-gray-300 ">
             <form
               onSubmit={handleSearch}
               className="relative flex items-start w-full"
@@ -82,7 +83,11 @@ const Search = () => {
               )}
               {searchResults?.length > 0 &&
                 searchResults?.map((resultItem) => (
-                  <Link to={`/cart/${resultItem._id}`} key={resultItem._id} className="">
+                  <Link
+                    to={`/cart/${resultItem._id}`}
+                    key={resultItem._id}
+                    className=""
+                  >
                     <div className="flex items-center flex-row border border-gray-200 ">
                       <div className="p-5">
                         <img src={resultItem.img[0]} alt="" />

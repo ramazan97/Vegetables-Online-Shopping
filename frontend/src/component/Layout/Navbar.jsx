@@ -152,7 +152,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode, setIsSearchShow }) => {
         <HiOutlineSearch
           fontSize={50}
           className="text-gray-900 p-2  "
-          onClick={() => document.getElementById("my_modal_3").showModal()}
+          onClick={() => document.getElementById("my_modal_2").showModal()}
         />
 
         {kullanici && (

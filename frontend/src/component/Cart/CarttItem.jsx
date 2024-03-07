@@ -13,7 +13,7 @@ const CarttItem = ({ item }) => {
       <div className="w-full min-h-[150px] flex items-center justify-between ">
         {/* image */}
         <Link to={`/product/${id} `}>
-          <img className="max-w-[80px]" src={img} alt="" />
+          <img className="max-w-[80px]" src={img[0] || img} alt="" />
         </Link>
         <div className="flex justify-between mb-2">
           {/* baslik  */}

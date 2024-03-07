@@ -11,22 +11,31 @@ router.get("/", async (req, res) => {
   // const kullanici_id = req.kullanici._id;
   // const shopCarts = await ShopCartModel.find({kullanici_id}).sort({ createdAt: -1 });
   // res.status(200).json(shopCarts);
-  const shopCarts = await ShopCartModel.find().sort({ createdAt: -1 });
-  res.status(200).json(shopCarts);
+  try {
+    const shopCarts = await ShopCartModel.find().sort({ createdAt: -1 });
+    res.status(200).json(shopCarts);
+  } catch (error) {
+    res.status(400).json({ hata: "shop işlemi sırasında hata oluştu" });
+  }
 });
 //id ye göre ürün getirme işlemi
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ hata: "ID Geçersiz" });
+    }
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ hata: "ID Geçersiz" });
+    const cart = await ShopCartModel.findById(id);
+    if (!cart) {
+      return res.status(404).json({ hata: "Cart Bulunamadı" });
+    }
+    res.status(200).json(cart);
+  } catch (error) {
+    res
+      .status(400)
+      .json({ hata: "shop işlemini idye göre getirme  sırasında hata oluştu" });
   }
-
-  const cart = await ShopCartModel.findById(id);
-  if (!cart) {
-    return res.status(404).json({ hata: "Cart Bulunamadı" });
-  }
-  res.status(200).json(cart);
 });
 //ürün oluşturma işlemi
 router.post("/", async (req, res) => {
@@ -56,40 +65,48 @@ router.post("/", async (req, res) => {
     res.status(200).json(shopCart);
   } catch (error) {
     res.status(400).json({ hata: error.message });
-    console.log("hata varrr");
+    console.log("shop işleminde post sırasında hata oluştu");
   }
 });
 //id ye göre ürün silme işlemi
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ hata: "ID Geçersiz" });
+    }
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ hata: "ID Geçersiz" });
+    const cart = await ShopCartModel.findOneAndDelete({ _id: id });
+    if (!cart) {
+      return res.status(404).json({ hata: "Cart Bulunamadı" });
+    }
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(400).json({ hata: error.message });
+    console.log("shop işlemi sırasında delete yaparken hata oluştu");
   }
-
-  const cart = await ShopCartModel.findOneAndDelete({ _id: id });
-  if (!cart) {
-    return res.status(404).json({ hata: "Cart Bulunamadı" });
-  }
-  res.status(200).json(cart);
 });
 //id ye göre ürün güncellme işlemi
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ hata: "ID Geçersiz" });
+    }
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ hata: "ID Geçersiz" });
+    const cart = await ShopCartModel.findOneAndUpdate(
+      { _id: id },
+      { ...req.body },
+      { new: true }
+    );
+    if (!cart) {
+      return res.status(404).json({ hata: "Cart Bulunamadı" });
+    }
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(400).json({ hata: error.message });
+    console.log("shop işlemi sırasında put yaparken hata oluştu");
   }
-
-  const cart = await ShopCartModel.findOneAndUpdate(
-    { _id: id },
-    { ...req.body },
-    { new: true }
-  );
-  if (!cart) {
-    return res.status(404).json({ hata: "Cart Bulunamadı" });
-  }
-  res.status(200).json(cart);
 });
 //id ye göre ürün getirme işlemi
 router.get("/search/:productName", async (req, res) => {
@@ -99,7 +116,6 @@ router.get("/search/:productName", async (req, res) => {
       name: { $regex: productName, $options: "i" },
     });
 
-  
     res.status(200).json(products);
   } catch (error) {
     console.log(error);

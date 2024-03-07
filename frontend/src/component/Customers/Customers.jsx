@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import { KullaniciContext } from "../../contexts/KullaniciContext";
 import { toast } from "react-toastify";
+import Sidebar from "../Admin Panel Component/shared/Sidebar";
 
 const Customers = () => {
   // const [shopCart, setShopCart] = useState(null);
@@ -31,7 +32,7 @@ const Customers = () => {
   };
 
   return (
-    <div className="">
+    <Sidebar>
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg md:mx-20 lg:mx-56 my-32">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -106,7 +107,7 @@ const Customers = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Sidebar>
   );
 };
 

@@ -10,18 +10,17 @@ const ProductStock = () => {
   const deleteProduct = async (id) => {
     try {
       const response = await fetch(`/api/shopcart/${id}`, {
-        // Doğru API endpoint'i
+
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
 
       if (response.ok) {
-        toast.success("Ürün başarıyla silindi"); // Başarı mesajı
-        // Kullanıcı listesini güncellemek için gerekli işlemleri burada yapın
-        // const data = kullanici;
+        toast.success("Ürün başarıyla silindi"); 
+
         setProducts(products);
       } else {
-        toast.error("Kullanıcı silme başarısız"); // Hata mesajı
+        toast.error("Kullanıcı silme başarısız"); 
         console.error("Kullanıcı silme hatası:", response.statusText);
       }
     } catch (error) {
@@ -54,6 +53,9 @@ const ProductStock = () => {
               <th scope="col" class="px-6 py-3">
                 Durum
               </th>
+              <th scope="col" class="px-6 py-3">
+                
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -66,8 +68,12 @@ const ProductStock = () => {
                   >
                     {urun._id}
                   </th>
-                  <td class="px-6 py-4 h-10 w-10 ">
-                    <img src={urun.resim} className="h-10 w-10" alt="urun resmi" />
+                  <td class="mx-4 my-4 h-16 w-16    ">
+                    <img
+                      src={urun.img[0]}
+                      className="h-16 w-20  "
+                      alt="urun resmi"
+                    />
                   </td>
                   <td class="px-6 py-4">{urun.name}</td>
                   <td class="px-6 py-4">{urun.kilogram}</td>
