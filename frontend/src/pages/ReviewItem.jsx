@@ -41,7 +41,8 @@ const ReviewItem = ({ text, createdAt, rating }) => {
             })}
           </ul>
           <div>
-            <strong> {user?.email}</strong>
+            <strong> {user === null ? "*****" : user?.email}</strong>
+
             <span> - </span>
             <time>{formattedDate}</time>
           </div>

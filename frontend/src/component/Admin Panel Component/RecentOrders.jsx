@@ -103,38 +103,35 @@ export default function RecentOrders() {
     fetchData();
   }, [MY_STRIPE_SECRET_KEY]);
 
-  console.log(dataSource, "datasource");
-
   return (
-    <div className="bg-white px-4 pt-3 pb-4 rounded-sm border border-gray-200 flex-1">
-      <strong className="text-gray-700 font-medium">Recent Orders</strong>
+    <div className="bg-white px-4 pt-3 pb-4 rounded-sm flex-1">
       <div className="border-x border-gray-200 rounded-sm mt-3">
         <table className="w-full text-gray-700">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Product ID</th>
-              <th>Customer Name</th>
+            <tr className="text-2xl border">
+              <th className="">ID</th>
+              <th className="">Order ID</th>
+              <th className="">Customer Email</th>
               <th>Order Status</th>
-              <th>Order Total</th>
+              <th className="">Order Total</th>
             </tr>
           </thead>
           <tbody>
             {dataSource.map((order, index) => (
-              <tr key={order.id}>
-                <td>
+              <tr className="text-xl border" key={order.id}>
+                <td className=" text-center">
                   <Link>#{index}</Link>
                 </td>
-                <td className=" px-7 text-left">
+                <td className=" text-center ">
                   <Link>#{order.id}</Link>
                 </td>
-                <td>
+                <td className=" text-center">
                   <Link>{order.receipt_email}</Link>
                 </td>
-                <td className="text-right">
+                <td className="text-center">
                   <Link>{order.status}</Link>
                 </td>
-                <td className="text-right">
+                <td className="text-center">
                   <Link>${(order.amount / 100).toFixed(2)}</Link>
                 </td>
                 {/* 
