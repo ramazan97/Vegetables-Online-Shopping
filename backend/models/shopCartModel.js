@@ -29,12 +29,6 @@ const shopCartSema = new Sema(
     colors: [{ type: String, required: true }],
     kilogram: [{ type: String, required: true }],
     price: [{ type: Number, required: true }],
-    // price: {
-    //   current: { type: Number,
-    //     // required: true
-    //   },
-    //   discount: { type: Number },
-    // },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

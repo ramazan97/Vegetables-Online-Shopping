@@ -3,6 +3,7 @@ require("dotenv").config();
 const shopCartRoute = require("./routes/shop");
 const kullaniciRoute = require("./routes/kullanici");
 const couponsRoute = require("./routes/coupons");
+const messagesRoute = require("./routes/messages");
 const paymentRoute = require("./routes/payment");
 const mongoose = require("mongoose");
 const app = express();
@@ -29,6 +30,7 @@ mongoose
 app.use("/api/shopcart",shopCartRoute);
 app.use("/api/kullanici",kullaniciRoute);
 app.use("/api/coupon",couponsRoute);
+app.use("/api/messages",messagesRoute);
 app.use("/api/payment", paymentRoute);
 
 

@@ -9,3 +9,4 @@ const couponModel = new Sema(
 );
 
 module.exports = mongoose.model("Coupon", couponModel);
+
