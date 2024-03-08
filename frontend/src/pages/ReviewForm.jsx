@@ -54,7 +54,7 @@ const ReviewForm = ({ setSingleProduct, singleProduct }) => {
       ],
     };
 
-    // console.log(formData, "formdata");
+   
 
     try {
       const res = await fetch(`/api/shopcart/${selectedProduct._id}`, {

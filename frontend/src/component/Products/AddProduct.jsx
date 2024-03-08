@@ -77,8 +77,8 @@ const AddProduct = () => {
         setImg("");
         setReviews("");
         setColors("");
-        setKilogram();
-        setPrice();
+        setKilogram("");
+        setPrice("");
         setCategory("");
         setDescription("");
         setBosalanlar([]);

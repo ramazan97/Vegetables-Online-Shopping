@@ -11,6 +11,11 @@ const kullaniciSema = new Sema(
     password: { type: String, required: true },
     role: { type: String, default: "user", enum: ["user", "admin"] },
     avatar: { type: String },
+    status: {
+      type: String,
+      default: "Onay Bekliyor",
+      enum: ["Onay Bekliyor", "Onaylandı", "Reddedildi"],
+    },
   },
   { timestamps: true }
 );

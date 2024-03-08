@@ -20,7 +20,7 @@ export default function Sidebar({ children }) {
   };
 
   return (
-    <div className="flex flex-row h-screen ">
+    <div className="flex flex-row h-screen  ">
       <div className="bg-neutral-900 w-auto p-3 flex flex-col ">
         <div className="flex items-center gap-2 px-1 py-3">
           <FcBullish fontSize={24} />

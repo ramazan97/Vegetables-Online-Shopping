@@ -1,19 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../component/Buttons/Button";
 import { toast } from "react-toastify";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { Link, useNavigate } from "react-router-dom";
 const Contactus = () => {
-  const { kullanici } = useAuthContext();
-  const navigate = useNavigate();
-  const handleClick = (product, id) => {
-    if (!kullanici) {
-      navigate("/login");
-    } else {
-      // müşteriden gelen mesajları burada kaydedip veri tabanına gönderen sonrada admin panelde mesajlar kısmında gösteren kodu yaz
-      navigate("/contactus");
+  const [phone, setPhone] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [messages, setMessages] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const urunVerisi = {
+      name: name,
+      email: email,
+      messages: messages,
+      phone: phone,
+    };
+    console.log(name, "name");
+    console.log(email, "name1");
+    console.log(messages, "name2");
+    console.log(phone, "name3");
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST",
+        body: JSON.stringify(urunVerisi),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          messages: messages,
+          phone: phone,
+        }),
+      });
+      console.log(response, "response");
+
+      if (!response.ok) {
+        toast.error(` !response.ok değil sı var `);
+      }
+      if (response.ok) {
+        setPhone("");
+        setName("");
+        setEmail("");
+        setMessages("");
+        toast.success("Mesaj gönderildi!");
+      }
+    } catch (error) {
+      console.log(error, "mesaj gönderme işlemi sırasında hata oluştu ");
     }
   };
+
   return (
     <div className="flex flex-col items-center mt-16 gap-y-5">
       {/* logo */}
@@ -25,38 +62,51 @@ const Contactus = () => {
       <div>
         <p className="text-4xl font-bold">Contact Us</p>
       </div>
-      <div className="grid grid-cols-1  lg:grid-cols-2 gap-4 py-5">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1  lg:grid-cols-2 gap-4 py-5"
+      >
         {/* input */}
         <div className="flex flex-col justify-between w-[550px] h-[480px]  ">
           <input
             className="w-full h-[51px] text-xl text-balance border border-spacing-6 border-gray-200 "
             type="text"
             placeholder="Your Name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             required
           />
           <input
             className="w-full h-[51px] text-xl text-balance border border-spacing-6 border-gray-200"
             type="email"
             placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             required
           />
           <input
             className="w-full h-[51px] text-xl text-balance border border-spacing-6 border-gray-200"
             type="tel"
-            placeholder="Phone Number"
-            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+            placeholder="Phone"
+            onChange={(e) => setPhone(e.target.value)}
+            value={phone}
+            title="Telefon numarası 123-456-7890 formatında olmalıdır"
             required
           />
           <textarea
             className="w-full h-[153px] text-xl text-balance border border-spacing-6 border-gray-200"
             placeholder="Message"
+            onChange={(e) => setMessages(e.target.value)}
+            value={messages}
           />
-          <Link
-            to={"/login"}
+          <Button name={`Gönder`} />
+          {/* <Link
+            // to={"/login"}
             className=" flex items-center justify-center my-5"
           >
-            <Button onClick={() => handleClick()} name={`Send`} />
-          </Link>
+            
+             <Button onClick={() => handleClick()} name={`Send`} /> 
+          </Link> */}
         </div>
         {/* map */}
         <div className="  ">
@@ -72,7 +122,7 @@ const Contactus = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

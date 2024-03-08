@@ -57,7 +57,7 @@ const AddCoupon = () => {
       <div className="flex flex-col gap-y-5">
         {/* baslik */}
         <div className=" w-80 flex items-center justify-between ">
-          <label>Baslik</label>
+          <label>İsmi</label>
           <input
             className={
               bosAlanlar
@@ -65,14 +65,14 @@ const AddCoupon = () => {
                 : "border  rounded-l-md h-[41px] border-red-500"
             }
             type="text"
-            placeholder="Ürün ismi"
+            placeholder="Kupon İsim"
             onChange={(e) => setCode(e.target.value)}
             value={code}
           />
         </div>
         {/* resim */}
         <div className=" w-80 flex items-center justify-between ">
-          <label>Resim</label>
+          <label>Oran</label>
           <input
             className={
               bosAlanlar
@@ -80,7 +80,7 @@ const AddCoupon = () => {
                 : "border border-gray-900  rounded-l-md h-[41px] border-gray-900-red-500"
             }
             type="text"
-            placeholder="Ürün resmi"
+            placeholder="Kupon Oranı"
             onChange={(e) => setDiscountPercent(e.target.value)}
             value={discountPercent}
           />

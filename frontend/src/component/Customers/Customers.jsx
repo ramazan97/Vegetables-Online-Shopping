@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import Sidebar from "../Admin Panel Component/shared/Sidebar";
 
 const Customers = () => {
-  // const [shopCart, setShopCart] = useState(null);
+  // const [onay, setOnay] = useState("Onay bekliyor");
+  const [kullaniciDurum, setkullaniciDurum] = useState("Onay Bekliyor");
 
   const { kullanici, setKullanici } = useContext(KullaniciContext);
 
@@ -30,6 +31,36 @@ const Customers = () => {
       console.log("kullanıcı silme işlemi sırasında hata oluştu", error);
     }
   };
+
+  const kullaniciOnayla = async (kullaniciiId) => {
+   
+    setkullaniciDurum(true)
+
+
+
+    console.log(kullaniciDurum,"kullaniciDurum");
+    try {
+      const res = await fetch(`/api/kullanici/${kullaniciiId}/status`, {
+        method: "PUT",
+        body: JSON.stringify({ status: kullaniciDurum }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res, "res");
+      if (!res.ok) {
+        toast.error("Bir şeyler yanlış gitti11111.");
+        return;
+      }
+      const data = await res.json();
+      toast.success("Yorum başarıyla eklendi.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Bir şeyler yanlış gitti22222.");
+    }
+  };
+
+  const kullaniciReddet = async (e) => {};
 
   return (
     <Sidebar>
@@ -73,13 +104,46 @@ const Customers = () => {
                   <td class="px-6 py-4">{kllnc.username}</td>
                   <td class="px-6 py-4">{kllnc.email}</td>
                   <td class="px-6 py-4">{kllnc.role}</td>
-                  <td class={false ? "text-orange-500" : "text-green-500"}>
-                    {false ? "Onay Bekliyor" : "onaylandi"}
-                    {/* reddet butonuna basıldığında silsin bu şekilde reddetsin*/}
+                  {/* ------------------------- */}
+                  {/* ------------------------- */}
+                  {/* ------------------------- */}
+                  <td
+                    class={
+                      kllnc.status === "Onay Bekliyor"
+                        ? "text-orange-500"
+                        : kllnc.status === false
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }
+                  >
+                    {kllnc.status === "Onay Bekliyor"
+                      ? "Onay Bekliyor"
+                      : kllnc.status === false
+                      ? "Red Edildi"
+                      : "Onaylandı"}
                   </td>
+                  {/* <td
+                    class={
+                      kullaniciDurum === "Onay Bekliyor"
+                        ? "text-orange-500"
+                        : kullaniciDurum === false
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }
+                  >
+                    {kullaniciDurum === "Onay Bekliyor"
+                      ? "Onay Bekliyor"
+                      : kullaniciDurum === false
+                      ? "Red Edildi"
+                      : "Onaylandı"}
+                
+                  </td> */}
                   <td class="px-6 py-4 text-right flex items-center justify-center gap-5">
                     {/* onay button */}
-                    <div className={"text-white"}>
+                    <div
+                      onClick={() => kullaniciOnayla(kllnc._id)}
+                      className={"text-white"}
+                    >
                       <button className="bg-green-500 p-3 rounded-lg hover:bg-green-400 transition duration-500 ">
                         Onayla
                       </button>
@@ -88,7 +152,10 @@ const Customers = () => {
 
                     {/* reddet butonuna basıldığında silsin bu şekilde reddetsin*/}
                     <div className={"text-white"}>
-                      <button className="bg-red-500 p-3 rounded-lg hover:bg-red-400 transition duration-500">
+                      <button
+                        onClick={() => kullaniciReddet(kllnc._id)}
+                        className="bg-red-500 p-3 rounded-lg hover:bg-red-400 transition duration-500"
+                      >
                         Reddet
                       </button>
                     </div>
