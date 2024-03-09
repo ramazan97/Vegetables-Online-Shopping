@@ -14,7 +14,7 @@ const kullaniciSema = new Sema(
     status: {
       type: String,
       default: "Onay Bekliyor",
-      enum: ["Onay Bekliyor", "Onaylandı", "Reddedildi"],
+      enum: ["Onay Bekliyor", "Onaylandı", "Red Edildi"],
     },
   },
   { timestamps: true }

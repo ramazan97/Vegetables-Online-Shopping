@@ -33,6 +33,7 @@ import Orders from "./pages/Orders";
 import Settings from "./pages/Settings";
 function App() {
   const { kullanici } = useAuthContext();
+  console.log(kullanici,"kullanici");
   return (
     <div>
       <ToastContainer />

@@ -46,20 +46,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//id ye göre kulaniciları güncellme işlemi
-router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
 
-    const kullanici = await Kullanici.findById(id);
-
-    res.status(200).json(kullanici);
-  } catch (error) {
-    res.status(400).json({
-      hata: "id ye göre kullanici getirme işlemi sırasında hata oluştu",
-    });
-  }
-});
 
 //id ye göre kullanici silme işlemi
 router.delete("/:id", async (req, res) => {
@@ -97,30 +84,43 @@ router.put("/:email", async (req, res) => {
   }
 });
 
-router.put("/:id/status", async (req, res) => {
+
+
+//id ye göre kulaniciları güncellme işlemi
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
 
-    if (
-      !status ||
-      !["Onay Bekliyor", "Onaylandı", "Reddedildi"].includes(status)
-    ) {
-      throw Error("Geçersiz durum değeri");
-    }
-
-    const kullanici = await Kullanici.findOneAndUpdate(
-      { id: id },
-      { status },
-      { new: true }
-    );
+    const kullanici = await Kullanici.findById(id);
 
     res.status(200).json(kullanici);
   } catch (error) {
     res.status(400).json({
-      hata: "Kullanıcı durumu güncelleme sırasında hata oluştu",
+      hata: "id ye göre kullanici getirme işlemi sırasında hata oluştu",
     });
   }
+});
+
+router.put("/status/:id", async (req, res) => {
+
+  
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+
+
+      const kullanici = await Kullanici.findByIdAndUpdate(
+        { _id: id },
+        { status },
+        { new: true }
+      );
+
+      res.status(200).json(kullanici);
+    } catch (error) {
+      res.status(400).json({
+        hata: "Kullanıcı durumu güncelleme sırasında hata oluştu",
+      });
+    }
 });
 
 module.exports = router;

@@ -5,9 +5,6 @@ import { toast } from "react-toastify";
 import Sidebar from "../Admin Panel Component/shared/Sidebar";
 
 const Customers = () => {
-  // const [onay, setOnay] = useState("Onay bekliyor");
-  const [kullaniciDurum, setkullaniciDurum] = useState("Onay Bekliyor");
-
   const { kullanici, setKullanici } = useContext(KullaniciContext);
 
   const deleteKullanici = async (id) => {
@@ -33,34 +30,50 @@ const Customers = () => {
   };
 
   const kullaniciOnayla = async (kullaniciiId) => {
-   
-    setkullaniciDurum(true)
-
-
-
-    console.log(kullaniciDurum,"kullaniciDurum");
     try {
-      const res = await fetch(`/api/kullanici/${kullaniciiId}/status`, {
+      const res = await fetch(`/api/kullanici/status/${kullaniciiId}`, {
         method: "PUT",
-        body: JSON.stringify({ status: kullaniciDurum }),
+        body: JSON.stringify({ status: "Onaylandı" }),
         headers: {
           "Content-Type": "application/json",
         },
       });
       console.log(res, "res");
       if (!res.ok) {
-        toast.error("Bir şeyler yanlış gitti11111.");
+        toast.error("Status Güncellenemedi.");
         return;
       }
+
       const data = await res.json();
-      toast.success("Yorum başarıyla eklendi.");
+      toast.success("Status başarıyla güncellendi.");
     } catch (error) {
       console.log(error);
-      toast.error("Bir şeyler yanlış gitti22222.");
+      toast.error("Status Güncellenemedi.");
     }
   };
 
-  const kullaniciReddet = async (e) => {};
+  const kullaniciReddet = async (kullaniciiId) => {
+    try {
+      const res = await fetch(`/api/kullanici/status/${kullaniciiId}`, {
+        method: "PUT",
+        body: JSON.stringify({ status: "Red Edildi" }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        toast.error("Status Güncellenemedi.");
+        return;
+      }
+
+      const data = await res.json();
+      toast.success("Status başarıyla güncellendi.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Status Güncellenemedi.");
+    }
+  };
 
   return (
     <Sidebar>
@@ -89,88 +102,63 @@ const Customers = () => {
             </tr>
           </thead>
           <tbody>
-            {kullanici &&
-              kullanici.map((kllnc) => (
-                <tr
-                  key={kllnc._id}
-                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            {kullanici.map((kllnc) => (
+              <tr
+                key={kllnc._id}
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <th
-                    scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {kllnc._id}
-                  </th>
-                  <td class="px-6 py-4">{kllnc.username}</td>
-                  <td class="px-6 py-4">{kllnc.email}</td>
-                  <td class="px-6 py-4">{kllnc.role}</td>
-                  {/* ------------------------- */}
-                  {/* ------------------------- */}
-                  {/* ------------------------- */}
-                  <td
-                    class={
-                      kllnc.status === "Onay Bekliyor"
-                        ? "text-orange-500"
-                        : kllnc.status === false
-                        ? "text-red-500"
-                        : "text-green-500"
-                    }
-                  >
-                    {kllnc.status === "Onay Bekliyor"
-                      ? "Onay Bekliyor"
-                      : kllnc.status === false
-                      ? "Red Edildi"
-                      : "Onaylandı"}
-                  </td>
-                  {/* <td
-                    class={
-                      kullaniciDurum === "Onay Bekliyor"
-                        ? "text-orange-500"
-                        : kullaniciDurum === false
-                        ? "text-red-500"
-                        : "text-green-500"
-                    }
-                  >
-                    {kullaniciDurum === "Onay Bekliyor"
-                      ? "Onay Bekliyor"
-                      : kullaniciDurum === false
-                      ? "Red Edildi"
-                      : "Onaylandı"}
-                
-                  </td> */}
-                  <td class="px-6 py-4 text-right flex items-center justify-center gap-5">
-                    {/* onay button */}
-                    <div
-                      onClick={() => kullaniciOnayla(kllnc._id)}
-                      className={"text-white"}
-                    >
-                      <button className="bg-green-500 p-3 rounded-lg hover:bg-green-400 transition duration-500 ">
-                        Onayla
-                      </button>
-                    </div>
-                    {/* red button */}
+                  {kllnc._id}
+                </th>
+                <td class="px-6 py-4">{kllnc.username}</td>
+                <td class="px-6 py-4">{kllnc.email}</td>
+                <td class="px-6 py-4">{kllnc.role}</td>
 
-                    {/* reddet butonuna basıldığında silsin bu şekilde reddetsin*/}
-                    <div className={"text-white"}>
-                      <button
-                        onClick={() => kullaniciReddet(kllnc._id)}
-                        className="bg-red-500 p-3 rounded-lg hover:bg-red-400 transition duration-500"
-                      >
-                        Reddet
-                      </button>
-                    </div>
-                    {/* reddet butonuna basıldığında silsin bu şekilde reddetsin*/}
-                    <div className={"text-white"}>
-                      <button
-                        onClick={() => deleteKullanici(kllnc._id)}
-                        className="bg-red-900 p-3 rounded-lg hover:bg-red-700 transition duration-500"
-                      >
-                        Sil
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                <td
+                  class={
+                    kllnc.status === "Onay Bekliyor"
+                      ? "text-orange-400"
+                      : kllnc.status === "Red Edildi"
+                      ? "text-red-700"
+                      : "text-green-500"
+                  }
+                >
+                  {kllnc.status}
+                </td>
+
+                <td class="px-6 py-4 text-right flex items-center justify-center gap-5">
+                  <div
+                    onClick={() => kullaniciOnayla(kllnc._id)}
+                    className={"text-white"}
+                  >
+                    <button className="bg-green-500 p-3 rounded-lg hover:bg-green-400 transition duration-500 ">
+                      Onayla
+                    </button>
+                  </div>
+
+                  <div className={"text-white"}>
+                    <button
+                      onClick={() => kullaniciReddet(kllnc._id)}
+                      className="bg-red-500 p-3 rounded-lg hover:bg-red-400 transition duration-500"
+                    >
+                      Reddet
+                    </button>
+                  </div>
+
+                  <div className={"text-white"}>
+                    <button
+                      onClick={() => deleteKullanici(kllnc._id)}
+                      className="bg-red-900 p-3 rounded-lg hover:bg-red-700 transition duration-500"
+                    >
+                      Sil
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

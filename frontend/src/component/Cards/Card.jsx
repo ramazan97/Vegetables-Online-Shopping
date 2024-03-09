@@ -8,7 +8,7 @@ import { BsEyeFill } from "react-icons/bs";
 const Card = ({ product }) => {
   const { kullanici } = useAuthContext();
   const navigate = useNavigate();
-  console.log(product, "product");
+
   // const { sayac, arttir, azalt } = countReducer();
   const { img, price, name, description, _id, kilogram } = product;
   const { addToCard } = useContext(CartContext);
