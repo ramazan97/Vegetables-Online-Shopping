@@ -45,7 +45,7 @@ const Messages = () => {
       console.log("Mesaj silme işlemi sırasında hata oluştu", error);
     }
   };
-
+  console.log(messages, "messages");
   return (
     <Sidebar>
       <div className="relative overflow-x-auto  rounded-lg md:mx-20 gap-y-5 lg:mx-56 my-32 flex flex-col items-center justify-center ">
@@ -78,7 +78,9 @@ const Messages = () => {
                         {message.phone}
                       </span>
                       <span className="text-xs font-medium text-blue-600 dark:text-blue-500">
-                        a few seconds ago
+                        {new Date(message.updatedAt).toLocaleString("tr-TR", {
+                          timeZone: "Europe/Istanbul",
+                        })}
                       </span>
                     </div>
                   </div>

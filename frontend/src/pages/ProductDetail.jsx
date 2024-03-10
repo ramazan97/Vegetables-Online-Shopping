@@ -30,7 +30,7 @@ const ProductDetail = () => {
     <section className="pt-32 pb-12 lg:py-32 flex items-center justify-center ">
       <div className=" flex flex-col items-center justify-center ">
         <div className="pb-20">
-          <Product />
+          <Product products={products} />
         </div>
 
         <div className="flex items-center justify-start w-full ">

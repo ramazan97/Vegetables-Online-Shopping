@@ -1,49 +1,129 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../component/Buttons/Button";
 import { CartContext } from "../contexts/CartContext";
 import { ProductContext } from "../contexts/ProductContext";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import Slider from "react-slick";
+import { useParams } from "react-router-dom";
+function PrevBtn({ onClick }) {
+  return (
+    <button
+      // transform -translate-y-1/2  text-25
+      // className="glide__arrow glide__arrow--left"
+      className="bg-transparent absolute top-[50%] transform -translate-y-1/2 -translate-x-3/4 left-0"
+      data-glide-dir="<"
+      onClick={onClick}
+      style={{
+        zIndex: "2",
+      }}
+    >
+      <MdArrowBackIos size={25} />
+    </button>
+  );
+}
 
-const Product = () => {
-  const { products } = useContext(ProductContext);
+function NextBtn({ onClick }) {
+  return (
+    <button
+      // className="glide__arrow glide__arrow--right"
+      className="bg-transparent absolute top-[50%] transform -translate-y-1/2 translate-x-[90%] right-0"
+      data-glide-dir=">"
+      onClick={onClick}
+      style={{
+        zIndex: "2",
+      }}
+    >
+      <MdArrowForwardIos size={25} />
+    </button>
+  );
+}
+
+const Product = ({ products }) => {
+  // const { products } = useContext(ProductContext);
 
   const { addToCard } = useContext(CartContext);
   const { name, description, price, img } = products;
-  const product = products.find((item) => {
-    return item._id;
+  const [activeImg, setActiveImg] = useState({
+    img: "",
+    imgIndex: 0,
   });
-  // console.log(product,"product");
+  const params = useParams();
+  const productId = params.id;
+
+
+  const selectedProduct = Array.isArray(products)
+    ? products.find((product) => product._id === productId)
+    : products;
+
+  useEffect(() => {
+    setActiveImg({ img: selectedProduct.img[0], imgIndex: 0 });
+  }, [selectedProduct.img]);
+
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    nextArrow: <NextBtn />,
+    prevArrow: <PrevBtn />,
+  };
   return (
-    <div className="flex gap-x-16  max-w-[700px] flex-col lg:flex-row items-center  bg-red-500 ">
+    <div className="flex gap-x-8 px max-w-[700px] flex-col lg:flex-row    ">
       {/* resim */}
-      <div className="flex flex-col px-5 bg-green-500 justify-center items-center mb-8 lg:mb-0 ">
+      <div className="flex flex-col justify-center items-center lg:mb-0 ">
         <div className="my-10 flex items-center justify-center">
           <img
             className="max-w-[200px] lg:max-w-sm "
-            src={product.img[0]}
+            src={`${activeImg.img}`}
             alt=""
+            id="single-image"
           />
         </div>
 
-        <div className="bg-yellow-500 flex flex-row gap-3 w-full">
-          <img className="w-[100px]  " src={product.img[0]} alt="" />
-          <img className="w-[100px]  " src={product.img[1]} alt="" />
-          <img className="w-[100px]  " src={product.img[2]} alt="" />
+        <div className=" flex flex-col w-[200px]  ">
+          <ol className="w-full ">
+            <Slider {...sliderSettings}>
+              {selectedProduct.img.map((itemImg, index) => (
+                <li
+                  className="bg-red-500 flex flex-col items-center justify-center cursor-pointer "
+                  key={index}
+                  onClick={() =>
+                    setActiveImg({
+                      img: itemImg,
+                      imgIndex: index,
+                    })
+                  }
+                >
+                  <img
+                    className={`  ${
+                      activeImg.imgIndex === index
+                        ? "border border-gray-900"
+                        : ""
+                    } `}
+                    src={`${itemImg}`}
+                    // src={selectedProduct.img[index]}
+                    alt=""
+                  />
+                </li>
+              ))}
+            </Slider>
+          </ol>
         </div>
       </div>
       {/* Ürün bilgisi */}
-      <div className="px-5">
-        <div className="flex flex-col  w-full text-center  bg-purple-500">
+      <div className="px-5 py-10">
+        <div className="flex flex-col  w-full text-center  ">
           <h1 className="text-[26px] font-medium mb-2  mx-auto lg:mx-0 ">
-            {product.name}
+            {selectedProduct.name}
           </h1>
-          <div className="text-xl text-red-500 font-medium mb-6">
-            {product.price}
+          <div className="text-xl  font-medium mb-6">
+            $<span className="text-red-500">{selectedProduct.price}</span>
           </div>
 
-          <p className="mb-8  text-wrap ">{product.description} </p>
+          <p className="mb-8  text-wrap ">{selectedProduct.description} </p>
           <div className=" flex items-center md:justify-center lg:justify-start">
             <Button
-              onClick={() => addToCard(product, product.id)}
+              onClick={() => addToCard(selectedProduct, selectedProduct.id)}
               name={"Buy Now"}
             />
           </div>

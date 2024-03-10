@@ -18,7 +18,7 @@ const Tabs = ({ products }) => {
     ? products.find((product) => product._id === productId)
     : products;
 
-  console.log(selectedProduct, "selectedProduct");
+
 
   return (
     <div>
