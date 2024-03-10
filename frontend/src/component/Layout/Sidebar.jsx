@@ -23,6 +23,7 @@ const Cart = ({ toggleDarkMode, darkMode, setDarkMode }) => {
   const { logout } = useLogout();
   const { cart, clearCart, total, itemAmount } = useContext(CartContext);
   const { kullanici } = useAuthContext();
+  const AdminEmail = process.env.REACT_APP_ADMIN_EMAIL;
   const handleClick = () => {
     logout();
   };
@@ -174,7 +175,7 @@ const Cart = ({ toggleDarkMode, darkMode, setDarkMode }) => {
                         </div>
                         <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-start w-full   ">
                           {kullanici &&
-                          kullanici.email === "admin1@gmail.com" ? (
+                          kullanici.email === AdminEmail? (
                             <Link className="" to="/admin">
                               <strong>Admin</strong>
                             </Link>

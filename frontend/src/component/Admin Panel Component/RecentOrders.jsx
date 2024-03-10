@@ -70,8 +70,8 @@ export default function RecentOrders() {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const MY_STRIPE_SECRET_KEY =
-    "sk_test_51OpzpsE7ftghkhcgGhtL1jiWl71CmjGYt6opbHDONFrD8DsqCQWxc7Iu8DIYHV18Q714vkt1ZdqZBicm8wklBMz200dfSo9tFE";
+  const REACT_APP_MY_STRIPE_SECRET_KEY =
+    process.env.REACT_APP_MY_STRIPE_SECRET_KEY;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +83,7 @@ export default function RecentOrders() {
           {
             method: "GET",
             headers: {
-              Authorization: `Bearer ${MY_STRIPE_SECRET_KEY}`,
+              Authorization: `Bearer ${REACT_APP_MY_STRIPE_SECRET_KEY}`,
             },
           }
         );
@@ -101,7 +101,7 @@ export default function RecentOrders() {
       }
     };
     fetchData();
-  }, [MY_STRIPE_SECRET_KEY]);
+  }, [REACT_APP_MY_STRIPE_SECRET_KEY]);
 
   return (
     <div className="bg-white px-4 pt-3 pb-4 rounded-sm flex-1">

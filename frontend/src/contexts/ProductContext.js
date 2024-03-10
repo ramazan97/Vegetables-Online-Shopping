@@ -6,10 +6,11 @@ export const ProductContext = createContext();
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [singleProduct, setSingleProduct] = useState(null);
+  const API = process.env.REACT_APP_CLIENT_DOMAIN;
   useEffect(() => {
     try {
       const fetchProducts = async () => {
-        const response = await fetch("http://localhost:3000/api/shopcart");
+        const response = await fetch(`${API}/api/shopcart`);
 
         if (!response.ok) {
           throw new Error("Verileri getirme hatası");

@@ -5,11 +5,11 @@ export const CouponContext = createContext();
 
 const CouponProvider = ({ children }) => {
   const [coupons, setCoupons] = useState([]);
-
+  const API = process.env.REACT_APP_CLIENT_DOMAIN;
   useEffect(() => {
     try {
       const fetchProducts = async () => {
-        const response = await fetch("http://localhost:3000/api/coupon");
+        const response = await fetch(`${API}/api/coupon`);
         const data = await response.json();
         setCoupons(data);
       };

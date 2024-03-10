@@ -23,6 +23,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode, setIsSearchShow }) => {
   const { navisOpen, setNavIsOpen } = useContext(NavbarContext);
   const { kullanici } = useAuthContext();
   const { itemAmount } = useContext(CartContext);
+  const AdminEmail = process.env.REACT_APP_ADMIN_EMAIL;
   const handleClick = () => {
     logout();
   };
@@ -200,7 +201,7 @@ const Navbar = ({ toggleDarkMode, darkMode, setDarkMode, setIsSearchShow }) => {
                         </Link>
                       </div>
                       <div className="hover:text-orange-400 cursor-pointer transition-all duration-500 font-bold flex items-center justify-end w-full   ">
-                        {kullanici && kullanici.email === "admin1@gmail.com" ? (
+                        {kullanici && kullanici.email === AdminEmail ? (
                           <Link className="" to="/admin">
                             <strong>Admin</strong>
                           </Link>

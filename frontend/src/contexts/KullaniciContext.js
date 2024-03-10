@@ -5,11 +5,11 @@ export const KullaniciContext = createContext();
 
 const KullaniciProvider = ({ children }) => {
   const [kullanici, setKullanici] = useState([]);
-
+  const API = process.env.REACT_APP_CLIENT_DOMAIN;
   useEffect(() => {
     const fetchkullanici = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/kullanici");
+        const response = await fetch(`${API}/api/kullanici`);
         const data = await response.json();
         setKullanici(data);
       } catch (error) {

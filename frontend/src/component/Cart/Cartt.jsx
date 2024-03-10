@@ -68,7 +68,7 @@ const Cartt = () => {
 
     try {
       const stripe = await loadStripe(
-        `pk_test_51OpzpsE7ftghkhcgwrZS6evXApAvMXkWq0ujkafogl3sxnYgNuQWKBBmAUIv40jjH6RIXFkVrqquBiNwlgroPRyM00B1Ly1SOM`
+        process.env.REACT_APP_API_STRIPE_PUBLIC_KEY
       );
 
       const res = await fetch(`/api/payment`, {
@@ -76,7 +76,7 @@ const Cartt = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      
+
       if (!res.ok) {
         return toast.error("Ödeme işlemi başarısız oldu.");
       }

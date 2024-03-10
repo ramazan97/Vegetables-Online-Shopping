@@ -33,11 +33,11 @@ import Orders from "./pages/Orders";
 import Settings from "./pages/Settings";
 function App() {
   const { kullanici } = useAuthContext();
-  console.log(kullanici,"kullanici");
+  const AdminEmail = process.env.REACT_APP_ADMIN_EMAIL;
+  console.log(AdminEmail,"admin");
   return (
     <div>
       <ToastContainer />
-
       <BrowserRouter>
         <div className="flex flex-col min-h-screen">
           <div className="flex-grow">
@@ -101,7 +101,7 @@ function App() {
                 <Route
                   path="/admin"
                   element={
-                    kullanici && kullanici.email === "admin1@gmail.com" ? (
+                    kullanici && kullanici.email === AdminEmail ? (
                       <Admin />
                     ) : (
                       <Home />
