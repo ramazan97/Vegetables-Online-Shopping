@@ -10,6 +10,8 @@ import { AuthContextProvider } from "./contexts/AuthContext";
 import SidebarProvider from "./contexts/SidebarContext";
 import KullaniciContext from "./contexts/KullaniciContext";
 import NavbarContext from "./contexts/NavbarContext";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
