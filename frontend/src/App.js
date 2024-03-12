@@ -24,17 +24,28 @@ import Customers from "./component/Customers/Customers";
 import Messages from "./component/Messages/Messages";
 
 import Cartt from "./component/Cart/Cartt";
-import ProductDetail from "./pages/ProductDetail";
-import Coupons from "./pages/Coupons";
-import AddCoupon from "./pages/AddCoupon";
-import UpdateCoupon from "./pages/UpdateCoupon";
-import Success from "./pages/Success";
-import Orders from "./pages/Orders";
-import Settings from "./pages/Settings";
+import ProductDetail from "./component/Products/ProductDetail";
+import Coupons from "./component/Coupon/Coupons";
+import AddCoupon from "./component/Coupon/AddCoupon";
+import UpdateCoupon from "./component/Coupon/UpdateCoupon";
+import Success from "./component/Success/Success";
+import Orders from "./component/Order/Orders";
+import Settings from "./component/Settings/Settings";
+import { useContext } from "react";
+import { KullaniciContext } from "./contexts/KullaniciContext";
+import { isAdmin } from "./config/isAdmin";
+
 function App() {
   const { kullanici } = useAuthContext();
-  const AdminEmail = process.env.REACT_APP_ADMIN_EMAIL;
-  console.log(AdminEmail,"admin");
+  const kullanicilar = useContext(KullaniciContext);
+  const girisYapanKullanici = JSON.parse(localStorage.getItem("kullanici"));
+
+  const selectKullanici = Array.isArray(kullanicilar.kullanici)
+    ? kullanicilar.kullanici.find(
+        (kllnc) => kllnc?.email === girisYapanKullanici?.email
+      )
+    : kullanicilar.kullanici;
+
   return (
     <div>
       <ToastContainer />
@@ -47,6 +58,7 @@ function App() {
                   path="/"
                   element={kullanici ? <Home /> : <Navigate to="/login" />}
                 /> */}
+
                 <Route path="/" element={<Home />} />
                 <Route path="/cart/:id" element={<ProductDetail />} />
                 <Route path="/shop" element={<Shop />} />
@@ -88,20 +100,27 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contactus" element={<Contactus />} />
                 {/* buradaki Navigate komutu ile sonradan istediğimiz alana yönlendirme işlemi yapacağız. burasını sonradan istediğimiz gibi ayarlayacaz */}
-                <Route
-                  path="/login"
-                  element={!kullanici ? <Login /> : <Navigate to="/" />}
-                />
-                <Route
-                  path="/signup"
-                  element={!kullanici ? <Signup /> : <Navigate to="/login" />}
-                />
-                {/* <Route path="/admin" element={<Admin />} /> */}
 
+                {/* <Route
+                  path="/login"
+                  element={
+                    !kullanici ? (
+                      <Login />
+                    ) : selectKullanici?.status === "Onaylandı" ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <div>
+                        {toast.error("Girişiniz Admin tarafından reddildi")}
+                        <Navigate to={logout()} />
+                      </div>
+                    )
+                  }
+                /> */}
                 <Route
                   path="/admin"
                   element={
-                    kullanici && kullanici.email === AdminEmail ? (
+                    selectKullanici &&
+                    "/" + selectKullanici.role === isAdmin ? (
                       <Admin />
                     ) : (
                       <Home />
@@ -111,16 +130,25 @@ function App() {
                   <Route
                     index
                     element={
-                      kullanici ? <Dashboard /> : <Navigate to="/admin" />
+                      selectKullanici ? <Dashboard /> : <Navigate to="/admin" />
                     }
                   />
                   <Route
                     path="products"
                     element={
-                      kullanici ? <Products /> : <Navigate to="/admin" />
+                      selectKullanici ? <Products /> : <Navigate to="/admin" />
                     }
                   />
                 </Route>
+                <Route
+                  path="/login"
+                  element={!kullanici ? <Login /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/signup"
+                  element={!kullanici ? <Signup /> : <Navigate to="/login" />}
+                />
+                {/* <Route path="/admin" element={<Admin />} /> */}
               </Routes>
             </Layout>
           </div>

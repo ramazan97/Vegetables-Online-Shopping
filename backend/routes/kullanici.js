@@ -37,7 +37,6 @@ router.post("/signup", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const kullanicilar = await Kullanici.find().sort({ createdAt: -1 });
-    console.log(kullanicilar);
     res.status(200).json(kullanicilar);
   } catch (error) {
     res
@@ -50,7 +49,6 @@ router.get("/", async (req, res) => {
 
 //id ye göre kullanici silme işlemi
 router.delete("/:id", async (req, res) => {
-  console.log(req.params, "params");
 
   try {
     const { id } = req.params;

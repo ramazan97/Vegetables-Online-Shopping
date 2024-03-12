@@ -9,7 +9,6 @@ const mongoose = require("mongoose");
 const app = express();
 
 app.use((req, res, next) => {
-  console.log(req.path, req.method);
   next();
 });
 

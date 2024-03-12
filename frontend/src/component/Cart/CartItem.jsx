@@ -6,17 +6,9 @@ import { CartContext } from "../../contexts/CartContext";
 const CartItem = ({ item }) => {
   const { removeFromCart, decriseAmount, increaseAmount } =
     useContext(CartContext);
-  const { ucret,price, baslik, aciklama, _id, amount, resim } = item;
+  const { price, baslik, _id, amount, resim } = item;
   const id = _id;
 
-  // const { cart } = useContext(CartContext);
-  // const params = useParams();
-  // const productId = params.id;
-  // const selectedProduct = Array.isArray(cart)
-  //   ? cart.find((product) => product._id === productId)
-  //   : cart;
-
-  //   console.log(selectedProduct.img[0],"selectedProduct.img[0]");
 
 
   return (

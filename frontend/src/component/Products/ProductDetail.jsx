@@ -1,19 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 // import ReactStars from "react-stars";
 
-import { CartContext } from "../contexts/CartContext";
-import { ProductContext } from "../contexts/ProductContext";
-import Button from "../component/Buttons/Button";
-import { FaRegCircleUser } from "react-icons/fa6";
-import Tabs from "./Tabs";
-import Reviews from "./Reviews";
+import { ProductContext } from "../../contexts/ProductContext";
+
+import Tabs from "../Tabs/Tabs";
 import Product from "./Product";
 
 const ProductDetail = () => {
   const { products } = useContext(ProductContext);
 
-  const { addToCard } = useContext(CartContext);
-  const { name, description, price, img } = products;
+
   const product = products.find((item) => {
     return item._id;
   });

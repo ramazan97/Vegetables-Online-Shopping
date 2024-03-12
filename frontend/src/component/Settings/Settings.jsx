@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../component/Admin Panel Component/shared/Sidebar";
+import Sidebar from "../Admin Panel Component/shared/Sidebar";
 import { toast } from "react-toastify";
-import Button from "../component/Buttons/Button";
+import Button from "../Buttons/Button";
 
 const Settings = () => {
-  const [kullanici, setKullanici] = useState("");
+  const [ setKullanici] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [setUserData] = useState();
@@ -32,7 +32,7 @@ const Settings = () => {
       }
     };
     fetchSingleCategory();
-  }, []);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();

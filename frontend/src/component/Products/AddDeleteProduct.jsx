@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { GrUpdate } from "react-icons/gr";
+import { FaPlus } from "react-icons/fa";
+
 import ProductStock from "./ProductStock";
 import Sidebar from "../Admin Panel Component/shared/Sidebar";
 const AddDeleteProduct = () => {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FiMessageCircle } from "react-icons/fi";
 import Sidebar from "../Admin Panel Component/shared/Sidebar";
 import { toast } from "react-toastify";
 
@@ -25,7 +24,6 @@ const Messages = () => {
   }, []);
 
   const deleteMessage = async (id) => {
-    console.log(id, "id");
 
     try {
       const response = await fetch(`/api/messages/${id}`, {
@@ -45,7 +43,6 @@ const Messages = () => {
       console.log("Mesaj silme işlemi sırasında hata oluştu", error);
     }
   };
-  console.log(messages, "messages");
   return (
     <Sidebar>
       <div className="relative overflow-x-auto  rounded-lg md:mx-20 gap-y-5 lg:mx-56 my-32 flex flex-col items-center justify-center ">

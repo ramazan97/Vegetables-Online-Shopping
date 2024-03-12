@@ -8,7 +8,6 @@ router.post("/", async (req, res) => {
 
     const newMessages = new Messages(req.body);
     await newMessages.save();
-    console.log(newMessages, "newMessage");
     res.status(201).json(newMessages);
   } catch (error) {
     console.log(error);

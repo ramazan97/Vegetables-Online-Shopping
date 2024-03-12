@@ -30,7 +30,6 @@ router.post("/", async (req, res) => {
       quantity: 1,
     });
   }
-  //  console.log(lineItems, "lineItems");
 
 
   try {

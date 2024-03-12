@@ -3,11 +3,10 @@ import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-import { CouponContext } from "../contexts/CouponContext";
+import { CouponContext } from "../../contexts/CouponContext";
 
 const Coupon = () => {
   const { coupons, setCoupons } = useContext(CouponContext);
-  console.log(coupons, "coupons");
   const  deleteCoupon = async (id) => {
     try {
       const response = await fetch(`/api/coupon/${id}`, {

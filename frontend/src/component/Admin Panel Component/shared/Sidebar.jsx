@@ -20,13 +20,13 @@ export default function Sidebar({ children }) {
   };
 
   return (
-    <div className="flex flex-row h-full">
+    <div className="flex flex-row h-screen dark:bg-gray-900">
       <div className="bg-neutral-900 w-auto p-3 flex flex-col ">
         <div className="flex items-center gap-2 px-1 py-3">
           <FcBullish fontSize={24} />
           <span className="text-neutral-200 text-lg">OpenShop</span>
         </div>
-        <div className="py-8 flex flex-1 flex-col gap-0.5">
+        <div className="py-8 flex  flex-1 flex-col gap-0.5">
           {DASHBOARD_SIDEBAR_LINKS.map((link) => (
             <SidebarLink key={link.key} link={link} />
           ))}
@@ -59,7 +59,7 @@ function SidebarLink({ link }) {
       to={link.path}
       className={classNames(
         pathname === link.path
-          ? "bg-neutral-700 text-white"
+          ? "bg-neutral-700 text-white "
           : "text-neutral-400",
         linkClass
       )}

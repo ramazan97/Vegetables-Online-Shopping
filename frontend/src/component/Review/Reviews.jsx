@@ -2,12 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ReviewForm from "./ReviewForm";
 import ReviewItem from "./ReviewItem";
-import { ProductContext } from "../contexts/ProductContext";
-import { useParams } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContext";
 const Reviews = ({ selectedProduct }) => {
   const [users, setUsers] = useState([]);
-  const params = useParams();
-  const productId = params.id;
   const thisReview = [];
 
   const { singleProduct, setSingleProduct } = useContext(ProductContext);
@@ -30,9 +27,6 @@ const Reviews = ({ selectedProduct }) => {
     fetchUsers();
   }, []);
 
-  // const edProduct = Array.isArray(singleProduct)
-  //   ? singleProduct.find((product) => product._id === productId)
-  //   : singleProduct;
 
   if (selectedProduct.reviews) {
     selectedProduct.reviews.forEach((review) => {

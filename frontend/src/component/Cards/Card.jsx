@@ -3,7 +3,6 @@ import Button from "../Buttons/Button";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
-import { FaMinus, FaPlus } from "react-icons/fa";
 import { BsEyeFill } from "react-icons/bs";
 const Card = ({ product }) => {
   const { kullanici } = useAuthContext();
@@ -23,11 +22,11 @@ const Card = ({ product }) => {
   };
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <div className=" flex items-center justify-center ">
+      <div className=" flex items-center  justify-center ">
         <img
-          className="p-8  h-[300px] w-full rounded-t-lg"
+          className="h-[300px] w-full rounded-2xl"
           src={img[0] || img}
-          alt="product image"
+          alt="product_image"
         />
       </div>
       <div className="px-5 pb-5">

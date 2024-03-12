@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Button from "../Buttons/Button";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
 const UpdateProduct = () => {
   const [setProductData] = useState();
   const params = useParams();
@@ -10,10 +9,9 @@ const UpdateProduct = () => {
   const [productData2, setProductData2] = useState();
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
-
   const [kilogram, setKilogram] = useState();
   const [price, setPrice] = useState();
-  const [bosAlanlar, setBosalanlar] = useState([]);
+  const [bosAlanlar] = useState([]);
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -36,7 +34,6 @@ const UpdateProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const imgLinks = img.split("\n").map((link) => link.trim());
-    console.log(imgLinks, "imgLinks");
     try {
       const response = await fetch(`/api/shopcart/${productId}`, {
         method: "PUT",
@@ -50,16 +47,15 @@ const UpdateProduct = () => {
         }),
       });
 
+      toast.success("Ürün başarıyla güncellendi.");
       if (response.ok) {
         const updatedData = await response.json();
-        setProductData(updatedData); // Güncellenmiş veriyi state'e ata
-        toast.success("Ürün başarıyla güncellendi.");
-
-        // Input alanlarını temizle
+        setProductData(updatedData);
+   
         setName("");
         setImg("");
-        setKilogram();
-        setPrice();
+        setKilogram("");
+        setPrice("");
         setDescription("");
       } else {
         toast.error("Ürün güncellenirken bir hata oluştu.");
@@ -141,7 +137,7 @@ const UpdateProduct = () => {
               </div>
             </div>
           </div>
-          <Button name={`Ekle`} />
+          <Button name={`Güncelle`} />
         </form>
       </div>
     </div>

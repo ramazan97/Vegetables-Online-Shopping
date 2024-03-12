@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LiaStarSolid } from "react-icons/lia";
-import Button from "../component/Buttons/Button";
+import Button from "../Buttons/Button";
 import { useParams } from "react-router-dom";
 
 const ReviewForm = ({ setSingleProduct, singleProduct }) => {
@@ -64,13 +64,12 @@ const ReviewForm = ({ setSingleProduct, singleProduct }) => {
           "Content-Type": "application/json",
         },
       });
-      // console.log(res, "res");
       if (!res.ok) {
         toast.error("Bir şeyler yanlış gitti11111.");
         return;
       }
       const data = await res.json();
-      console.log(data, "data");
+
       setSingleProduct(data);
       setReview("");
       setRating(0);

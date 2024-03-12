@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import { toast } from "react-toastify";
-import { useUrunContext } from "../hooks/useUrunContext";
-import Button from "../component/Buttons/Button";
+import { useUrunContext } from "../../hooks/useUrunContext";
+import Button from "../Buttons/Button";
 const AddCoupon = () => {
 
   const [code, setCode] = useState("");
@@ -21,7 +21,6 @@ const AddCoupon = () => {
         discountPercent,
 
     };
-    console.log(code, "code");
     const response = await fetch("/api/coupon", {
       method: "POST",
       body: JSON.stringify(couponVerisi),

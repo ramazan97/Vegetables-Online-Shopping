@@ -14,9 +14,9 @@ const Login = () => {
       await login( email,password);
   };
   return (
-    <form    onSubmit={handleSubmit} className="flex items-center justify-center py-14">
+    <form    onSubmit={handleSubmit} className="flex items-center justify-center py-14 dark:bg-neutral-900 ">
       <div className="w-full md:w-[500px] p-3 shadow-2xl rounded-md">
-        <p className={`text-slate-500 my-3 md:my-5 px-3 md:px-10 md:text-2xl text-center `}>
+        <p className={`text-slate-500 dark:text-neutral-200 my-3 md:my-5 px-3 md:px-10 md:text-2xl text-center `}>
           Login
         </p>
         <input
@@ -24,7 +24,7 @@ const Login = () => {
           placeholder="Email"
           type="text"
           id="email"
-          className="w-full h-12 p-3 rounded-md outline-none my-2"
+          className="w-full h-12 p-3 rounded-md outline-none my-2 dark:bg-neutral-900 dark:text-neutral-200 dark:border dark:border-yellow-500 "
           required
         />
         <input
@@ -32,7 +32,7 @@ const Login = () => {
           placeholder="Parola"
           type="password"
           id="password"
-          className="w-full h-12 p-3 rounded-md outline-none my-2"
+          className="w-full h-12 p-3 rounded-md outline-none my-2 dark:bg-neutral-900 dark:text-neutral-200 dark:border dark:border-yellow-500"
           required
         />
         <div className=" flex items-center justify-center">
@@ -45,7 +45,7 @@ const Login = () => {
             buraya tıkla
           </Link>
         </div>
-        <div className="text-center my-2 font-bold text-lg">OR</div>
+        <div className="text-center dark:text-neutral-200 my-2 font-bold text-lg">OR</div>
         <div className=" flex items-center justify-center">
           <Button  disabled={yukleniyor} name="Google" />
         </div>

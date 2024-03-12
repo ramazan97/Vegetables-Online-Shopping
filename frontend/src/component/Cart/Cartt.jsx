@@ -2,24 +2,19 @@ import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { IoMdArrowForward } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
-import { SidebarContext } from "../../contexts/SidebarContext";
 import { CartContext } from "../../contexts/CartContext";
-import CartItem from "./CartItem";
 import CarttItem from "./CarttItem";
 import Button from "../Buttons/Button";
 import { toast } from "react-toastify";
 const Cartt = () => {
-  const { isOpen, handleClose } = useContext(SidebarContext);
-  const [loading, setLoading] = useState(false);
+  const [ setLoading] = useState(false);
   const [couponCode, setCouponCode] = useState("");
 
   const {
     cart,
     clearCart,
     total,
-    itemAmount,
     fastCargoChecked,
     setFastCargoChecked,
     setCart,
@@ -84,7 +79,6 @@ const Cartt = () => {
       const result = await stripe.redirectToCheckout({
         sessionId: session.id,
       });
-      console.log(session, "result");
       if (result.error) {
         throw new Error(result.error.message);
       }

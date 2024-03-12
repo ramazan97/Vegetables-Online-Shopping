@@ -3,7 +3,7 @@ import { useUrunContext } from "./useUrunContext";
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext();
-  //   --
+
   const { dispatch: notDispatch } = useUrunContext();
 
   const logout = () => {

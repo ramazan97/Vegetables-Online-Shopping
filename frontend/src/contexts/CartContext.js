@@ -32,7 +32,7 @@ const CartProvider = ({ children }) => {
       : subTotals.toFixed(2);
 
     setTotal(total);
-  });
+  },[fastCargoChecked,subTotals]);
 
   useEffect(() => {
     if (cart) {
@@ -61,7 +61,6 @@ const CartProvider = ({ children }) => {
     } else {
       setCart([...cart, newItem]);
     }
-    // console.log(cart,"cart")
   };
 
   const removeFromCart = (id) => {

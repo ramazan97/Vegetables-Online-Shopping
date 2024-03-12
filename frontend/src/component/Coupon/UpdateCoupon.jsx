@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import Button from "../component/Buttons/Button";
+import Button from "../Buttons/Button";
 
 const UpdateCoupon = () => {
   const params = useParams();

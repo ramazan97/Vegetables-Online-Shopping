@@ -3,7 +3,7 @@ import Button from "../component/Buttons/Button";
 
 const About = () => {
   return (
-    <div className="flex flex-col items-center mt-16 gap-y-5">
+    <div className="flex dark:bg-neutral-900 h-screen flex-col items-center pt-16 gap-y-5">
       {/* logo */}
       <div>
         {" "}
@@ -11,7 +11,7 @@ const About = () => {
       </div>
       {/* title */}
       <div>
-        <p className="text-4xl font-bold">About Our Shop</p>
+        <p className="text-4xl font-bold dark:text-gray-200">About Our Shop</p>
       </div>
       {/* img */}
       <div>
@@ -20,7 +20,7 @@ const About = () => {
       </div>
       {/* descprtion */}
       <div className=" w-1/3">
-        <p className="text-center">
+        <p className="text-center dark:text-gray-200">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem

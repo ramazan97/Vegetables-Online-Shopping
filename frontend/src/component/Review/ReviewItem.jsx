@@ -1,8 +1,5 @@
-import React, { useContext } from "react";
-import { CiStar } from "react-icons/ci";
+import React from "react";
 import { FaRegCircleUser } from "react-icons/fa6";
-import { useParams } from "react-router-dom";
-import { ProductContext } from "../contexts/ProductContext";
 import { LiaStarSolid } from "react-icons/lia";
 
 const ReviewItem = ({ text, createdAt, rating }) => {
@@ -13,7 +10,6 @@ const ReviewItem = ({ text, createdAt, rating }) => {
     "tr-TR",
     options
   );
-  // console.log(reviewItem, `reviewItem`);
 
   const user = localStorage.getItem("kullanici")
     ? JSON.parse(localStorage.getItem("kullanici"))

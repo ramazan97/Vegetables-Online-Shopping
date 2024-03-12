@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../contexts/CartContext";
-import Button from "../component/Buttons/Button";
+import { CartContext } from "../../contexts/CartContext";
+import Button from "../Buttons/Button";
 
 import { BsCheckCircleFill } from "react-icons/bs";
 const Success = () => {

@@ -5,7 +5,6 @@ const Coupon = require("../models/couponModel");
 router.post("/", async (req, res) => {
   try {
     const { code } = req.body;
-    console.log(req.body, "coderrrrr");
     const existingCoupon = await Coupon.findOne({ code });
 
     if (existingCoupon) {
@@ -16,7 +15,6 @@ router.post("/", async (req, res) => {
 
     const newCoupon = new Coupon(req.body);
     await newCoupon.save();
-    console.log(newCoupon, "newkupon");
     res.status(201).json(newCoupon);
   } catch (error) {
     console.log(error);
@@ -63,7 +61,6 @@ router.get("/:couponId", async (req, res) => {
   router.get("/code/:couponCode", async (req, res) => {
     try {
       const couponCode = req.params.couponCode;
-  console.log(req.params.couponCode,"couponCode");
       const coupon = await Coupon.findOne({ code: couponCode });
   
       if (!coupon) {

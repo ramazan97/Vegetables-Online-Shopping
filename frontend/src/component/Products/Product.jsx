@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import Button from "../component/Buttons/Button";
-import { CartContext } from "../contexts/CartContext";
-import { ProductContext } from "../contexts/ProductContext";
+import Button from "../Buttons/Button";
+import { CartContext } from "../../contexts/CartContext";
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import Slider from "react-slick";
 import { useParams } from "react-router-dom";
@@ -42,7 +41,6 @@ const Product = ({ products }) => {
   // const { products } = useContext(ProductContext);
 
   const { addToCard } = useContext(CartContext);
-  const { name, description, price, img } = products;
   const [activeImg, setActiveImg] = useState({
     img: "",
     imgIndex: 0,

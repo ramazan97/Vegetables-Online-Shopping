@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext } from "react";
 
 import { KullaniciContext } from "../../contexts/KullaniciContext";
 import { toast } from "react-toastify";
@@ -29,7 +29,7 @@ const Customers = () => {
     }
   };
 
-  const kullaniciOnayla = async (kullaniciiId) => {
+  const kullaniciOnayla = useCallback(async (kullaniciiId) => {
     try {
       const res = await fetch(`/api/kullanici/status/${kullaniciiId}`, {
         method: "PUT",
@@ -38,20 +38,19 @@ const Customers = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(res, "res");
+
       if (!res.ok) {
         toast.error("Status Güncellenemedi.");
         return;
       }
 
-      const data = await res.json();
+     
       toast.success("Status başarıyla güncellendi.");
     } catch (error) {
       console.log(error);
       toast.error("Status Güncellenemedi.");
     }
-  };
-
+  }, []);
   const kullaniciReddet = async (kullaniciiId) => {
     try {
       const res = await fetch(`/api/kullanici/status/${kullaniciiId}`, {
@@ -67,7 +66,7 @@ const Customers = () => {
         return;
       }
 
-      const data = await res.json();
+
       toast.success("Status başarıyla güncellendi.");
     } catch (error) {
       console.log(error);
@@ -78,6 +77,7 @@ const Customers = () => {
   return (
     <Sidebar>
       <div class="relative overflow-x-auto shadow-md sm:rounded-lg md:mx-20 lg:mx-56 my-32">
+        <h3 className="text-3xl">{new Date().toLocaleTimeString()} </h3>
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

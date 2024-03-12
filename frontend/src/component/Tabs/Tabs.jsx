@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Reviews from "./Reviews";
+import Reviews from "../Review/Reviews";
 
 const Tabs = ({ products }) => {
   const [activeTab, setActiveTab] = useState("desc");
@@ -11,8 +11,6 @@ const Tabs = ({ products }) => {
     e.preventDefault();
     setActiveTab(tab);
   };
-  const { name, description, price, img } = products;
-  console.log(products.description, "products");
 
   const selectedProduct = Array.isArray(products)
     ? products.find((product) => product._id === productId)

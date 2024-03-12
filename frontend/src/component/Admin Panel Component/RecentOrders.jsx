@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { format } from "date-fns";
 import { Link } from "react-router-dom";
-import { getOrderStatus } from "../Admin Panel Component/lib/helpers";
 import { toast } from "react-toastify";
 const recentOrderData = [
   {
@@ -104,21 +102,21 @@ export default function RecentOrders() {
   }, [REACT_APP_MY_STRIPE_SECRET_KEY]);
 
   return (
-    <div className="bg-white px-4 pt-3 pb-4 rounded-sm flex-1">
+    <div className="bg-white   dark:bg-gray-900  px-4 pt-3 pb-4 rounded-sm flex-1">
       <div className="border-x border-gray-200 rounded-sm mt-3">
-        <table className="w-full text-gray-700">
+        <table className="w-full  text-gray-700">
           <thead>
-            <tr className="text-2xl border">
-              <th className="">ID</th>
-              <th className="">Order ID</th>
-              <th className="">Customer Email</th>
-              <th>Order Status</th>
-              <th className="">Order Total</th>
+            <tr className="text-2xl border dark:border-yellow-500">
+              <th className="dark:text-gray-200">ID</th>
+              <th className="dark:text-gray-200">Order ID</th>
+              <th className="dark:text-gray-200">Customer Email</th>
+              <th className="dark:text-gray-200">Order Status</th>
+              <th className="dark:text-gray-200">Order Total</th>
             </tr>
           </thead>
           <tbody>
             {dataSource.map((order, index) => (
-              <tr className="text-xl border" key={order.id}>
+              <tr className="text-xl border dark:border-yellow-500 dark:text-gray-200" key={order.id}>
                 <td className=" text-center">
                   <Link>#{index}</Link>
                 </td>
@@ -134,12 +132,6 @@ export default function RecentOrders() {
                 <td className="text-center">
                   <Link>${(order.amount / 100).toFixed(2)}</Link>
                 </td>
-                {/* 
-			
-                <td>{format(new Date(order.order_date), "dd MMM yyyy")}</td>
-                <td>{order.order_total}</td>
-                <td>{order.shipment_address}</td>
-                <td>{getOrderStatus(order.current_order_status)}</td> */}
               </tr>
             ))}
           </tbody>

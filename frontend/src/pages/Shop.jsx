@@ -46,7 +46,7 @@ const Shop = () => {
 
 
   return (
-    <div id="shop" className="flex flex-col items-center mt-16 gap-y-5">
+    <div id="shop" className="flex dark:bg-neutral-900 flex-col items-center pt-16 gap-y-5">
       {/* logo */}
       <div>
         {" "}
@@ -54,10 +54,10 @@ const Shop = () => {
       </div>
       {/* title */}
       <div>
-        <p className="text-4xl font-bold">Our Vegatables</p>
+        <p className="text-4xl font-bold dark:text-gray-200">Our Vegatables</p>
       </div>
       {/* descprtion */}
-      <div>
+      <div className="dark:text-gray-200">
         <p>Reader will be distracted by the readable content of a</p>
       </div>
       {/* cart */}

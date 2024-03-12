@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useUrunContext } from "../../hooks/useUrunContext";
 import { ProductContext } from "../../contexts/ProductContext";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -77,7 +76,7 @@ const ProductStock = () => {
                   </td>
                   <td class="px-6 py-4">{urun.name}</td>
                   <td class="px-6 py-4">{urun.kilogram}</td>
-                  <td class="px-6 py-4">${urun.current}</td>
+                  <td class="px-6 py-4">${urun.price}</td>
 
                   <td class="px-6 py-4 text-right">
                     <div

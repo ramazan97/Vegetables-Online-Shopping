@@ -41,7 +41,6 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   // const { resim, ucret, baslik, kilogram, aciklama } = req.body;
   const { name, img, kilogram, price, description } = req.body;
-  console.log(req.body);
   let bosAlanlar = [];
   if (!name) {
     bosAlanlar.push("name");
@@ -50,10 +49,7 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ hata: "Alanlar bos geçilemez", bosAlanlar });
   }
   try {
-    // burada kullanici_id yazarak kullanıcıya göre id işlemi yaptık
-    // console.log(req,"req");
-    // const kullanici_id = req.kullanici._id;
-    // console.log(kullanici_id,"kullanici_id");
+
     const shopCart = await ShopCartModel.create({
       name,
       img,

@@ -49,16 +49,16 @@ const popularProducts = [
 
 function PopularProducts() {
 	return (
-		<div className="w-[20rem] bg-white p-4 rounded-sm border border-gray-200">
-			<strong className="text-gray-700 font-medium">Popular Products</strong>
+		<div className="w-[20rem] dark:border-yellow-500 dark:bg-gray-900  bg-white p-4 rounded-sm border border-gray-200">
+			<strong className="text-gray-700 font-medium dark:text-gray-200">Popular Products</strong>
 			<div className="mt-4 flex flex-col gap-3">
 				{popularProducts.map((product) => (
 					<Link
 						key={product.id}
 						to={`/product/${product.id}`}
-						className="flex items-start hover:no-underline"
+						className="flex items-start hover:no-underline dark:text-gray-200"
 					>
-						<div className="w-10 h-10 min-w-[2.5rem] bg-gray-200 rounded-sm">
+						<div className="w-10 h-10 min-w-[2.5rem] bg-gray-200 dark:text-gray-200 rounded-sm">
 							<img
 								className="w-full h-full object-cover rounded-sm"
 								src={product.product_thumbnail}
@@ -80,7 +80,7 @@ function PopularProducts() {
 								{product.product_stock === 0 ? 'Out of Stock' : product.product_stock + ' in Stock'}
 							</span>
 						</div>
-						<div className="text-xs text-gray-400 pl-1.5">{product.product_price}</div>
+						<div className="text-xs text-gray-400 pl-1.5 dark:text-gray-200">{product.product_price}</div>
 					</Link>
 				))}
 			</div>

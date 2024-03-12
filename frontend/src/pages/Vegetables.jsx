@@ -3,7 +3,7 @@ import Button from "../component/Buttons/Button";
 
 const Vegetables = () => {
   return (
-    <div className="flex flex-col items-center mt-16 gap-y-5">
+    <div className="flex flex-col h-screen dark:bg-neutral-900 items-center pt-16 gap-y-5">
       {/* logo */}
       <div>
         {" "}
@@ -11,7 +11,7 @@ const Vegetables = () => {
       </div>
       {/* title */}
       <div>
-        <p className="text-4xl font-bold">Why Choose Us</p>
+        <p className="text-4xl font-bold dark:text-gray-200 ">Why Choose Us</p>
       </div>
       {/* img */}
       <div>
@@ -20,7 +20,7 @@ const Vegetables = () => {
       </div>
       {/* descprtion */}
       <div className=" w-1/3">
-        <p className="text-center">
+        <p className="text-center dark:text-gray-200">
           consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
           exercitation

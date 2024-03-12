@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {  FaPlus } from "react-icons/fa";
 
 import Coupon from "./Coupon";
-import Sidebar from "../component/Admin Panel Component/shared/Sidebar";
+import Sidebar from "../Admin Panel Component/shared/Sidebar";
 
 const Coupons = () => {
 

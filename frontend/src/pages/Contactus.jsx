@@ -16,10 +16,7 @@ const Contactus = () => {
       messages: messages,
       phone: phone,
     };
-    console.log(name, "name");
-    console.log(email, "name1");
-    console.log(messages, "name2");
-    console.log(phone, "name3");
+
     try {
       const response = await fetch("/api/messages", {
         method: "POST",
@@ -34,7 +31,6 @@ const Contactus = () => {
           phone: phone,
         }),
       });
-      console.log(response, "response");
 
       if (!response.ok) {
         toast.error(` !response.ok değil sı var `);
@@ -52,7 +48,7 @@ const Contactus = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 gap-y-5">
+    <div className="flex flex-col h-screen dark:bg-neutral-900 items-center pt-16 gap-y-5">
       {/* logo */}
       <div>
         {" "}
@@ -60,7 +56,7 @@ const Contactus = () => {
       </div>
       {/* title */}
       <div>
-        <p className="text-4xl font-bold">Contact Us</p>
+        <p className="text-4xl font-bold dark:text-gray-200">Contact Us</p>
       </div>
       <form
         onSubmit={handleSubmit}
@@ -69,7 +65,7 @@ const Contactus = () => {
         {/* input */}
         <div className="flex flex-col justify-between w-[550px] h-[480px]  ">
           <input
-            className="w-full h-[51px] text-xl text-balance border border-spacing-6 border-gray-200 "
+            className="w-full h-[51px] text-xl dark:bg-neutral-900 dark:border dark:text-gray-200 dark:border-yellow-500 text-balance border border-spacing-6 border-gray-200 "
             type="text"
             placeholder="Your Name"
             onChange={(e) => setName(e.target.value)}
@@ -77,7 +73,7 @@ const Contactus = () => {
             required
           />
           <input
-            className="w-full h-[51px] text-xl text-balance border border-spacing-6 border-gray-200"
+            className="w-full h-[51px] text-xl text-balance border dark:text-gray-200 dark:bg-neutral-900 dark:border dark:border-yellow-500 border-spacing-6 border-gray-200"
             type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
@@ -85,7 +81,7 @@ const Contactus = () => {
             required
           />
           <input
-            className="w-full h-[51px] text-xl text-balance border border-spacing-6 border-gray-200"
+            className="w-full h-[51px] text-xl text-balance border dark:text-gray-200 dark:bg-neutral-900 dark:border dark:border-yellow-500 border-spacing-6 border-gray-200"
             type="tel"
             placeholder="Phone"
             onChange={(e) => setPhone(e.target.value)}
@@ -94,7 +90,7 @@ const Contactus = () => {
             required
           />
           <textarea
-            className="w-full h-[153px] text-xl text-balance border border-spacing-6 border-gray-200"
+            className="w-full h-[153px] text-xl text-balance border dark:text-gray-200 dark:bg-neutral-900 dark:border dark:border-yellow-500 border-spacing-6 border-gray-200"
             placeholder="Message"
             onChange={(e) => setMessages(e.target.value)}
             value={messages}

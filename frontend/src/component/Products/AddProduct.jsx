@@ -39,7 +39,6 @@ const AddProduct = () => {
 
     const imgLinks = img.split("\n").map((link) => link.trim());
 
-    console.log(price, "price");
 
     try {
       const response = await fetch("/api/shopcart", {
@@ -83,7 +82,6 @@ const AddProduct = () => {
         setDescription("");
         setBosalanlar([]);
         dispatch({ type: "URUN_OLUSTUR", payload: json });
-        // console.log(`yeni bir not eklendi`, json);
         toast.success("yeni bir not eklendi!");
       }
     } catch (error) {

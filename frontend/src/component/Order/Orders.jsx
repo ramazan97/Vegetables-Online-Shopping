@@ -1,6 +1,6 @@
 import React from "react";
-import RecentOrders from "../component/Admin Panel Component/RecentOrders";
-import Sidebar from "../component/Admin Panel Component/shared/Sidebar";
+import RecentOrders from "../Admin Panel Component/RecentOrders";
+import Sidebar from "../Admin Panel Component/shared/Sidebar";
 
 const Orders = () => {
   return (
