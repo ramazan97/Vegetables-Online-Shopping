@@ -10,17 +10,17 @@ const Contactus = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const urunVerisi = {
-      name: name,
-      email: email,
-      messages: messages,
-      phone: phone,
-    };
+    // const urunVerisi = {
+    //   name: name,
+    //   email: email,
+    //   messages: messages,
+    //   phone: phone,
+    // };
 
     try {
       const response = await fetch("/api/messages", {
         method: "POST",
-        body: JSON.stringify(urunVerisi),
+        // body: JSON.stringify(urunVerisi),
         headers: {
           "Content-Type": "application/json",
         },

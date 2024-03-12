@@ -5,7 +5,6 @@ import {
   HiOutlineUsers,
   HiOutlineDocumentText,
   HiOutlineAnnotation,
-  HiOutlineQuestionMarkCircle,
   HiOutlineCog,
 } from "react-icons/hi";
 

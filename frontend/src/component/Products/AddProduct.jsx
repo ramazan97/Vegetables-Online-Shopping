@@ -26,36 +26,29 @@ const AddProduct = () => {
     //   return;
     // }
 
-    const urunVerisi = {
-      name,
-      img,
-      reviews,
-      colors,
-      kilogram,
-      price,
-      category,
-      description,
-    };
+    // const urunVerisi = {
+    //   name,
+    //   img,
+    //   reviews,
+    //   colors,
+    //   kilogram,
+    //   price,
+    //   category,
+    //   description,
+    // };
 
     const imgLinks = img.split("\n").map((link) => link.trim());
-
 
     try {
       const response = await fetch("/api/shopcart", {
         method: "POST",
-        body: JSON.stringify(urunVerisi),
+        // body: JSON.stringify(urunVerisi),
         headers: {
           "Content-Type": "application/json",
           // kullanıcının varlığını sorguladık kulanıcı varsa yap dedik gerek olmya bilir sadece nasıl uygulandığını göstermek için ekledim
           // Authorization: `Bearer ${kullanici.token}`,
         },
         body: JSON.stringify({
-          //   ...values,
-          // price: {
-          //   current: values.current,
-          // },
-          //   colors,
-          //   sizes,
           name: name,
           img: imgLinks,
           kilogram: kilogram,
